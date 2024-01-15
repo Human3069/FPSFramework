@@ -32,6 +32,22 @@ namespace _KMH_Framework
             }
         }
 
+        internal bool _isInputDown;
+        internal bool IsInputDown
+        {
+            get
+            {
+                return _isInputDown;
+            }
+            set
+            {
+                if (_isInputDown != value)
+                {
+                    _isInputDown = value;
+                }
+            }
+        }
+
         public delegate void ValueChanged(bool _value);
         public event ValueChanged OnValueChanged;
 
@@ -54,6 +70,8 @@ namespace _KMH_Framework
         public static string KEY_MOVE_RIGHT;
         public static string KEY_SPRINT;
         public static string KEY_JUMP;
+        public static string KEY_CROUCH;
+        public static string KEY_PRONE;
         public static string KEY_LEAN_LEFT;
         public static string KEY_LEAN_RIGHT;
         public static string KEY_RELOAD;
@@ -151,11 +169,13 @@ namespace _KMH_Framework
             KEY_MOVE_RIGHT = KeySettings[3].name;
             KEY_SPRINT = KeySettings[4].name;
             KEY_JUMP = KeySettings[5].name;
-            KEY_LEAN_LEFT = KeySettings[6].name;
-            KEY_LEAN_RIGHT = KeySettings[7].name;
-            KEY_RELOAD = KeySettings[8].name;
-            KEY_INTERACT = KeySettings[9].name;
-            KEY_THROW_GRENADE = KeySettings[10].name;
+            KEY_CROUCH = KeySettings[6].name;
+            KEY_PRONE = KeySettings[7].name;
+            KEY_LEAN_LEFT = KeySettings[8].name;
+            KEY_LEAN_RIGHT = KeySettings[9].name;
+            KEY_RELOAD = KeySettings[10].name;
+            KEY_INTERACT = KeySettings[11].name;
+            KEY_THROW_GRENADE = KeySettings[12].name;
 
             IsInitialized = true;
         }
@@ -176,14 +196,8 @@ namespace _KMH_Framework
             {
                 if (_SettingState == SettingState.None)
                 {
-                    if (Input.GetKey(KeySettings[i].keyCode) == true)
-                    {
-                        KeySettings[i].isInput = true;
-                    }
-                    else
-                    {
-                        KeySettings[i].isInput = false;
-                    }
+                    KeySettings[i].IsInputDown = Input.GetKeyDown(KeySettings[i].keyCode);
+                    KeySettings[i].isInput = Input.GetKey(KeySettings[i].keyCode);
                 }
             }
         }

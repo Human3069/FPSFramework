@@ -711,7 +711,7 @@ namespace Demo.Scripts.Runtime
                 FPSAnimLib.ExpDecayAlpha(restoreSpeed, Time.deltaTime));
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             Time.timeScale = timeScale;
             if (Input.GetKeyDown(KeyCode.Escape))

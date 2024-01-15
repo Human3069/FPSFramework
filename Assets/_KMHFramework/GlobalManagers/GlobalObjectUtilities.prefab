@@ -2261,6 +2261,12 @@ MonoBehaviour:
   - name: Jump
     keyCode: 32
     _isInput: 0
+  - name: Crouch
+    keyCode: 99
+    _isInput: 0
+  - name: Prone
+    keyCode: 122
+    _isInput: 0
   - name: Lean Left
     keyCode: 113
     _isInput: 0

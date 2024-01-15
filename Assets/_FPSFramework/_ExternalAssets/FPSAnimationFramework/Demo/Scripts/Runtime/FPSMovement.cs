@@ -218,7 +218,7 @@ namespace Demo.Scripts.Runtime
             onUncrouch.Invoke();
         }
 
-        protected void UpdatePoseState()
+        protected virtual void UpdatePoseState()
         {
             if (MovementState is FPSMovementState.Sprinting or FPSMovementState.InAir)
             {

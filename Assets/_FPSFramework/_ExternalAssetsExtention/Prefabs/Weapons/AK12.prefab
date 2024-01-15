@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2368811415538818050}
   - component: {fileID: 746774683944186785}
+  - component: {fileID: 1670458181512350704}
   m_Layer: 0
   m_Name: AK12
   m_TagString: Untagged
@@ -95,6 +96,19 @@ MonoBehaviour:
   - {fileID: 612378718665479367}
   recoilPattern: {fileID: 11400000, guid: 69c2b9a0d4a2b3349ba0fbc184f82178, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
+--- !u!65 &1670458181512350704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208818845419045761}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06, y: 0.26, z: 0.9}
+  m_Center: {x: 0, y: -0.07, z: 0.06}
 --- !u!1 &3072488125693394169
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +302,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &5469598640025153680
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -305,8 +319,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &7803644150195053193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43cfbb68b55b0db4a8e7b7efc977462b,
