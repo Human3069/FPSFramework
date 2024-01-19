@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 830822289977377357}
   - component: {fileID: 830822289977377346}
+  - component: {fileID: 5998773963881264845}
+  - component: {fileID: -4936931346212117913}
   m_Layer: 0
   m_Name: Mk18_mod1
   m_TagString: Untagged
@@ -42,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 57558145545033975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd79974665c90734d9bd7ff5a68cba63, type: 3}
+  m_Script: {fileID: 11500000, guid: 53e7c77b988fcc745b5faf0575f8b626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponAsset: {fileID: 11400000, guid: b75a5c957882395478792e809fd8e432, type: 2}
@@ -63,6 +65,35 @@ MonoBehaviour:
   - {fileID: 2382635355684495694}
   recoilPattern: {fileID: 11400000, guid: df70e32e3d10bc9418d2aa3a6e8e7431, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
+--- !u!65 &5998773963881264845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57558145545033975}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06, y: 0.26, z: 0.86}
+  m_Center: {x: 0, y: -0.05, z: 0.1}
+--- !u!54 &-4936931346212117913
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57558145545033975}
+  serializedVersion: 2
+  m_Mass: 2.5
+  m_Drag: 0.01
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &177094813266833730
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +615,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &5717271945822360155
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -601,8 +632,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &5486287092530963108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f5f725c96d479f47a74a78251ab2c0a,

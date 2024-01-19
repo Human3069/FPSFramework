@@ -107,6 +107,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1203207988119846955}
   - component: {fileID: 5793223459091897020}
+  - component: {fileID: 538173752929847312}
+  - component: {fileID: 3961517331509837676}
   m_Layer: 0
   m_Name: SVD
   m_TagString: Untagged
@@ -139,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7876211033580497163}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd79974665c90734d9bd7ff5a68cba63, type: 3}
+  m_Script: {fileID: 11500000, guid: 53e7c77b988fcc745b5faf0575f8b626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponAsset: {fileID: 11400000, guid: 4d093ed68c7d78b4aaa4e4e8170add63, type: 2}
@@ -159,6 +161,35 @@ MonoBehaviour:
   - {fileID: 6157310742127185597}
   recoilPattern: {fileID: 11400000, guid: 71613ada76c2eb24ba19072d3759e824, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
+--- !u!65 &538173752929847312
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7876211033580497163}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.17, z: 1.23}
+  m_Center: {x: 0, y: -0.04, z: 0.22}
+--- !u!54 &3961517331509837676
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7876211033580497163}
+  serializedVersion: 2
+  m_Mass: 2.5
+  m_Drag: 0.01
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7942649095336863943
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +304,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &5380883416435320595
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -290,5 +321,4 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0

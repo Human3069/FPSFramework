@@ -40,6 +40,8 @@ namespace Demo.Scripts.Runtime
     // An example-controller class
     public class FPSController : FPSAnimController
     {
+        private const string LOG_FORMAT = "<color=white><b>[FPSController]</b></color> {0}";
+
         [Tab("Animation")] 
         [Header("General")] 
         [SerializeField] protected Animator animator;
@@ -177,7 +179,7 @@ namespace Demo.Scripts.Runtime
             EquipWeapon();
         }
         
-        protected void UnequipWeapon()
+        protected virtual void UnequipWeapon()
         {
             DisableAim();
 
@@ -198,8 +200,10 @@ namespace Demo.Scripts.Runtime
         {
         }
 
-        protected void EquipWeapon()
+        protected virtual void EquipWeapon()
         {
+            Debug.LogFormat(LOG_FORMAT, "EquipWeapon()");
+
             if (weapons.Count == 0) return;
 
             weapons[_lastIndex].gameObject.SetActive(false);
@@ -217,14 +221,18 @@ namespace Demo.Scripts.Runtime
 
         protected void EnableUnarmedState()
         {
+            Debug.LogFormat(LOG_FORMAT, "EnableUnarmedState()");
+
             if (weapons.Count == 0) return;
             
             weapons[_index].gameObject.SetActive(false);
             animator.SetFloat(OverlayType, 0);
         }
         
-        protected void ChangeWeapon_Internal()
+        protected virtual void ChangeWeapon_Internal()
         {
+            Debug.LogFormat(LOG_FORMAT, "ChangeWeapon_Internal()");
+
             if (movementComponent.PoseState == FPSPoseState.Prone) return;
             
             if (HasActiveAction()) return;
@@ -258,7 +266,7 @@ namespace Demo.Scripts.Runtime
             swayLayer.SetLayerAlpha(1f);
         }
 
-        public void ToggleAim()
+        public virtual void ToggleAim()
         {
             if (!GetGun().canAim) return;
             
@@ -331,8 +339,10 @@ namespace Demo.Scripts.Runtime
             _recoilStep += GetGun().recoilPattern.acceleration;
         }
 
-        protected void OnFirePressed()
+        protected virtual void OnFirePressed()
         {
+            Debug.LogFormat(LOG_FORMAT, "OnFirePressed()");
+
             if (weapons.Count == 0 || HasActiveAction()) return;
 
             _bursts = GetGun().burstAmount - 1;
@@ -353,8 +363,10 @@ namespace Demo.Scripts.Runtime
             return weapons[_index];
         }
 
-        protected void OnFireReleased()
+        protected virtual void OnFireReleased()
         {
+            Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
+
             if (weapons.Count == 0) return;
 
             if (recoilComponent != null)
@@ -404,7 +416,7 @@ namespace Demo.Scripts.Runtime
             lookLayer.SetLayerAlpha(1f);
         }
 
-        protected void OnSprintStarted()
+        protected virtual void OnSprintStarted()
         {
             OnFireReleased();
             lookLayer.SetLayerAlpha(0.5f);
@@ -523,33 +535,34 @@ namespace Demo.Scripts.Runtime
                     charAnimData.SetLeanInput(wasLeaning ? 0f : rightLean ? -startLean : startLean);
                 }
 
-                if (_isLeaning)
+                if (_isLeaning == true)
                 {
                     float leanValue = Input.GetAxis("Mouse ScrollWheel") * smoothLeanStep;
                     charAnimData.AddLeanInput(leanValue);
                 }
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Mouse0) == true)
                 {
                     OnFirePressed();
                 }
 
-                if (Input.GetKeyUp(KeyCode.Mouse0))
+                if (Input.GetKeyUp(KeyCode.Mouse0) == true)
                 {
                     OnFireReleased();
                 }
 
-                if (Input.GetKeyDown(KeyCode.Mouse1))
+                if (Input.GetKeyDown(KeyCode.Mouse1) == true)
                 {
                     ToggleAim();
                 }
 
-                if (Input.GetKeyDown(KeyCode.V))
+                if (Input.GetKeyDown(KeyCode.V) == true)
                 {
                     ChangeScope();
                 }
 
-                if (Input.GetKeyDown(KeyCode.B) && IsAiming())
+                if (Input.GetKeyDown(KeyCode.B) &&
+                    IsAiming() == true)
                 {
                     if (aimState == FPSAimState.PointAiming)
                     {
@@ -564,7 +577,7 @@ namespace Demo.Scripts.Runtime
                 }
             }
             
-            if (Input.GetKeyDown(KeyCode.H))
+            if (Input.GetKeyDown(KeyCode.H) == true)
             {
                 if (aimState == FPSAimState.Ready)
                 {

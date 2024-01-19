@@ -64,7 +64,7 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
         }
         
         // Call this when equipping a new weapon
-        protected void InitWeapon(FPSAnimWeapon weapon)
+        protected virtual void InitWeapon(FPSAnimWeapon weapon)
         {
             recoilComponent.Init(weapon.weaponAsset.recoilData, weapon.fireRate, weapon.fireMode);
             fpsAnimator.OnGunEquipped(weapon.weaponAsset, weapon.weaponTransformData);

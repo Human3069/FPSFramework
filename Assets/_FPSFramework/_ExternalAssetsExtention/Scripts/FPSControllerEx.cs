@@ -1,6 +1,7 @@
 using _KMH_Framework;
 using Demo.Scripts.Runtime;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,11 @@ namespace FPSFramework
 {
     public class FPSControllerEx : FPSController
     {
+        private const string LOG_FORMAT = "<color=white><b>[FPSControllerEx]</b></color> {0}";
         private const float INTERACT_DISTANCE = 2f;
+
+        [SerializeField]
+        protected Transform weaponParentTransform;
 
         protected Camera _fpsCamera;
 
@@ -35,24 +40,146 @@ namespace FPSFramework
 
         protected override void Update()
         {
-            base.Update();
+            // base.Update();
+            Time.timeScale = timeScale;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit(0);
+            }
 
+            UpdateActionInput();
+            UpdateLookInput();
+            UpdateRecoil();
+
+            charAnimData.moveInput = movementComponent.AnimatorVelocity;
+            if (weaponList.Count > 0 &&
+                actionState != FPSActionState.WeaponChange)
+            {
+                UpdateAnimController();
+            }
+
+            // Interact
             Ray ray = new Ray(mainCamera.position, mainCamera.forward * INTERACT_DISTANCE);
             if (Physics.Raycast(ray, out RaycastHit _raycastHit) == true)
             {
-                if (_raycastHit.transform.TryGetComponent<BaseEquipable>(out BaseEquipable _equipable) == true)
+                if (_raycastHit.transform.TryGetComponent<IEquipable>(out IEquipable _equipable) == true)
                 {
-                    _equipable.DoInteract();
-                }
-            }
-  
-            if (_keyData[KeyInputManager.KEY_INTERACT].IsInputDown == true)
-            {
+                    if (_keyData[KeyInputManager.KEY_INTERACT].IsInputDown == true)
+                    {
+                        WeaponEx _weapon = _equipable as WeaponEx;
+                        _weapon.DoInteract();
+                        _weapon.transform.parent = weaponParentTransform;
+                        _weapon.transform.localPosition = Vector3.zero;
+                        _weapon.transform.localEulerAngles = Vector3.zero;
 
+                        weaponList.Add(_weapon);
+
+                        ChangeWeapon_Internal();
+                    }
+                }
             }
         }
 
+        protected override void UnequipWeapon()
+        {
+            Debug.LogFormat(LOG_FORMAT, "UnequipWeapon()");
 
+            DisableAim();
+
+            actionState = FPSActionState.WeaponChange;
+            GetAnimGraph().GetFirstPersonAnimator().CrossFade(UnEquip, 0.1f);
+        }
+
+        protected IEnumerator EquipWeaponEx(WeaponEx currentWeapon)
+        {
+            Debug.LogFormat(LOG_FORMAT, "EquipWeaponEx(), currentWeapon.name : " + currentWeapon);
+
+            yield return new WaitForSeconds(equipDelay);
+
+            if (currentWeapon != null)
+            {
+                currentWeapon.Release(this.transform.position + (this.transform.forward * 0.5f));
+            }
+            if (weaponList.Count == 0)
+            {
+                yield break;
+            }
+
+            weaponList[_lastIndex].gameObject.SetActive(false);
+            WeaponEx _weaponEx = weaponList[_index] as WeaponEx;
+
+            _bursts = _weaponEx.burstAmount;
+
+            InitWeapon(_weaponEx);
+            _weaponEx.Initialize();
+            _weaponEx.gameObject.SetActive(true);
+            Debug.LogFormat(LOG_FORMAT, "_weaponEx.name : " + _weaponEx.name);
+
+            animator.SetFloat(OverlayType, (float)_weaponEx.overlayType);
+            actionState = FPSActionState.None;
+        }
+
+        protected override void ChangeWeapon_Internal()
+        {
+            Debug.LogFormat(LOG_FORMAT, "ChangeWeapon_Internal()");
+
+            if (movementComponent.PoseState == FPSPoseState.Prone)
+            {
+                return;
+            }
+
+            if (HasActiveAction() == true)
+            {
+                return;
+            }
+
+            OnFireReleased();
+
+            WeaponEx currentWeapon = GetGun() as WeaponEx;
+            int newIndex = _index;
+            newIndex++;
+            if (newIndex > weapons.Count - 1)
+            {
+                newIndex = 0;
+            }
+
+            _lastIndex = _index;
+            _index = newIndex;
+
+            UnequipWeapon();
+            StartCoroutine(EquipWeaponEx(currentWeapon));
+        }
+
+        public override void ToggleAim()
+        {
+            if (weaponList.Count == 0)
+            {
+                return;
+            }
+
+            if (GetGun().canAim == false)
+            {
+                return;
+            }
+
+            slotLayer.PlayMotion(aimMotionAsset);
+
+            if (IsAiming() == false)
+            {
+                aimState = FPSAimState.Aiming;
+                OnInputAim(true);
+
+                adsLayer.SetAds(true);
+                swayLayer.SetFreeAimEnable(false);
+                swayLayer.SetLayerAlpha(0.5f);
+            }
+            else
+            {
+                DisableAim();
+            }
+
+            recoilComponent.isAiming = IsAiming();
+        }
 
         #region #Movement
         protected override void UpdateActionInput()
@@ -64,19 +191,14 @@ namespace FPSFramework
                 return;
             }
 
-            if (_keyData[KeyInputManager.KEY_RELOAD].isInput == true)
+            if (_keyData[KeyInputManager.KEY_RELOAD].IsInputDown == true)
             {
                 TryReload();
             }
 
-            if (_keyData[KeyInputManager.KEY_THROW_GRENADE].isInput == true)
+            if (_keyData[KeyInputManager.KEY_THROW_GRENADE].IsInputDown == true)
             {
                 TryGrenadeThrow();
-            }
-
-            if (_keyData[KeyInputManager.KEY_INTERACT].isInput == true)
-            {
-                ChangeWeapon_Internal();
             }
 
             if (aimState != FPSAimState.Ready)
@@ -86,12 +208,30 @@ namespace FPSFramework
                 bool isLeanRight = _keyData[KeyInputManager.KEY_LEAN_RIGHT].isInput;
                 bool isLeanLeft = _keyData[KeyInputManager.KEY_LEAN_LEFT].isInput;
 
-                _isLeaning = (isLeanRight || isLeanLeft);
+                _isLeaning = (isLeanRight == true) ||
+                             (isLeanLeft == true);
 
                 if (_isLeaning != wasLeaning)
                 {
                     slotLayer.PlayMotion(leanMotionAsset);
-                    charAnimData.SetLeanInput(wasLeaning ? 0f : isLeanRight ? -startLean : startLean);
+
+                    float targetValue;
+                    if (wasLeaning == true)
+                    {
+                        targetValue = 0f;
+                    }
+                    else
+                    {
+                        if (isLeanRight == true)
+                        {
+                            targetValue = -startLean;
+                        }
+                        else
+                        {
+                            targetValue = startLean;
+                        }
+                    }
+                    charAnimData.SetLeanInput(targetValue);
                 }
 
                 if (_isLeaning == true)
@@ -120,7 +260,7 @@ namespace FPSFramework
                     ChangeScope();
                 }
 
-                if (Input.GetKeyDown(KeyCode.B) && IsAiming())
+                if (Input.GetKeyDown(KeyCode.B) && IsAiming() == true)
                 {
                     if (aimState == FPSAimState.PointAiming)
                     {
@@ -135,7 +275,7 @@ namespace FPSFramework
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.H))
+            if (Input.GetKeyDown(KeyCode.H) == true)
             {
                 if (aimState == FPSAimState.Ready)
                 {
@@ -145,9 +285,31 @@ namespace FPSFramework
                 else
                 {
                     aimState = FPSAimState.Ready;
-                    lookLayer.SetLayerAlpha(.5f);
+                    lookLayer.SetLayerAlpha(0.5f);
                     OnFireReleased();
                 }
+            }
+        }
+
+        protected override void OnSprintStarted()
+        {
+            OnFireReleased();
+            lookLayer.SetLayerAlpha(0.5f);
+            adsLayer.SetLayerAlpha(0f);
+
+            if (weaponList.Count > 0)
+            {
+                if (GetGun().overlayType == Demo.Scripts.Runtime.OverlayType.Rifle)
+                {
+                    locoLayer.BlendInIkPose(sprintPose);
+                }
+            }
+
+            aimState = FPSAimState.None;
+
+            if (recoilComponent != null)
+            {
+                recoilComponent.Stop();
             }
         }
         #endregion
