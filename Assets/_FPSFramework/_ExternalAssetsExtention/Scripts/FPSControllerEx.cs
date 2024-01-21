@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 namespace FPSFramework
 {
@@ -16,6 +17,30 @@ namespace FPSFramework
         protected Transform weaponParentTransform;
 
         protected Camera _fpsCamera;
+
+        protected bool _isEquipable;
+        public bool IsEquipable
+        {
+            get
+            {
+                return _isEquipable;
+            }
+            protected set
+            {
+                if (_isEquipable != value)
+                {
+                    _isEquipable = value;
+
+                    if (OnEquipableValueChanged != null)
+                    {
+                        OnEquipableValueChanged(value);
+                    }
+                }
+            }
+        }
+
+        public delegate void EquipableValueChanged(bool isEquipable);
+        public static event EquipableValueChanged OnEquipableValueChanged;
 
         protected List<Weapon> weaponList
         {
@@ -40,7 +65,9 @@ namespace FPSFramework
 
         protected override void Update()
         {
+            // Debug.Log("weaponList.Count : " + weaponList.Count + ", _index : " + _index + ", lastIndex : " + _lastIndex);
             // base.Update();
+
             Time.timeScale = timeScale;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -59,25 +86,101 @@ namespace FPSFramework
             }
 
             // Interact
-            Ray ray = new Ray(mainCamera.position, mainCamera.forward * INTERACT_DISTANCE);
+            Ray ray = new Ray(mainCamera.position, mainCamera.forward);
             if (Physics.Raycast(ray, out RaycastHit _raycastHit) == true)
             {
-                if (_raycastHit.transform.TryGetComponent<IEquipable>(out IEquipable _equipable) == true)
+                bool isRayHit = _raycastHit.transform.TryGetComponent<IEquipable>(out IEquipable _equipable);
+                bool isInbound = (_raycastHit.transform.position - this.transform.position).magnitude <= INTERACT_DISTANCE;
+
+                IsEquipable = isRayHit && isInbound;
+                if (IsEquipable == true)
                 {
                     if (_keyData[KeyInputManager.KEY_INTERACT].IsInputDown == true)
                     {
-                        WeaponEx _weapon = _equipable as WeaponEx;
-                        _weapon.DoInteract();
-                        _weapon.transform.parent = weaponParentTransform;
-                        _weapon.transform.localPosition = Vector3.zero;
-                        _weapon.transform.localEulerAngles = Vector3.zero;
+                        WeaponEx _currentWeapon = GetGun() as WeaponEx;
+                        WeaponEx _equipedWeapon = _equipable as WeaponEx;
 
-                        weaponList.Add(_weapon);
+                        Debug.LogFormat(LOG_FORMAT, "Update(), currentWeapon : " + _currentWeapon + ", _equipedWeapon : " + _equipedWeapon);
 
-                        ChangeWeapon_Internal();
+                        ChangeWeapon_InternalEx(_equipedWeapon, _currentWeapon, _equipedWeapon.transform.position, _equipedWeapon.transform.rotation);
                     }
                 }
             }
+        }
+
+        protected override void OnFirePressed()
+        {
+            if (weaponList.Count == 0 ||
+                HasActiveAction() == true)
+            {
+                return;
+            }
+
+            // Debug.LogFormat(LOG_FORMAT, "OnFirePressed()");
+
+            WeaponEx weapon = GetGun() as WeaponEx;
+            _bursts = weapon.burstAmount - 1;
+
+            if (weapon.recoilPattern != null)
+            {
+                _recoilStep = weapon.recoilPattern.step;
+            }
+
+            _isFiring = true;
+            Fire();
+        }
+
+        protected override void OnFireReleased()
+        {
+            if (weaponList.Count == 0)
+            {
+                return;
+            }
+
+            // Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
+
+            if (recoilComponent != null)
+            {
+                recoilComponent.Stop();
+            }
+
+            _recoilStep = 0f;
+            _isFiring = false;
+            CancelInvoke(nameof(Fire));
+        }
+
+        protected IEnumerator EquipWeaponEx(WeaponEx equipedWeapon, WeaponEx currentWeapon, Vector3 equipedWeaponPos, Quaternion equipedWeaponRot)
+        {
+            Debug.LogFormat(LOG_FORMAT, "EquipWeaponEx(), _equipedWeapon : " + equipedWeapon + ", currentWeapon : " + currentWeapon);
+
+            equipedWeapon.DoInteract();
+            equipedWeapon.transform.parent = weaponParentTransform;
+            equipedWeapon.transform.localPosition = Vector3.zero;
+            equipedWeapon.transform.localEulerAngles = Vector3.zero;
+
+            yield return new WaitForSeconds(equipDelay);
+
+            if (currentWeapon != null)
+            {
+                currentWeapon.Release(equipedWeaponPos, equipedWeaponRot);
+                currentWeapon.transform.parent = null;
+
+                weaponList.Remove(currentWeapon);
+                _index = 0;
+            }
+            if (weaponList.Count == 0)
+            {
+                yield break;
+            }
+
+            _bursts = equipedWeapon.burstAmount;
+
+            InitWeapon(equipedWeapon);
+            equipedWeapon.Initialize();
+            equipedWeapon.gameObject.SetActive(true);
+
+            animator.SetFloat(OverlayType, (float)equipedWeapon.overlayType);
+            actionState = FPSActionState.None;
         }
 
         protected override void UnequipWeapon()
@@ -90,38 +193,9 @@ namespace FPSFramework
             GetAnimGraph().GetFirstPersonAnimator().CrossFade(UnEquip, 0.1f);
         }
 
-        protected IEnumerator EquipWeaponEx(WeaponEx currentWeapon)
+        protected void ChangeWeapon_InternalEx(WeaponEx equipedWeapon, WeaponEx currentWeapon, Vector3 equipedWeaponPos, Quaternion equipedWeaponRot)
         {
-            Debug.LogFormat(LOG_FORMAT, "EquipWeaponEx(), currentWeapon.name : " + currentWeapon);
-
-            yield return new WaitForSeconds(equipDelay);
-
-            if (currentWeapon != null)
-            {
-                currentWeapon.Release(this.transform.position + (this.transform.forward * 0.5f));
-            }
-            if (weaponList.Count == 0)
-            {
-                yield break;
-            }
-
-            weaponList[_lastIndex].gameObject.SetActive(false);
-            WeaponEx _weaponEx = weaponList[_index] as WeaponEx;
-
-            _bursts = _weaponEx.burstAmount;
-
-            InitWeapon(_weaponEx);
-            _weaponEx.Initialize();
-            _weaponEx.gameObject.SetActive(true);
-            Debug.LogFormat(LOG_FORMAT, "_weaponEx.name : " + _weaponEx.name);
-
-            animator.SetFloat(OverlayType, (float)_weaponEx.overlayType);
-            actionState = FPSActionState.None;
-        }
-
-        protected override void ChangeWeapon_Internal()
-        {
-            Debug.LogFormat(LOG_FORMAT, "ChangeWeapon_Internal()");
+            Debug.LogFormat(LOG_FORMAT, "ChangeWeapon_Internal(), equipedWeapon : " + equipedWeapon + ", currentWeapon : " + currentWeapon);
 
             if (movementComponent.PoseState == FPSPoseState.Prone)
             {
@@ -133,9 +207,10 @@ namespace FPSFramework
                 return;
             }
 
+            weaponList.Add(equipedWeapon);
+
             OnFireReleased();
 
-            WeaponEx currentWeapon = GetGun() as WeaponEx;
             int newIndex = _index;
             newIndex++;
             if (newIndex > weapons.Count - 1)
@@ -147,7 +222,7 @@ namespace FPSFramework
             _index = newIndex;
 
             UnequipWeapon();
-            StartCoroutine(EquipWeaponEx(currentWeapon));
+            StartCoroutine(EquipWeaponEx(equipedWeapon, currentWeapon, equipedWeaponPos, equipedWeaponRot));
         }
 
         public override void ToggleAim()

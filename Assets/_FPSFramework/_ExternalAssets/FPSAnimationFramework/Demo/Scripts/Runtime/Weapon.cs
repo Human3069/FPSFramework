@@ -32,7 +32,7 @@ namespace Demo.Scripts.Runtime
         public RecoilPattern recoilPattern;
         public FPSCameraShake cameraShake;
         
-        private Animator _animator;
+        protected Animator _animator;
         private int _scopeIndex;
 
         protected void Start()
@@ -47,7 +47,7 @@ namespace Demo.Scripts.Runtime
             return scopes[_scopeIndex];
         }
         
-        public void OnFire()
+        public virtual void OnFire()
         {
             if (_animator == null)
             {
