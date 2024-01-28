@@ -8,7 +8,7 @@ namespace _KMH_Framework
     public abstract class BaseObjectPoolManager<BaseHandler> : MonoBehaviour where BaseHandler : BaseObjectPoolHandler
     {
         // private const string LOG_FORMAT = "<color=white><b>[BaseObjectPoolManager]</b></color> {0}";
-
+   
         protected static BaseObjectPoolManager<BaseHandler> _instance;
         public static BaseObjectPoolManager<BaseHandler> Instance
         {
@@ -45,8 +45,8 @@ namespace _KMH_Framework
                 newObj.transform.SetParent(this.transform);
 
                 BaseObjectPoolHandler newHandler = newObj.AddComponent<BaseObjectPoolHandler>();
-                newHandler.Initialize();
                 newHandler.ThisInitIndex = i;
+                newHandler.Initialize();
 
                 PoolHandlerDictionary.Add(_InitInfos[i].Title, newHandler);
             }
@@ -57,9 +57,6 @@ namespace _KMH_Framework
     [System.Serializable]
     public struct InitInfo
     {
-        public string Title;
-
-        [Space(10)]
         public GameObject Obj;
         public int ObjInitCount;
     }
@@ -95,8 +92,9 @@ namespace _KMH_Framework
         /*
         {
             GameObject newObj = Instantiate(BaseObjectPoolHandler.Instance._InitInfos[ThisInitIndex].Obj);
-            newObj.gameObject.SetActive(false);
             newObj.transform.SetParent(disableObjectsParent.transform);
+            newObj.gameObject.SetActive(false);
+
             return newObj;
         }
         */
@@ -109,13 +107,15 @@ namespace _KMH_Framework
                 GameObject obj = poolingQueue.Dequeue();
                 obj.transform.SetParent(enableObjectsParent.transform);
                 obj.gameObject.SetActive(true);
+
                 return obj;
             }
             else
             {
                 GameObject newObj = CreateNewObject();
-                newObj.gameObject.SetActive(true);
                 newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
                 return newObj;
             }
         }
@@ -129,8 +129,8 @@ namespace _KMH_Framework
                 GameObject obj = poolingQueue.Dequeue();
 
                 obj.transform.SetPositionAndRotation(_transform.position, _transform.rotation);
-
                 obj.gameObject.SetActive(true);
+
                 return obj;
             }
             else
@@ -138,9 +138,9 @@ namespace _KMH_Framework
                 GameObject newObj = CreateNewObject();
 
                 newObj.transform.SetPositionAndRotation(_transform.position, _transform.rotation);
-
-                newObj.gameObject.SetActive(true);
                 newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
                 return newObj;
             }
         }
@@ -154,7 +154,32 @@ namespace _KMH_Framework
                 GameObject obj = poolingQueue.Dequeue();
 
                 obj.transform.SetPositionAndRotation(_position, _rotation);
+                obj.transform.SetParent(enableObjectsParent.transform);
+                obj.gameObject.SetActive(true);
 
+                return obj;
+            }
+            else
+            {
+                GameObject newObj = CreateNewObject();
+
+                newObj.transform.SetPositionAndRotation(_position, _rotation);
+                newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
+                return newObj;
+            }
+        }
+        */
+
+        public abstract GameObject EnableObject(Vector3 _position);
+        /*
+        {
+            if (poolingQueue.Count > 0)
+            {
+                GameObject obj = poolingQueue.Dequeue();
+
+                obj.transform.position = _position;
                 obj.transform.SetParent(enableObjectsParent.transform);
                 obj.gameObject.SetActive(true);
                 return obj;
@@ -163,10 +188,10 @@ namespace _KMH_Framework
             {
                 GameObject newObj = CreateNewObject();
 
-                newObj.transform.SetPositionAndRotation(_position, _rotation);
-
-                newObj.gameObject.SetActive(true);
+                newObj.transform.position = _position;
                 newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
                 return newObj;
             }
         }

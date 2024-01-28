@@ -1895,6 +1895,7 @@ Transform:
   - {fileID: 343785978415572798}
   - {fileID: 5133771285880599932}
   - {fileID: 977657296878384333}
+  - {fileID: 1772367250691399039}
   m_Father: {fileID: 3777772160216583987}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3056,6 +3057,71 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &5681910792221588219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1772367250691399039}
+  - component: {fileID: 6850685487558261070}
+  m_Layer: 0
+  m_Name: ImpactPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1772367250691399039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681910792221588219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 964863186186632003}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6850685487558261070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681910792221588219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9540f616e433d9a4fbedb3e39400d8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InitInfos:
+  - Obj: {fileID: 151174, guid: 2beca6a8877c0044fb94c1671b185209, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 108086, guid: f3c56490620b54746b4e8e5ced8de3c6, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 186004, guid: 24c5d7da5c43de4408167dbab93c6777, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 196912, guid: c7ddd7b9bacc4294ab90160710b16329, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 168394, guid: 19c8e2f498930f549b04f97743a865c7, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 180772, guid: db65ea4c3bc2f9f449f67fc2f721630f, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 178032, guid: 8f4faa847d4117840bfb9e97c0ae08d5, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 142740, guid: 6108a49bb9ddf8544a9e46d90cb19ad5, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 149956, guid: 64ec15b958d8caa4cbd4dea6889a7106, type: 3}
+    ObjInitCount: 20
+  - Obj: {fileID: 138412, guid: fc81856dc3f1dad4285301f492380297, type: 3}
+    ObjInitCount: 20
 --- !u!1 &6123452591078015599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,8 +3810,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _InitInfos:
-  - Title: CommonBullet
-    Obj: {fileID: 6879916920074542158, guid: 59fdc15005074de44a44db0646cf9f8c, type: 3}
+  - Obj: {fileID: 6879916920074542158, guid: 3d99e7267ad9b4146934553a35e0aa1d, type: 3}
+    ObjInitCount: 100
+  - Obj: {fileID: 6879916920074542158, guid: 59fdc15005074de44a44db0646cf9f8c, type: 3}
+    ObjInitCount: 100
+  - Obj: {fileID: 6879916920074542158, guid: 6804a094e5231b146a31588c05ab91c2, type: 3}
     ObjInitCount: 100
 --- !u!1 &8374961974761846034
 GameObject:

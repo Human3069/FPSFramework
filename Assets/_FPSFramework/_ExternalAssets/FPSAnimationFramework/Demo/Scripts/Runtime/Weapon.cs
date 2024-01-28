@@ -26,7 +26,7 @@ namespace Demo.Scripts.Runtime
         
         [Header("Aiming")]
         public bool canAim = true;
-        [SerializeField] private List<Transform> scopes;
+        [SerializeField] protected List<Transform> scopes;
         
         [Header("Recoil")]
         public RecoilPattern recoilPattern;

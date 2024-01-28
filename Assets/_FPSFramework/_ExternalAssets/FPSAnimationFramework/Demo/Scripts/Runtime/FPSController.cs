@@ -294,7 +294,7 @@ namespace Demo.Scripts.Runtime
             InitAimPoint(GetGun());
         }
 
-        protected void Fire()
+        protected virtual void Fire()
         {
             if (HasActiveAction()) return;
             

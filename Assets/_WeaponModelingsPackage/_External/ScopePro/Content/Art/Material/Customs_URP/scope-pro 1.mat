@@ -96,13 +96,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_0bb2c494708d4e73aed6ec3922b741ac: 1
-    - Vector1_3b802a5540e846d4a53a0d6005786cf0: 1.2
-    - Vector1_4abd5c557bba4b8fa1cf9a49390e8d46: 1.5
-    - Vector1_5da8ee3542eb4d3695e8727ffd19ec6f: 0.1
+    - Vector1_0bb2c494708d4e73aed6ec3922b741ac: 0.2
+    - Vector1_3b802a5540e846d4a53a0d6005786cf0: 1
+    - Vector1_4abd5c557bba4b8fa1cf9a49390e8d46: 0.15
+    - Vector1_5da8ee3542eb4d3695e8727ffd19ec6f: 0.2
     - _AppertureBasedDistance: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _DEBUG_X: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Float1: 1.14
@@ -117,7 +118,7 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RenderSize: 0.5
+    - _RenderSize: 0.05
     - _ReticleSize: 1.488
     - _ReticleSizeBDistance: 0
     - _ScopeApperture: -0.391
@@ -132,7 +133,10 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DepthThreshold: {r: 30, g: 30, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RenderOffset: {r: 1, g: 1, b: 0, a: 0}
     - _ReticleColor: {r: 0.754717, g: 0, b: 0, a: 1}
+    - _Threshold: {r: 0, g: 0, b: 0, a: 0}
+    - _ViewThreshold: {r: 3, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []

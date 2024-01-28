@@ -100,6 +100,7 @@ MonoBehaviour:
   - {fileID: 6506212990733282748}
   recoilPattern: {fileID: 11400000, guid: 56306d8ad38a8a7498dbbec7d3f96297, type: 2}
   cameraShake: {fileID: 11400000, guid: bb03719f457697343922a1dcf7b02e2b, type: 2}
+  _bulletType: 2
 --- !u!65 &5182852995460359925
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -17,5 +17,5 @@ MonoBehaviour:
   step: -15
   horizontalVariation: {x: -5, y: 5}
   aimRatio: 0.5
-  cameraWeight: 0.2
+  cameraWeight: 0.078
   cameraRestoreSpeed: 8

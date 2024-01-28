@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MaterialType : MonoBehaviour {
+public class _MaterialType : MonoBehaviour {
 
     public MaterialTypeEnum TypeOfMaterial = MaterialTypeEnum.Plaster;
 

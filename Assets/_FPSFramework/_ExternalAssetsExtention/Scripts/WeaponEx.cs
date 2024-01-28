@@ -1,8 +1,6 @@
 using _KMH_Framework;
 using Demo.Scripts.Runtime;
-
-using System.Collections.Generic;
-using UnityEditor;
+using System.Collections;
 using UnityEngine;
 
 namespace FPSFramework
@@ -15,10 +13,30 @@ namespace FPSFramework
         private const string MUZZLE_FLASH_NAME = "MuzzleFlash";
         private const string FIRE_POINT_NAME = "FirePoint";
 
+        [SerializeField]
+        protected BulletHandler.BulletType _bulletType;
+        protected string bulletName;
+
         protected Collider _collider;
         protected Rigidbody _rigidbody;
         protected VisualFxPlayer _muzzleFlashFx;
         protected Transform _firePoint;
+
+        protected virtual void Awake()
+        {
+            StartCoroutine(PostAwake());
+        }
+
+        protected IEnumerator PostAwake()
+        {
+            while (BulletPoolManager.Instance == null ||
+                   BulletPoolManager.Instance.IsReady == false)
+            {
+                yield return null;
+            }
+
+            bulletName = BulletHandler.GetName(_bulletType);
+        }
 
         public virtual void Initialize()
         {
@@ -55,10 +73,10 @@ namespace FPSFramework
         {
             Debug.LogFormat(LOG_FORMAT, "_firePoint.pos : " + _firePoint.position + ", _firePoint.name : " + _firePoint.name);
 
-            base.OnFire();
-
+            BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].EnableObject((weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward), weaponTransformData.pivotPoint.rotation);
             _muzzleFlashFx.Play();
-            BulletPoolManager.Instance.PoolHandlerDictionary[BulletPoolManager.COMMON_BULLET].EnableObject(_firePoint.position, _firePoint.rotation);
+
+            base.OnFire();
         }
     }
 }

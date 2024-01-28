@@ -33,13 +33,13 @@ public class FPSFireManager : MonoBehaviour
     [System.Serializable]
     public class ImpactInfo
     {
-        public MaterialType.MaterialTypeEnum MaterialType;
+        public _MaterialType.MaterialTypeEnum MaterialType;
         public GameObject ImpactEffect;
     }
 
     GameObject GetImpactEffect(GameObject impactedGameObject)
     {
-        var materialType = impactedGameObject.GetComponent<MaterialType>();
+        var materialType = impactedGameObject.GetComponent<_MaterialType>();
         if (materialType==null)
             return null;
         foreach (var impactInfo in ImpactElemets)

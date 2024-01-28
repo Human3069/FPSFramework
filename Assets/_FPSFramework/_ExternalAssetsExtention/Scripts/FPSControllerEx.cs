@@ -1,10 +1,10 @@
 using _KMH_Framework;
 using Demo.Scripts.Runtime;
+using Kinemation.FPSFramework.Runtime.Recoil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 
 namespace FPSFramework
 {
@@ -15,6 +15,11 @@ namespace FPSFramework
 
         [SerializeField]
         protected Transform weaponParentTransform;
+
+        [Space(10)]
+        [ReadOnly]
+        [SerializeField]
+        protected float fireTimeStamp = 0f;
 
         protected Camera _fpsCamera;
 
@@ -58,6 +63,8 @@ namespace FPSFramework
             }
         }
 
+        protected WeaponEx currentEquipedWeapon;
+
         protected void Awake()
         {
             _fpsCamera = mainCamera.GetComponent<Camera>();
@@ -68,7 +75,16 @@ namespace FPSFramework
             // Debug.Log("weaponList.Count : " + weaponList.Count + ", _index : " + _index + ", lastIndex : " + _lastIndex);
             // base.Update();
 
-            Time.timeScale = timeScale;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Time.timeScale = 0.01f;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Time.timeScale = 1f;
+            }
+
+            // Time.timeScale = timeScale;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Application.Quit(0);
@@ -108,22 +124,94 @@ namespace FPSFramework
             }
         }
 
+        protected override void Fire()
+        {
+            if (HasActiveAction() == true)
+            {
+                return;
+            }
+
+            currentEquipedWeapon.OnFire();
+         
+            PlayAnimation(currentEquipedWeapon.fireClip);
+            PlayCameraShake(currentEquipedWeapon.cameraShake);
+
+            if (currentEquipedWeapon.recoilPattern != null)
+            {
+                float aimRatio;
+                if (IsAiming() == true)
+                {
+                    aimRatio = currentEquipedWeapon.recoilPattern.aimRatio;
+                }
+                else
+                {
+                    aimRatio = 1f;
+                }
+
+                Vector2 _horizontalVar = currentEquipedWeapon.recoilPattern.horizontalVariation;
+                float hRecoil = UnityEngine.Random.Range(_horizontalVar.x, _horizontalVar.y);
+
+                _controllerRecoil += new Vector2(hRecoil, _recoilStep) * aimRatio;
+            }
+
+            if (recoilComponent == null ||
+                currentEquipedWeapon.weaponAsset.recoilData == null)
+            {
+                return;
+            }
+
+            recoilComponent.Play();
+            _recoilStep += currentEquipedWeapon.recoilPattern.acceleration;
+
+            if (recoilComponent.fireMode == FireMode.Burst)
+            {
+                _bursts--;
+            }
+        }
+
+        protected void OnFirePressed_Constantly()
+        {
+            if (recoilComponent.fireMode == FireMode.Semi)
+            {
+                _isFiring = false;
+                return;
+            }
+            else if (recoilComponent.fireMode == FireMode.Burst)
+            {
+                if (_bursts == 0)
+                {
+                    OnFireReleased();
+                    return;
+                }
+            }
+            else
+            {
+                // do nothing
+            }
+
+            float fireRate = (60f / currentEquipedWeapon.fireRate);
+            if (fireTimeStamp >= fireRate)
+            {
+                fireTimeStamp = 0f;
+                Fire();
+            }
+        }
+
         protected override void OnFirePressed()
         {
-            if (weaponList.Count == 0 ||
+            Debug.LogFormat(LOG_FORMAT, "OnFirePressed()");
+
+            if (currentEquipedWeapon == null ||
                 HasActiveAction() == true)
             {
                 return;
             }
 
-            // Debug.LogFormat(LOG_FORMAT, "OnFirePressed()");
+            _bursts = currentEquipedWeapon.burstAmount;
 
-            WeaponEx weapon = GetGun() as WeaponEx;
-            _bursts = weapon.burstAmount - 1;
-
-            if (weapon.recoilPattern != null)
+            if (currentEquipedWeapon.recoilPattern != null)
             {
-                _recoilStep = weapon.recoilPattern.step;
+                _recoilStep = currentEquipedWeapon.recoilPattern.step;
             }
 
             _isFiring = true;
@@ -132,12 +220,9 @@ namespace FPSFramework
 
         protected override void OnFireReleased()
         {
-            if (weaponList.Count == 0)
-            {
-                return;
-            }
+            Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
 
-            // Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
+            if (weapons.Count == 0) return;
 
             if (recoilComponent != null)
             {
@@ -173,12 +258,17 @@ namespace FPSFramework
                 yield break;
             }
 
-            _bursts = equipedWeapon.burstAmount;
+            currentEquipedWeapon = equipedWeapon;
 
-            InitWeapon(equipedWeapon);
-            equipedWeapon.Initialize();
-            equipedWeapon.gameObject.SetActive(true);
+            InitWeapon(currentEquipedWeapon);
+            currentEquipedWeapon.Initialize();
+            currentEquipedWeapon.gameObject.SetActive(true);
 
+            if (recoilComponent.fireMode == FireMode.Semi)
+            {
+                _bursts = currentEquipedWeapon.burstAmount;
+            }
+                
             animator.SetFloat(OverlayType, (float)equipedWeapon.overlayType);
             actionState = FPSActionState.None;
         }
@@ -314,15 +404,27 @@ namespace FPSFramework
                     float leanValue = Input.GetAxis("Mouse ScrollWheel") * smoothLeanStep;
                     charAnimData.AddLeanInput(leanValue);
                 }
-
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+            
+                if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    OnFirePressed();
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        OnFirePressed();
+                    }
+
+                    if (currentEquipedWeapon != null)
+                    {
+                        OnFirePressed_Constantly();
+                    }
+
+                    fireTimeStamp += Time.deltaTime;
                 }
 
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
                     OnFireReleased();
+
+                    fireTimeStamp = 0f;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Mouse1))

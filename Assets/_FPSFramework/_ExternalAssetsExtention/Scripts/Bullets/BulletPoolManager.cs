@@ -9,7 +9,10 @@ namespace _KMH_Framework
     {
         private const string LOG_FORMAT = "<color=white><b>[BulletPoolManager]</b></color> {0}";
 
-        public const string COMMON_BULLET = "CommonBullet";
+        public static string _556_BULLET;
+        public static string _577_450_BULLET;
+        public static string _762_BULLET;
+        public static string _9_BULLET;
 
         public static new BulletPoolManager Instance
         {
@@ -20,6 +23,19 @@ namespace _KMH_Framework
             protected set
             {
                 _instance = value;
+            }
+        }
+
+        protected bool _isReady = false;
+        public bool IsReady
+        {
+            get
+            {
+                return _isReady;
+            }
+            protected set
+            {
+                _isReady = value;
             }
         }
 
@@ -36,17 +52,25 @@ namespace _KMH_Framework
                 return;
             }
 
+            _556_BULLET = _InitInfos[0].Obj.name;
+            _577_450_BULLET = _InitInfos[1].Obj.name;
+            _762_BULLET = _InitInfos[2].Obj.name;
+            _9_BULLET = _InitInfos[3].Obj.name;
+
             for (int i = 0; i < _InitInfos.Length; i++)
             {
-                GameObject newObj = new GameObject(_InitInfos[i].Title + "PoolHandler");
+                string objName = _InitInfos[i].Obj.name;
+                GameObject newObj = new GameObject(objName + "PoolHandler");
                 newObj.transform.SetParent(this.transform);
 
                 BulletPoolHandler newHandler = newObj.AddComponent<BulletPoolHandler>();
-                newHandler.Initialize();
                 newHandler.ThisInitIndex = i;
+                newHandler.Initialize();
 
-                PoolHandlerDictionary.Add(_InitInfos[i].Title, newHandler);
+                PoolHandlerDictionary.Add(objName, newHandler);
             }
+
+            IsReady = true;
         }
     }
 
@@ -71,8 +95,9 @@ namespace _KMH_Framework
         protected override GameObject CreateNewObject()
         {
             GameObject newObj = Instantiate(BulletPoolManager.Instance._InitInfos[ThisInitIndex].Obj);
-            newObj.gameObject.SetActive(false);
             newObj.transform.SetParent(disableObjectsParent.transform);
+            newObj.gameObject.SetActive(false);
+
             return newObj;
         }
 
@@ -83,13 +108,15 @@ namespace _KMH_Framework
                 GameObject obj = poolingQueue.Dequeue();
                 obj.transform.SetParent(enableObjectsParent.transform);
                 obj.gameObject.SetActive(true);
+
                 return obj;
             }
             else
             {
                 GameObject newObj = CreateNewObject();
-                newObj.gameObject.SetActive(true);
                 newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
                 return newObj;
             }
         }
@@ -103,6 +130,7 @@ namespace _KMH_Framework
                 obj.transform.SetPositionAndRotation(_transform.position, _transform.rotation);
                 obj.transform.SetParent(enableObjectsParent.transform);
                 obj.gameObject.SetActive(true);
+
                 return obj;
             }
             else
@@ -110,9 +138,9 @@ namespace _KMH_Framework
                 GameObject newObj = CreateNewObject();
 
                 newObj.transform.SetPositionAndRotation(_transform.position, _transform.rotation);
-
-                newObj.gameObject.SetActive(true);
                 newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
                 return newObj;
             }
         }
@@ -126,6 +154,7 @@ namespace _KMH_Framework
                 obj.transform.SetPositionAndRotation(_position, _rotation);
                 obj.transform.SetParent(enableObjectsParent.transform);
                 obj.gameObject.SetActive(true);
+
                 return obj;
             }
             else
@@ -133,9 +162,33 @@ namespace _KMH_Framework
                 GameObject newObj = CreateNewObject();
 
                 newObj.transform.SetPositionAndRotation(_position, _rotation);
-
-                newObj.gameObject.SetActive(true);
                 newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
+                return newObj;
+            }
+        }
+
+        public override GameObject EnableObject(Vector3 _position)
+        {
+            if (poolingQueue.Count > 0)
+            {
+                GameObject obj = poolingQueue.Dequeue();
+
+                obj.transform.position = _position;
+                obj.transform.SetParent(enableObjectsParent.transform);
+                obj.gameObject.SetActive(true);
+
+                return obj;
+            }
+            else
+            {
+                GameObject newObj = CreateNewObject();
+
+                newObj.transform.position = _position;
+                newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
                 return newObj;
             }
         }
