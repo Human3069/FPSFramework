@@ -22,7 +22,7 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
             return weaponTransformData.aimPoint;
         }
 
-#if UNITY_EDITOR
+#if false
         public void SetupWeapon()
         {
             Transform FindPoint(Transform target, string searchName)

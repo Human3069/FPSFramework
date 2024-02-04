@@ -65,7 +65,8 @@ namespace Kinemation.FPSFramework.Editor.FPSAnimator
                             new GUIContent(ObjectNames.NicifyVariableName(field.Name)));
                     }
                 }
-                
+
+                /*
                 GUILayout.BeginHorizontal();
                 
                 if (GUILayout.Button("Setup Weapon"))
@@ -93,6 +94,7 @@ namespace Kinemation.FPSFramework.Editor.FPSAnimator
                         PrefabUtility.ApplyPrefabInstance(owner.gameObject, InteractionMode.AutomatedAction);
                     }
                 }
+                */
 
                 // Reset the background color
                 EditorGUILayout.EndVertical();

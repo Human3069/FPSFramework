@@ -2,7 +2,7 @@
 
 using Kinemation.FPSFramework.Runtime.Attributes;
 using Kinemation.FPSFramework.Runtime.Core.Types;
-
+using Kinemation.FPSFramework.Runtime.FPSAnimator;
 using System;
 using UnityEngine;
 
@@ -213,7 +213,7 @@ namespace Kinemation.FPSFramework.Runtime.Core.Components
         {
             return core.weaponTransformData.pivotPoint;
         }
-        
+
         protected Transform GetAimPoint()
         {
             return core.weaponTransformData.aimPoint;

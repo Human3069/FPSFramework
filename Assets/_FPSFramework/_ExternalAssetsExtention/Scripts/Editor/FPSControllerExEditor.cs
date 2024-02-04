@@ -6,7 +6,7 @@ using Unity.Services.Analytics.Platform;
 using UnityEditor;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     [CustomEditor(typeof(FPSControllerEx))]
     public class FPSControllerExEditor : Demo.Scripts.Editor.TabAttribute

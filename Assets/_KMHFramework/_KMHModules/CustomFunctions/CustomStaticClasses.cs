@@ -1,9 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _KMH_Framework
 {
+    public static class _Log
+    {
+        public static string _Format(object baseObject)
+        {
+            return _Format(baseObject.GetType().Name, Color.white);
+        }
+
+        public static string _Format(object baseObject, Color formatColor)
+        {
+            return _Format(baseObject.GetType().Name, formatColor);
+        }
+
+        public static string _Format(string nameOfClass)
+        {
+            return _Format(nameOfClass, Color.white);
+        }
+
+        public static string _Format(string nameOfClass, Color formatColor)
+        {
+            string colorToHex = formatColor.ToHexString();
+            string _result = "<color=#" + colorToHex + " ><b>[" + nameOfClass + "]</b></color> {0}";
+
+            return _result;
+        }
+    }
+
     public static class _Physical
     {
         public static float GetAngleFromThreePositions(Vector3 pos1, Vector3 pos2, Vector3 pos3)

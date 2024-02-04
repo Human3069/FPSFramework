@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.Build;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
@@ -29,6 +29,10 @@ namespace FPSFramework
         protected float speed;
 
         protected Rigidbody _rigidbody;
+
+        protected Vector3 enablePos;
+        protected Vector3 disablePos;
+        protected float flightDistance;
 
         public static string GetName(BulletType _type)
         {
@@ -70,6 +74,8 @@ namespace FPSFramework
             _rigidbody.velocity = this.transform.forward * speed;
             _rigidbody.angularVelocity = Vector3.zero;
 
+            enablePos = this.transform.position;
+
             StartCoroutine(PostOnEnable());
         }
 
@@ -77,6 +83,8 @@ namespace FPSFramework
         {
             yield return new WaitForSeconds(lifeTime);
 
+            disablePos = this.transform.position;
+            flightDistance = Vector3.Magnitude(enablePos - disablePos);
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
         }
 
@@ -95,6 +103,13 @@ namespace FPSFramework
 
                 GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(impactPoint);
                 particleObj.transform.LookAt(impactAngle);
+
+                disablePos = this.transform.position;
+                flightDistance = Vector3.Magnitude(enablePos - disablePos);
+                if (_materialType == Impactable.MaterialType.ShootingTarget)
+                {
+                    _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");
+                }
 
                 BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
             }

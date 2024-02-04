@@ -1,9 +1,10 @@
 using _KMH_Framework;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     [RequireComponent(typeof(Collider))]
     public class Impactable : MonoBehaviour
@@ -19,7 +20,9 @@ namespace FPSFramework
             Concrete,
             Dirt,
             Glass,
-            Water
+            Water,
+
+            ShootingTarget
         }
 
         [SerializeField]
@@ -75,6 +78,10 @@ namespace FPSFramework
             {
                 impactName = ImpactPoolManager.WOOD_IMPACT;
             }
+            else if (_type == MaterialType.ShootingTarget)
+            {
+                impactName = ImpactPoolManager.PLASTER_IMPACT;
+            }
             else
             {
                 impactName = "";
@@ -82,6 +89,27 @@ namespace FPSFramework
             }
 
             return impactName;
+        }
+
+        protected ShootingTarget _shootingTarget;
+        public ShootingTarget _ShootingTarget
+        {
+            get
+            {
+                return _shootingTarget;
+            }
+            protected set
+            {
+                _shootingTarget = value;
+            }
+        }
+
+        protected void Awake()
+        {
+            if (_MaterialType == MaterialType.ShootingTarget)
+            {
+                _ShootingTarget = this.transform.GetComponentInChildren<ShootingTarget>();
+            }
         }
     }
 }

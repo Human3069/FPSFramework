@@ -119,13 +119,14 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         {
             LocRot adsOffset = new LocRot(Vector3.zero, Quaternion.identity);
 
-            if (GetAimPoint() == null)
+            Transform aimPoint = GetAimPoint();
+            if (aimPoint == null)
             {
                 return adsOffset;
             }
             
-            adsOffset.rotation = Quaternion.Inverse(GetPivotPoint().rotation) * GetAimPoint().rotation;
-            adsOffset.position = -GetPivotPoint().InverseTransformPoint(GetAimPoint().position);
+            adsOffset.rotation = Quaternion.Inverse(GetPivotPoint().rotation) * aimPoint.rotation;
+            adsOffset.position = -GetPivotPoint().InverseTransformPoint(aimPoint.position);
 
             return adsOffset;
         }

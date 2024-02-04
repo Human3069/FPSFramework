@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     public class UI_Ingame : MonoBehaviour
     {

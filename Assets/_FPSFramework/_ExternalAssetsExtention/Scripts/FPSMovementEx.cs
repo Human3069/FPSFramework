@@ -3,7 +3,7 @@ using Demo.Scripts.Runtime;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     [RequireComponent(typeof(FPSControllerEx))]
     public class FPSMovementEx : FPSMovement

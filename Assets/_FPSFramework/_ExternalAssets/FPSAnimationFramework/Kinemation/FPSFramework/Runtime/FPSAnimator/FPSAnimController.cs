@@ -16,13 +16,13 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
     // Make sure to derive your controller from this class
     public abstract class FPSAnimController : MonoBehaviour
     {
-        private CoreAnimComponent fpsAnimator;
-        private FPSCamera fpsCamera;
+        protected CoreAnimComponent fpsAnimator;
+        protected FPSCamera fpsCamera;
         protected RecoilAnimation recoilComponent;
         protected CharAnimData charAnimData;
-        
-        private LookLayer internalLookLayer;
-        private AdsLayer internalAdsLayer;
+
+        protected LookLayer internalLookLayer;
+        protected AdsLayer internalAdsLayer;
         
         // Used primarily for function calls from Animation Events
         // Runs once at the beginning of the next update
@@ -95,7 +95,7 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
         }
 
         // Call this when changing sights
-        protected void InitAimPoint(FPSAnimWeapon weapon)
+        protected virtual void InitAimPoint(FPSAnimWeapon weapon)
         {
             fpsAnimator.OnSightChanged(weapon.GetAimPoint());
             

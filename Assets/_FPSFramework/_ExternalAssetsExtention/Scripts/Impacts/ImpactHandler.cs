@@ -2,7 +2,7 @@ using _KMH_Framework;
 using System.Collections;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     public class ImpactHandler : MonoBehaviour
     {

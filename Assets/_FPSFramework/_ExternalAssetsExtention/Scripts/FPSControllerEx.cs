@@ -1,12 +1,15 @@
 using _KMH_Framework;
 using Demo.Scripts.Runtime;
+using Kinemation.FPSFramework.Runtime.Core.Types;
+using Kinemation.FPSFramework.Runtime.FPSAnimator;
 using Kinemation.FPSFramework.Runtime.Recoil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Claims;
 using UnityEngine;
 
-namespace FPSFramework
+namespace FPS_Framework
 {
     public class FPSControllerEx : FPSController
     {
@@ -65,6 +68,49 @@ namespace FPSFramework
 
         protected WeaponEx currentEquipedWeapon;
 
+        protected bool _isAim;
+        public bool IsAim
+        {
+            get
+            {
+                return _isAim;
+            }
+            set
+            {
+                if (_isAim != value)
+                {
+                    if (currentEquipedWeapon != null &&
+                        currentEquipedWeapon.canAim == true)
+                    {
+                        _isAim = value;
+
+                        slotLayer.PlayMotion(aimMotionAsset);
+
+                        float alphaThreshold;
+                        if (value == true)
+                        {
+                            aimState = FPSAimState.Aiming;
+                            alphaThreshold = 0.5f;
+                        }
+                        else
+                        {
+                            aimState = FPSAimState.None;
+                            alphaThreshold = 1f;
+
+                            adsLayer.SetPointAim(false);
+                        }
+                        OnInputAim(value);
+                        adsLayer.SetAds(value);
+                        swayLayer.SetFreeAimEnable(!value);
+                        swayLayer.SetLayerAlpha(alphaThreshold);
+
+                        currentEquipedWeapon.IsAiming = value;
+                        recoilComponent.isAiming = value;
+                    }
+                }
+            }
+        }
+
         protected void Awake()
         {
             _fpsCamera = mainCamera.GetComponent<Camera>();
@@ -72,9 +118,6 @@ namespace FPSFramework
 
         protected override void Update()
         {
-            // Debug.Log("weaponList.Count : " + weaponList.Count + ", _index : " + _index + ", lastIndex : " + _lastIndex);
-            // base.Update();
-
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Time.timeScale = 0.01f;
@@ -222,7 +265,10 @@ namespace FPSFramework
         {
             Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
 
-            if (weapons.Count == 0) return;
+            if (currentEquipedWeapon == null)
+            {
+                return;
+            }
 
             if (recoilComponent != null)
             {
@@ -232,6 +278,17 @@ namespace FPSFramework
             _recoilStep = 0f;
             _isFiring = false;
             CancelInvoke(nameof(Fire));
+        }
+
+        protected override void InitAimPoint(FPSAnimWeapon weapon)
+        {
+            WeaponEx weaponEx = weapon as WeaponEx;
+            fpsAnimator.OnSightChanged(weaponEx.GetAimPoint());
+
+            if (internalAdsLayer != null)
+            {
+                internalAdsLayer.UpdateAimPoint();
+            }
         }
 
         protected IEnumerator EquipWeaponEx(WeaponEx equipedWeapon, WeaponEx currentWeapon, Vector3 equipedWeaponPos, Quaternion equipedWeaponRot)
@@ -261,8 +318,8 @@ namespace FPSFramework
             currentEquipedWeapon = equipedWeapon;
 
             InitWeapon(currentEquipedWeapon);
-            currentEquipedWeapon.Initialize();
             currentEquipedWeapon.gameObject.SetActive(true);
+            currentEquipedWeapon.Initialize();
 
             if (recoilComponent.fireMode == FireMode.Semi)
             {
@@ -271,6 +328,41 @@ namespace FPSFramework
                 
             animator.SetFloat(OverlayType, (float)equipedWeapon.overlayType);
             actionState = FPSActionState.None;
+        }
+
+        protected override void InitWeapon(FPSAnimWeapon weapon)
+        {
+            WeaponEx weaponEx = weapon as WeaponEx;
+
+            recoilComponent.Init(weaponEx.weaponAsset.recoilData, weaponEx.fireRate, weaponEx.fireMode);
+
+            WeaponTransformData _transformData = weaponEx.weaponTransformData;
+            _transformData.aimPoint = weaponEx.AttatchmentHandler.SelectedSight.AimPoint;
+
+            fpsAnimator.OnGunEquipped(weaponEx.weaponAsset, _transformData);
+
+            fpsAnimator.ikRigData.weaponTransform = weaponEx.weaponAsset.weaponBone;
+
+            if (internalLookLayer != null)
+            {
+                internalLookLayer.SetAimOffsetTable(weaponEx.weaponAsset.aimOffsetTable);
+            }
+
+            AnimSequence pose = weaponEx.weaponAsset.overlayPose;
+            if (pose == null)
+            {
+                Debug.LogError("FPSAnimController: OverlayPose is null! Make sure to assign it in the weapon prefab.");
+                return;
+            }
+
+            fpsAnimator.OnPrePoseSampled();
+            PlayPose(weaponEx.weaponAsset.overlayPose);
+            fpsAnimator.OnPoseSampled();
+
+            if (fpsCamera != null)
+            {
+                fpsCamera.cameraData = weaponEx.weaponAsset.adsData.cameraData;
+            }
         }
 
         protected override void UnequipWeapon()
@@ -287,18 +379,13 @@ namespace FPSFramework
         {
             Debug.LogFormat(LOG_FORMAT, "ChangeWeapon_Internal(), equipedWeapon : " + equipedWeapon + ", currentWeapon : " + currentWeapon);
 
-            if (movementComponent.PoseState == FPSPoseState.Prone)
-            {
-                return;
-            }
-
-            if (HasActiveAction() == true)
+            if (movementComponent.PoseState == FPSPoseState.Prone ||
+                HasActiveAction() == true)
             {
                 return;
             }
 
             weaponList.Add(equipedWeapon);
-
             OnFireReleased();
 
             int newIndex = _index;
@@ -313,37 +400,6 @@ namespace FPSFramework
 
             UnequipWeapon();
             StartCoroutine(EquipWeaponEx(equipedWeapon, currentWeapon, equipedWeaponPos, equipedWeaponRot));
-        }
-
-        public override void ToggleAim()
-        {
-            if (weaponList.Count == 0)
-            {
-                return;
-            }
-
-            if (GetGun().canAim == false)
-            {
-                return;
-            }
-
-            slotLayer.PlayMotion(aimMotionAsset);
-
-            if (IsAiming() == false)
-            {
-                aimState = FPSAimState.Aiming;
-                OnInputAim(true);
-
-                adsLayer.SetAds(true);
-                swayLayer.SetFreeAimEnable(false);
-                swayLayer.SetLayerAlpha(0.5f);
-            }
-            else
-            {
-                DisableAim();
-            }
-
-            recoilComponent.isAiming = IsAiming();
         }
 
         #region #Movement
@@ -416,20 +472,18 @@ namespace FPSFramework
                     {
                         OnFirePressed_Constantly();
                     }
-
                     fireTimeStamp += Time.deltaTime;
                 }
 
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
                     OnFireReleased();
-
                     fireTimeStamp = 0f;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
-                    ToggleAim();
+                    IsAim = !IsAim;
                 }
 
                 if (Input.GetKeyDown(KeyCode.V))
@@ -466,6 +520,52 @@ namespace FPSFramework
                     OnFireReleased();
                 }
             }
+        }
+
+        protected override void UpdateLookInput()
+        {
+            _freeLook = Input.GetKey(KeyCode.X);
+
+            float deltaMouseX = Input.GetAxis("Mouse X") * FPSManager.Instance.ActualSenstivity;
+            float deltaMouseY = -Input.GetAxis("Mouse Y") * FPSManager.Instance.ActualSenstivity;
+
+            if (_freeLook == true)
+            {
+                // No input for both controller and animation component. We only want to rotate the camera
+
+                _freeLookInput.x += deltaMouseX;
+                _freeLookInput.y += deltaMouseY;
+
+                _freeLookInput.x = Mathf.Clamp(_freeLookInput.x, -freeLookAngle.x, freeLookAngle.x);
+                _freeLookInput.y = Mathf.Clamp(_freeLookInput.y, -freeLookAngle.y, freeLookAngle.y);
+
+                return;
+            }
+
+            _freeLookInput = Vector2.Lerp(_freeLookInput, Vector2.zero,
+                FPSAnimLib.ExpDecayAlpha(15f, Time.deltaTime));
+
+            _playerInput.x += deltaMouseX;
+            _playerInput.y += deltaMouseY;
+
+            float proneWeight = animator.GetFloat("ProneWeight");
+            Vector2 pitchClamp = Vector2.Lerp(new Vector2(-90f, 90f), new Vector2(-30, 0f), proneWeight);
+
+            _playerInput.y = Mathf.Clamp(_playerInput.y, pitchClamp.x, pitchClamp.y);
+            moveRotation *= Quaternion.Euler(0f, deltaMouseX, 0f);
+            TurnInPlace();
+
+            _jumpState = Mathf.Lerp(_jumpState, movementComponent.IsInAir() ? 1f : 0f,
+                FPSAnimLib.ExpDecayAlpha(10f, Time.deltaTime));
+
+            float moveWeight = Mathf.Clamp01(movementComponent.AnimatorVelocity.magnitude);
+            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, moveWeight);
+            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, _jumpState);
+            _playerInput.x *= 1f - moveWeight;
+            _playerInput.x *= 1f - _jumpState;
+
+            charAnimData.SetAimInput(_playerInput);
+            charAnimData.AddDeltaInput(new Vector2(deltaMouseX, charAnimData.deltaAimInput.y));
         }
 
         protected override void OnSprintStarted()

@@ -641,7 +641,7 @@ namespace Demo.Scripts.Runtime
 
         protected float _jumpState = 0f;
 
-        protected void UpdateLookInput()
+        protected virtual void UpdateLookInput()
         {
             _freeLook = Input.GetKey(KeyCode.X);
 
