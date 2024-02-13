@@ -3123,6 +3123,8 @@ MonoBehaviour:
     ObjInitCount: 20
   - Obj: {fileID: 138412, guid: fc81856dc3f1dad4285301f492380297, type: 3}
     ObjInitCount: 20
+  - Obj: {fileID: 9180080523680794357, guid: 352c9ab3e49854b4098d98b33d77f522, type: 3}
+    ObjInitCount: 5
 --- !u!1 &6123452591078015599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,8 +3865,12 @@ MonoBehaviour:
     ObjInitCount: 100
   - Obj: {fileID: 6879916920074542158, guid: 59fdc15005074de44a44db0646cf9f8c, type: 3}
     ObjInitCount: 100
+  - Obj: {fileID: 6879916920074542158, guid: ce759a28bfe03b443820a87921fe8199, type: 3}
+    ObjInitCount: 100
   - Obj: {fileID: 6879916920074542158, guid: 6804a094e5231b146a31588c05ab91c2, type: 3}
     ObjInitCount: 100
+  - Obj: {fileID: 6879916920074542158, guid: 270239ee12f106a498480121d917303a, type: 3}
+    ObjInitCount: 10
 --- !u!1 &8374961974761846034
 GameObject:
   m_ObjectHideFlags: 0

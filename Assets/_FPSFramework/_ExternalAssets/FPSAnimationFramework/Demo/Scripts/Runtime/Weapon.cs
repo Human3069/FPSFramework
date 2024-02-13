@@ -57,7 +57,7 @@ namespace Demo.Scripts.Runtime
             _animator.Play("Fire", 0, 0f);
         }
 
-        public void Reload()
+        public virtual void Reload()
         {
             if (_animator == null)
             {

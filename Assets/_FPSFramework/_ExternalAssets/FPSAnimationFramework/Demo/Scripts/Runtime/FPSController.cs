@@ -470,7 +470,7 @@ namespace Demo.Scripts.Runtime
             slotLayer.PlayMotion(onLandedMotionAsset);
         }
 
-        protected void TryReload()
+        protected virtual void TryReload()
         {
             if (HasActiveAction()) return;
 
