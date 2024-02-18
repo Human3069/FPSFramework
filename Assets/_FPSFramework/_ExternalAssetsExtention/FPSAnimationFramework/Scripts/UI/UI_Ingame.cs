@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static FPS_Framework.FPSControllerEx;
 
 namespace FPS_Framework
 {
@@ -14,7 +15,7 @@ namespace FPS_Framework
         public SingleFPSPlayer _SingleFPSPlayer;
 
         [SerializeField]
-        protected GameObject equipablePanelObj;
+        protected TMP_Text interactableText;
 
         [Space(10)]
         [SerializeField]
@@ -22,7 +23,7 @@ namespace FPS_Framework
 
         protected void Awake()
         {
-            equipablePanelObj.SetActive(false);
+            interactableText.enabled = false;
 
             StartCoroutine(PostAwake());
         }
@@ -37,6 +38,7 @@ namespace FPS_Framework
             }
 
             _SingleFPSPlayer.FPSController.OnEquipableValueChanged += OnEquipableValueChanged;
+            _SingleFPSPlayer.FPSController.OnSeatableValueChanged += OnSeatableValueChanged;
             _SingleFPSPlayer.FPSController.OnEquipedWeaponChanged += OnEquipedWeaponChanged;
         }
 
@@ -45,6 +47,7 @@ namespace FPS_Framework
             if (_SingleFPSPlayer != null)
             {
                 _SingleFPSPlayer.FPSController.OnEquipedWeaponChanged -= OnEquipedWeaponChanged;
+                _SingleFPSPlayer.FPSController.OnSeatableValueChanged -= OnSeatableValueChanged;
                 _SingleFPSPlayer.FPSController.OnEquipableValueChanged -= OnEquipableValueChanged;
             }
         }
@@ -53,7 +56,16 @@ namespace FPS_Framework
         {
             Debug.LogFormat(LOG_FORMAT, "OnEquipableValueChanged(), isEquipable : " + isEquipable);
 
-            equipablePanelObj.SetActive(isEquipable);
+            interactableText.text = "Press 'F' to Equip";
+            interactableText.enabled = isEquipable;
+        }
+
+        protected void OnSeatableValueChanged(bool isSeatable)
+        {
+            Debug.LogFormat(LOG_FORMAT, "OnSeatableValueChanged(), isSeatable : " + isSeatable);
+
+            interactableText.text = "Press 'F' to Seat";
+            interactableText.enabled = isSeatable;
         }
 
         protected void OnEquipedWeaponChanged(WeaponEx currentWeapon, WeaponEx equipedWeapon)

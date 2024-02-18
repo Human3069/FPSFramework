@@ -9,12 +9,21 @@ namespace FPS_Framework
         //
     }
 
+    ////////////////////////////////////////////////////
+
     public interface IEquipable : IInteractable
     {
         //
     }
 
     public interface IWeapon : IEquipable
+    {
+        //
+    }
+
+    ////////////////////////////////////////////////////
+
+    public interface ISeatable : IInteractable
     {
         //
     }

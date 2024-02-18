@@ -33,8 +33,6 @@ namespace FPS_Framework
             set
             {
                 _isEquipped = value;
-                this.gameObject.SetActive(value);
-
                 if (value == true &&
                     isModifiable == true)
                 {

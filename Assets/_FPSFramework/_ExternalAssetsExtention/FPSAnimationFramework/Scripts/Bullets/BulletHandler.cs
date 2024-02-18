@@ -116,6 +116,16 @@ namespace FPS_Framework
                 particleObj.transform.LookAt(impactAngle);
 
                 BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+
+                Collider[] colliders = Physics.OverlapSphere(impactPoint, 10f);
+                foreach (Collider hit in colliders)
+                {
+                    if (hit != null && hit.TryGetComponent<Rigidbody>(out Rigidbody _rigidbody) == true)
+                    {
+                        _rigidbody.isKinematic = false;
+                        _rigidbody.AddExplosionForce(130000f, impactPoint, 10f, 0.3f);
+                    }
+                }
             }
             else
             {

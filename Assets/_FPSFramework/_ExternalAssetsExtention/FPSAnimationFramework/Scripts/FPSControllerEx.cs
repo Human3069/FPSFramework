@@ -3,6 +3,7 @@ using Demo.Scripts.Runtime;
 using Kinemation.FPSFramework.Runtime.Core.Types;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
 using Kinemation.FPSFramework.Runtime.Recoil;
+using NPOI.SS.Formula.Udf;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,53 @@ namespace FPS_Framework
 
         public delegate void EquipableValueChanged(bool isEquipable);
         public event EquipableValueChanged OnEquipableValueChanged;
+
+        [ReadOnly]
+        [SerializeField]
+        protected bool _isSeatable;
+        public bool IsSeatable
+        {
+            get
+            {
+                return _isSeatable;
+            }
+            protected set
+            {
+                if (_isSeatable != value)
+                {
+                    _isSeatable = value;
+
+                    if (OnSeatableValueChanged != null)
+                    {
+                        OnSeatableValueChanged(value);
+                    }
+                }
+            }
+        }
+
+        [Space(10)]
+        [ReadOnly]
+        [SerializeField]
+        protected bool _isSeated;
+        protected bool IsSeated
+        {
+            get
+            {
+                return _isSeated;
+            }
+            set
+            {
+                _isSeated = value;
+                movementComponent.enabled = !value;
+            }
+        }
+
+        [ReadOnly]
+        [SerializeField]
+        protected Seat currentSeat = null;
+
+        public delegate void SeatableValueChanged(bool isSeatable);
+        public event SeatableValueChanged OnSeatableValueChanged;
 
         protected List<Weapon> weaponList
         {
@@ -178,17 +226,41 @@ namespace FPS_Framework
                 bool isRayHit = _raycastHit.transform.TryGetComponent<IInteractable>(out IInteractable _interactable);
                 bool isInbound = (_raycastHit.transform.position - this.transform.position).magnitude <= INTERACT_DISTANCE;
 
-                IsEquipable = isRayHit && isInbound;
-                if (IsEquipable == true)
+                bool isTypeEquipable = _interactable is IEquipable;
+                bool isTypeSittable = _interactable is ISeatable;
+
+                bool isInteractable = isRayHit && isInbound;
+                IsEquipable = isInteractable && isTypeEquipable; // Property
+                IsSeatable = isInteractable && isTypeSittable && (IsSeated == false); // Property
+
+                if (_keyData[KeyInputManager.KEY_INTERACT].IsInputDown == true)
                 {
-                    if (_keyData[KeyInputManager.KEY_INTERACT].IsInputDown == true)
+                    if (IsEquipable == true)
                     {
-                        WeaponEx _currentWeapon = GetGun() as WeaponEx;
+                        WeaponEx _currentWeapon = CurrentEquipedWeapon;
                         WeaponEx _equipedWeapon = _interactable as WeaponEx;
 
                         Debug.LogFormat(LOG_FORMAT, "Update(), currentWeapon : " + _currentWeapon + ", _equipedWeapon : " + _equipedWeapon);
 
                         ChangeWeapon_InternalEx(_equipedWeapon, _currentWeapon, _equipedWeapon.transform.position, _equipedWeapon.transform.rotation);
+                    }
+                    else if (IsSeatable == true)
+                    {
+                        IsSeated = true;
+
+                        Seat _seat = _interactable as Seat;
+                        _seat.Interact(this.transform, IsSeated);
+                        _SingleFPSPlayer.transform.parent = _seat.transform;
+
+                        currentSeat = _seat;
+                    }
+                    else if (IsSeated == true)
+                    {
+                        IsSeated = false;
+
+                        currentSeat.Interact(this.transform, IsSeated);
+                        _SingleFPSPlayer.transform.parent = null;
+                        currentSeat = null;
                     }
                 }
             }
@@ -374,7 +446,6 @@ namespace FPS_Framework
             _transformData.aimPoint = weaponEx.AttatchmentHandler.SelectedSight.AimPoint;
 
             fpsAnimator.OnGunEquipped(weaponEx.weaponAsset, _transformData);
-
             fpsAnimator.ikRigData.weaponTransform = weaponEx.weaponAsset.weaponBone;
 
             if (internalLookLayer != null)
@@ -616,8 +687,8 @@ namespace FPS_Framework
                 FPSAnimLib.ExpDecayAlpha(10f, Time.deltaTime));
 
             float moveWeight = Mathf.Clamp01(movementComponent.AnimatorVelocity.magnitude);
-            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, moveWeight);
-            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, _jumpState);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, moveRotation, moveWeight);
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, moveRotation, _jumpState);
             _playerInput.x *= 1f - moveWeight;
             _playerInput.x *= 1f - _jumpState;
 
@@ -631,9 +702,9 @@ namespace FPS_Framework
             lookLayer.SetLayerAlpha(0.5f);
             adsLayer.SetLayerAlpha(0f);
 
-            if (weaponList.Count > 0)
+            if (CurrentEquipedWeapon != null)
             {
-                if (GetGun().overlayType == Demo.Scripts.Runtime.OverlayType.Rifle)
+                if (CurrentEquipedWeapon.overlayType == Demo.Scripts.Runtime.OverlayType.Rifle)
                 {
                     locoLayer.BlendInIkPose(sprintPose);
                 }
