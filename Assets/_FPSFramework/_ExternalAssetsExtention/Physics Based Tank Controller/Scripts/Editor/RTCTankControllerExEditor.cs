@@ -7,6 +7,8 @@ public class RTCTankControllerExEditor : Editor
 {
     protected SerializedProperty m_Script;
 
+    protected SerializedProperty tankGunController;
+
     protected SerializedProperty gasInput;
     protected SerializedProperty brakeInput;
     protected SerializedProperty steerInput;
@@ -82,6 +84,8 @@ public class RTCTankControllerExEditor : Editor
     {
         m_Script = serializedObject.FindProperty("m_Script");
 
+        tankGunController = serializedObject.FindProperty("tankGunController");
+
         gasInput = serializedObject.FindProperty("gasInput");
         brakeInput = serializedObject.FindProperty("brakeInput");
         steerInput = serializedObject.FindProperty("steerInput");
@@ -96,6 +100,10 @@ public class RTCTankControllerExEditor : Editor
         EditorGUI.BeginDisabledGroup(true);
         EditorGUILayout.PropertyField(m_Script);
         EditorGUI.EndDisabledGroup();
+
+        EditorGUILayout.Space(10);
+
+        EditorGUILayout.PropertyField(tankGunController);
 
         EditorGUILayout.PropertyField(gasInput);
         EditorGUILayout.PropertyField(brakeInput);

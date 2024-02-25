@@ -15,7 +15,9 @@ namespace FPS_Framework
         protected Rigidbody _rigidbody;
         protected AudioSource _audioSource;
         protected RTCTankControllerEx tankController;
-        protected GameObject tankCamera;
+
+        [SerializeField]
+        protected TankCameraController tankCameraController;
 
         [SerializeField]
         protected bool canControl = true;
@@ -113,12 +115,13 @@ namespace FPS_Framework
 
         protected virtual void Awake()
         {
+            Debug.Assert(tankCameraController != null);
+
             forceField.enabled = false;
 
             _rigidbody = this.GetComponent<Rigidbody>();
             _audioSource = this.GetComponent<AudioSource>();
             tankController = transform.root.gameObject.GetComponent<RTCTankControllerEx>();
-            tankCamera = GameObject.FindObjectOfType<RTCCamera>().gameObject;
 
             GameObject newTarget = new GameObject("Target");
             target = newTarget.transform;
@@ -128,6 +131,16 @@ namespace FPS_Framework
             _rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
 
             _hingeJoint = GetComponent<HingeJoint>();
+        }
+
+        protected virtual void OnEnable()
+        {
+            tankCameraController.enabled = true;
+        }
+
+        protected virtual void OnDisable()
+        {
+            tankCameraController.enabled = false;
         }
 
         protected virtual void Update()
@@ -183,7 +196,7 @@ namespace FPS_Framework
 
         protected virtual void FireMainGun()
         {
-            target.position = tankCamera.transform.position + (tankCamera.transform.forward * 100);
+            target.position = tankCameraController.transform.position + (tankCameraController.transform.forward * 100);
 
             if (Input.GetButtonDown("Fire1") &&
                 isShootable == true &&

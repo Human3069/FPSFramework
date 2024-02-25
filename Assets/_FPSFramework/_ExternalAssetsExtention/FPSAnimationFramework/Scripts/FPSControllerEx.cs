@@ -1,4 +1,5 @@
 using _KMH_Framework;
+using Cinemachine;
 using Demo.Scripts.Runtime;
 using Kinemation.FPSFramework.Runtime.Core.Types;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
@@ -12,6 +13,7 @@ using UnityEngine;
 
 namespace FPS_Framework
 {
+    [RequireComponent(typeof(CharacterController))]
     public class FPSControllerEx : FPSController
     {
         private const string LOG_FORMAT = "<color=white><b>[FPSControllerEx]</b></color> {0}";
@@ -28,7 +30,7 @@ namespace FPS_Framework
         [SerializeField]
         protected float fireTimeStamp = 0f;
 
-        protected Camera _fpsCamera;
+        protected CinemachineVirtualCamera fpsVCam;
 
         protected bool _isEquipable;
         public bool IsEquipable
@@ -90,6 +92,7 @@ namespace FPS_Framework
             set
             {
                 _isSeated = value;
+                _characterController.enabled = !IsSeated;
                 movementComponent.enabled = !value;
             }
         }
@@ -186,9 +189,14 @@ namespace FPS_Framework
             }
         }
 
+        protected CharacterController _characterController;
+
         protected void Awake()
         {
-            _fpsCamera = mainCamera.GetComponent<Camera>();
+            fpsVCam = mainCamera.GetComponent<CinemachineVirtualCamera>();
+            _characterController = this.GetComponent<CharacterController>();
+
+            fpsVCam.Priority = 1;
         }
 
         protected override void Update()
@@ -253,6 +261,8 @@ namespace FPS_Framework
                         _SingleFPSPlayer.transform.parent = _seat.transform;
 
                         currentSeat = _seat;
+
+                        fpsVCam.Priority = 0;
                     }
                     else if (IsSeated == true)
                     {
@@ -261,6 +271,8 @@ namespace FPS_Framework
                         currentSeat.Interact(this.transform, IsSeated);
                         _SingleFPSPlayer.transform.parent = null;
                         currentSeat = null;
+
+                        fpsVCam.Priority = 1;
                     }
                 }
             }

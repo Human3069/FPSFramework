@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _KMH_Framework;
+using FPS_Framework;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
@@ -83,7 +84,9 @@ public class RTCTankControllerEx : MonoBehaviour
     protected float lastVelocity = 0f;
     protected float engineRPM = 0f;
 
-    //Inputs.
+    [SerializeField]
+    protected RTCTankGunControllerEx tankGunController;
+
     [Header("Inputs")]
     [ReadOnly]
     [SerializeField]
@@ -126,13 +129,20 @@ public class RTCTankControllerEx : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Debug.Assert(tankGunController != null);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     protected virtual void OnEnable()
     {
-        
+        tankGunController.enabled = true;
+    }
+
+    protected virtual void OnDisable()
+    {
+        tankGunController.enabled = false;
     }
 
     protected virtual void Start()

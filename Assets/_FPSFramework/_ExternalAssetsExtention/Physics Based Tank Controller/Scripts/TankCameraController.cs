@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Cinemachine;
 
-public class RTCCamera : MonoBehaviour
+public class TankCameraController : MonoBehaviour
 {
 	[SerializeField]
 	protected Transform tankTransform;
+	[SerializeField]
+	protected CinemachineVirtualCamera tankVCam;
 
 	[Space(10)]
 	[SerializeField]
@@ -36,6 +39,16 @@ public class RTCCamera : MonoBehaviour
 		xResult = angles.x;
 		yResult = angles.y;
 	}
+
+    protected void OnEnable()
+    {
+		tankVCam.Priority = 1;
+    }
+
+    protected void OnDisable()
+    {
+		tankVCam.Priority = 0;
+    }
 
     protected void LateUpdate()
 	{
