@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb3bc2da5e5a43aead6a1ed982ce95d, type: 3}
+  m_Name: VTS_GSTUConfig
+  m_EditorClassIdentifier: 
+  CLIENT_ID: 914648531863-b6b2drp83r2n6qld4ef4akre3psumcua.apps.googleusercontent.com
+  CLIENT_SECRET: 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
+  ACCESS_TOKEN: ya29.a0Ad52N39M7MiylHQfzPwf6E8TQMr1wc5FGruKm49ZpyTyw2GlKArsSoyZ9Rn-ej7xZb6CE0R9Dx-coQT6P65bdwG8F0Vr8eEnOyAku83L2Z78serNSzHaxLfFoDL7sABmldhX_i6UQw_OWIcVohL3Ufgn3NJH-nJIHqSoaCgYKAcESARISFQHGX2MicKDBJzT-aYlz6vGUno7gOw0171
+  REFRESH_TOKEN: 
+  API_Key: AIzaSyBNcoH1ke04eBoZZfn3IPWB0RyrTXJIIMI
+  PORT: 1991
+  gdr:
+    access_token: ya29.a0AeDClZC6UiAaO8W5cd74U5YiVIZA85edQ0OVkdzez_sPcWBmktyPqrgdJTfdQTjaBswGs0Tbvl_7tg-4Lin1EPpF8oAWSscYzv2NkOIFMIRrpDz6PxlaaQ1ODSWnxlrlaEiGReGEIJ70nCu2xw2dKPYyancjqcAuG0tv7BRzf-0aCgYKAcUSARMSFQHGX2MijtqKL5hDCMsqsNey489O8A0178
+    refresh_token: 1//0epQADoFa7ogNCgYIARAAGA4SNwF-L9IrOqMN5RmISAk_Xa1H_k4dobK3ETh_bKk-Vg3FQRU0g7nTRXbktmkJgRtRHULuJsRJ23E
+    token_type: Bearer
+    expires_in: 3599
+  SavePath: Assets/StreamingAssets/Tables/FovFramework
+  SheetTableData:
+  - TableName: Sample_Popup
+    SheetUriCode: 1-0vlofUtqClArOiszbb-G8nvLcPXwvVctrQTY7FJJXQ
+    WorkSheet: Sheet
+    FileName: PopupTableSample
+    IgnorePrefix: 
+    Element: 
+  - TableName: Sample_Localize
+    SheetUriCode: 1h8cYqX-A7kbIc0QL1sZGBz6gMg2XqBirO_zqlb4bst8
+    WorkSheet: Sheet_OutMission
+    FileName: LocalizeTableSample_OutMission
+    IgnorePrefix: 
+    Element: 
+  - TableName: Sample_Localize
+    SheetUriCode: 1h8cYqX-A7kbIc0QL1sZGBz6gMg2XqBirO_zqlb4bst8
+    WorkSheet: Sheet_InMission
+    FileName: LocalizeTableSample_InMission
+    IgnorePrefix: 
+    Element: 
+  - TableName: Sample_Localize
+    SheetUriCode: 1h8cYqX-A7kbIc0QL1sZGBz6gMg2XqBirO_zqlb4bst8
+    WorkSheet: Sheet_Popup
+    FileName: LocalizeTableSample_Popup
+    IgnorePrefix: 
+    Element: 
+  - TableName: Sample_MissionSetting
+    SheetUriCode: 1jZsf_1NvRp9_1jRRlX1fuBNSDeGxvdi_M2fePsmdd3E
+    WorkSheet: Sheet
+    FileName: MissionSettingTableSample
+    IgnorePrefix: 
+    Element: 
+  - TableName: Sample_ScenarioTable
+    SheetUriCode: 1R4M8uVDUDy8otgalaLw_lA3Fi5t1gRsj5oGSZIyMRWY
+    WorkSheet: Sheet
+    FileName: ScenarioTableSample
+    IgnorePrefix: 
+    Element: 
+  - TableName: Sample_TaskSettingTable
+    SheetUriCode: 1FZanMSCbBKc5C4YEWH1cNnMwNmP5kyFoRQYtvFv6AeE
+    WorkSheet: Sheet
+    FileName: TaskSettingTableSample
+    IgnorePrefix: 
+    Element: 

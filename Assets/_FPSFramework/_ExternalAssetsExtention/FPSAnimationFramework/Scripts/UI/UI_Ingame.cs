@@ -1,3 +1,4 @@
+using _KMH_Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,17 +55,17 @@ namespace FPS_Framework
 
         protected void OnEquipableValueChanged(bool isEquipable)
         {
-            Debug.LogFormat(LOG_FORMAT, "OnEquipableValueChanged(), isEquipable : " + isEquipable);
+            // Debug.LogFormat(LOG_FORMAT, "OnEquipableValueChanged(), isEquipable : " + isEquipable);
 
-            interactableText.text = "Press 'F' to Equip";
+            interactableText.text = "Press \'" + KeyInputManager.Instance.KeyData["Interact"]._KeyCode + "\' to Equip";
             interactableText.enabled = isEquipable;
         }
 
         protected void OnSeatableValueChanged(bool isSeatable)
         {
-            Debug.LogFormat(LOG_FORMAT, "OnSeatableValueChanged(), isSeatable : " + isSeatable);
+            // Debug.LogFormat(LOG_FORMAT, "OnSeatableValueChanged(), isSeatable : " + isSeatable);
 
-            interactableText.text = "Press 'F' to Seat";
+            interactableText.text = "Press \'" + KeyInputManager.Instance.KeyData["Interact"]._KeyCode + "\' to Seat";
             interactableText.enabled = isSeatable;
         }
 

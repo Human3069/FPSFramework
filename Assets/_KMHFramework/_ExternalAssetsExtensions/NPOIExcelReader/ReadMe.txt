@@ -1,1 +1,0 @@
-Dependancy : Uni-Excel's Plugin

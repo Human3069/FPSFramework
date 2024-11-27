@@ -184,7 +184,7 @@ namespace _KMH_Framework
             }
         }
 
-        public override GameObject EnableObject(Vector3 _position)
+        public virtual GameObject EnableObject(Vector3 _position)
         {
             if (poolingQueue.Count > 0)
             {

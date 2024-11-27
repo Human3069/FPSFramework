@@ -103,7 +103,12 @@ MonoBehaviour:
   movementComponent: {fileID: 6520993945747829880}
   weapons:
   - {fileID: 0}
+  _SingleFPSPlayer: {fileID: 0}
   weaponParentTransform: {fileID: 6520993946275233735}
+  fireTimeStamp: 0
+  _isSeatable: 0
+  _isSeated: 0
+  currentSeat: {fileID: 0}
 --- !u!143 &5688462531604701072
 CharacterController:
   m_ObjectHideFlags: 0
@@ -199,7 +204,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3700518581120219614}
-  m_LocalRotation: {x: -0, y: -1.0339758e-25, z: -5.169879e-26, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -272,7 +277,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraData: {fileID: 11400000, guid: b654eede1a140da469e3545ffaaa3754, type: 2}
   rootBone: {fileID: 0}
-  isAiming: 0
+  _isAiming: 0
+  fovDelta: 1
+  defaultFOV: 60
+  aimingFOV: 40
   useViewLimits: 0
   useCameraAnimation: 1
 --- !u!114 &8775934767538570584

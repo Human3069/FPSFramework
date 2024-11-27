@@ -66,7 +66,7 @@ namespace FPS_Framework
         protected Rigidbody _rigidbody;
         protected AudioSource _audioSource;
 
-        protected VisualFxPlayer _muzzleFlashFx;
+        // protected VisualFxPlayer _muzzleFlashFx;
         protected Transform _firePoint;
 
         public delegate void AmmoValuesChanged(int maxAmmo, int currentAmmo);
@@ -143,12 +143,10 @@ namespace FPS_Framework
 
         public virtual void Initialize()
         {
-            Debug.LogFormat(_Log._Format(this), "Initialize()");
-
             _collider = this.GetComponent<Collider>();
             _rigidbody = this.GetComponent<Rigidbody>();
             _audioSource = this.GetComponent<AudioSource>();
-            _muzzleFlashFx = this.transform.Find(MUZZLE_FLASH_NAME).GetComponent<VisualFxPlayer>();
+            // _muzzleFlashFx = this.transform.Find(MUZZLE_FLASH_NAME).GetComponent<VisualFxPlayer>();
             _firePoint = this.transform.Find(FIRE_POINT_NAME);
 
             attatchmentHandler.SelectedSight.IsEquipped = true;
@@ -159,8 +157,6 @@ namespace FPS_Framework
 
         public virtual void DoInteract() // Weapon Equip
         {
-            Debug.LogFormat(_Log._Format(this), "DoInteract()");
-
             this.gameObject.SetActive(false);
 
             CurrentMagCount = MaxMagCount;
@@ -168,8 +164,6 @@ namespace FPS_Framework
 
         public virtual void Release(Vector3 worldPos, Quaternion worldRot) // Weapon Release
         {
-            Debug.LogFormat(_Log._Format(this), "Release(), worldPos : " + worldPos + ", worldRot : " + worldRot);
-
             this.transform.position = worldPos;
             this.transform.rotation = worldRot;
 
@@ -188,11 +182,9 @@ namespace FPS_Framework
 
         public override void OnFire()
         {
-            Debug.LogFormat(_Log._Format(this), "_firePoint.pos : " + _firePoint.position + ", _firePoint.name : " + _firePoint.name);
-
             CurrentMagCount--;
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].EnableObject((weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward), weaponTransformData.pivotPoint.rotation);
-            _muzzleFlashFx.Play();
+            // _muzzleFlashFx.Play();
 
             int randomIndex = Random.Range(0, fireClips.Length);
             _audioSource.PlayOneShot(fireClips[randomIndex]);

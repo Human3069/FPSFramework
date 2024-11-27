@@ -54,7 +54,7 @@ namespace FPS_Framework
             }
             else
             {
-                Debug.LogErrorFormat(_Log._Format(this), "Awake()");
+                // Debug.LogErrorFormat(_Log._Format(this), "Awake()");
             }
         }
 

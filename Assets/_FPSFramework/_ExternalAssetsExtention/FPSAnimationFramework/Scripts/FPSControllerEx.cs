@@ -4,17 +4,14 @@ using Demo.Scripts.Runtime;
 using Kinemation.FPSFramework.Runtime.Core.Types;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
 using Kinemation.FPSFramework.Runtime.Recoil;
-using NPOI.SS.Formula.Udf;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Claims;
 using UnityEngine;
 
 namespace FPS_Framework
 {
     [RequireComponent(typeof(CharacterController))]
-    public class FPSControllerEx : FPSController
+    public class FPSControllerEx : Demo.Scripts.Runtime.FPSController
     {
         private const string LOG_FORMAT = "<color=white><b>[FPSControllerEx]</b></color> {0}";
         private const float INTERACT_DISTANCE = 2f;
@@ -241,7 +238,7 @@ namespace FPS_Framework
                 IsEquipable = isInteractable && isTypeEquipable; // Property
                 IsSeatable = isInteractable && isTypeSittable && (IsSeated == false); // Property
 
-                if (_keyData[KeyInputManager.KEY_INTERACT].IsInputDown == true)
+                if (_keyData["Interact"].IsInput == true)
                 {
                     if (IsEquipable == true)
                     {
@@ -381,8 +378,6 @@ namespace FPS_Framework
 
         protected override void OnFireReleased()
         {
-            Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
-
             if (CurrentEquipedWeapon == null)
             {
                 return;
@@ -544,18 +539,17 @@ namespace FPS_Framework
         protected override void UpdateActionInput()
         {
             if (movementComponent.MovementState == FPSMovementState.Sprinting ||
-                KeyInputManager.Instance == null ||
-                KeyInputManager.Instance.IsInitialized == false)
+                KeyInputManager.Instance == null)
             {
                 return;
             }
 
-            if (_keyData[KeyInputManager.KEY_RELOAD].IsInputDown == true)
+            if (_keyData["Reload"].IsInput == true)
             {
                 TryReload();
             }
 
-            if (_keyData[KeyInputManager.KEY_THROW_GRENADE].IsInputDown == true)
+            if (_keyData["Throw Grenade"].IsInput == true)
             {
                 TryGrenadeThrow();
             }
@@ -564,8 +558,8 @@ namespace FPS_Framework
             {
                 bool wasLeaning = _isLeaning;
 
-                bool isLeanRight = _keyData[KeyInputManager.KEY_LEAN_RIGHT].isInput;
-                bool isLeanLeft = _keyData[KeyInputManager.KEY_LEAN_LEFT].isInput;
+                bool isLeanRight = _keyData["Lean Right"].IsInput;
+                bool isLeanLeft = _keyData["Lean Left"].IsInput;
 
                 _isLeaning = (isLeanRight == true) ||
                              (isLeanLeft == true);

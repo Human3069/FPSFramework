@@ -9,16 +9,16 @@ namespace FPS_Framework
     public class Seat : MonoBehaviour, ISeatable
     {
         [SerializeField]
-        protected Transform _sitTransform;
+        protected Transform _seatTransform;
 
         [SerializeField]
         protected UnityEvent<bool> _onSeat;
 
         public void Interact(Transform _transform, bool isSeated)
         {
-            Debug.LogFormat(_Log._Format(this), "Interact(), isSeated : " + isSeated);
+            // Debug.LogFormat(_Log._Format(this), "Interact(), isSeated : " + isSeated);
 
-            _transform.position = _sitTransform.position;
+            _transform.position = _seatTransform.position;
 
             _onSeat.Invoke(isSeated);
         }

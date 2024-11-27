@@ -36,7 +36,7 @@ namespace FPS_Framework
 
                     float magnifyThreshold = (_magnifyRatio - 1) * (1 / (maxMagnify - 1));
                     float reticleSize = Mathf.Lerp(0.05f, 0.005f, magnifyThreshold);
-                    Debug.Log("magnifyThreshold : " + magnifyThreshold);
+                    // Debug.Log("magnifyThreshold : " + magnifyThreshold);
                     instantiatedMat.SetFloat(RETICLE_KEY, reticleSize); // 0.02 ~ 0.1
                 }
             }

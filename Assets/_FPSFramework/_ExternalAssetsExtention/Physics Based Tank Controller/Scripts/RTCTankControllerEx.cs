@@ -186,7 +186,7 @@ public class RTCTankControllerEx : MonoBehaviour
         if (allWheelTransformsR[0] == null ||
             allWheelTransformsL[0] == null)
         {
-            Debug.LogErrorFormat(_Log._Format(this), "You haven't choose your Wheel Transforms. Please select all of your Wheel Transforms before creating Wheel Colliders. Script needs to know their positions, aye?");
+            // Debug.LogErrorFormat(_Log._Format(this), "You haven't choose your Wheel Transforms. Please select all of your Wheel Transforms before creating Wheel Colliders. Script needs to know their positions, aye?");
             return;
         }
 

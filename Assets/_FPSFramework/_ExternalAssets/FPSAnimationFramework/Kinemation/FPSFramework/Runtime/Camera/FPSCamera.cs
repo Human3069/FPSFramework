@@ -3,8 +3,9 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
 using Kinemation.FPSFramework.Runtime.Core.Types;
+using Kinemation.FPSFramework.Runtime.Attributes;
+using UnityEngine.Events;
 
 namespace Kinemation.FPSFramework.Runtime.Camera
 {
@@ -33,21 +34,45 @@ namespace Kinemation.FPSFramework.Runtime.Camera
     {
         public CameraData cameraData;
         public Transform rootBone;
-        public bool isAiming = false;
+
+        [ReadOnly]
+        [SerializeField]
+        protected bool _isAiming = false;
+        public bool IsAiming
+        {
+            get
+            {
+                return _isAiming;
+            }
+            set
+            {
+                if (_isAiming != value)
+                {
+                    _isAiming = value;
+
+                    OnAimedEvent.Invoke(value);
+                }
+            }
+        }
+
+        public UnityEvent<bool> OnAimedEvent;
+
         public bool useViewLimits = false;
         public bool useCameraAnimation = true;
         
-        private UnityEngine.Camera _mainCamera;
+        // private UnityEngine.Camera _mainCamera;
 
         private CameraShakeInfo _shake;
         private Vector3 _target;
         private Vector3 _out;
         private Quaternion _animation;
         private float _playBack = 0f;
-        
+
+#if false
         private float _fovPlayback = 0f;
 
         private float _fov = 0f;
+#endif
 
         private Vector2 _pitchLimit = new Vector2(-90f, 90f);
         private Vector2 _yawLimit = new Vector2(-90f, 90f);
@@ -90,6 +115,7 @@ namespace Kinemation.FPSFramework.Runtime.Camera
 
         private void UpdateFOV()
         {
+#if false
             if (_mainCamera == null || cameraData == null) return;
 
             float alpha = cameraData.fovCurve.Evaluate(_fovPlayback);
@@ -101,11 +127,12 @@ namespace Kinemation.FPSFramework.Runtime.Camera
             _fov = CoreToolkitLib.InterpLayer(_fov, vFOVrad, cameraData.extraSmoothing, Time.deltaTime);
             _mainCamera.fieldOfView = _fov;
 
-            _fovPlayback += Time.deltaTime * cameraData.aimSpeed * (isAiming ? 1f : -1f);
+            _fovPlayback += Time.deltaTime * cameraData.aimSpeed * (IsAiming ? 1f : -1f);
             _fovPlayback = Mathf.Clamp01(_fovPlayback);
+#endif
         }
 
-        private void UpdateViewLimit()
+        protected void UpdateViewLimit()
         {
             if (!useViewLimits || rootBone == null) return;
             
@@ -126,13 +153,15 @@ namespace Kinemation.FPSFramework.Runtime.Camera
             _viewLimitPlayback = Mathf.Clamp01(_viewLimitPlayback);
         }
 
-        private void Start()
+        protected void Start()
         {
+#if false
             _mainCamera = GetComponent<UnityEngine.Camera>();
             if (_mainCamera != null)
             {
                 _fov = _mainCamera.fieldOfView;
             }
+#endif
         }
 
         public void LimitView(Vector2 pitchLimit, Vector2 yawLimit, float blendIn = 1f)

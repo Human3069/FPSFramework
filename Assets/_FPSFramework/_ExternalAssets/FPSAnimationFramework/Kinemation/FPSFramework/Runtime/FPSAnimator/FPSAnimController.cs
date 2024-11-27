@@ -59,7 +59,10 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
             InitAnimController();
             fpsAnimator.onPostUpdate.AddListener(cameraDelegate);
 
-            if (fpsCamera == null) return;
+            if (fpsCamera == null)
+            {
+                return;
+            }
             fpsAnimator.onPostUpdate.AddListener(fpsCamera.UpdateCamera);
         }
         
@@ -140,7 +143,7 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
         {
             if (fpsCamera != null)
             {
-                fpsCamera.isAiming = isAiming;
+                fpsCamera.IsAiming = isAiming;
             }
         }
 
