@@ -37,7 +37,7 @@ namespace FPS_Framework
             }
         }
 
-        public float thickness = 10f;
+        public float Thickness = 1f;
 
         public static string GetName(MaterialType _type)
         {

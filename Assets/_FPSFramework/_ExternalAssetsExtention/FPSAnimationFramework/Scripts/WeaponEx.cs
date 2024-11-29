@@ -66,7 +66,7 @@ namespace FPS_Framework
         protected Rigidbody _rigidbody;
         protected AudioSource _audioSource;
 
-        // protected VisualFxPlayer _muzzleFlashFx;
+        protected ParticleSystem _muzzleFlashFx;
         protected Transform _firePoint;
 
         public delegate void AmmoValuesChanged(int maxAmmo, int currentAmmo);
@@ -146,7 +146,7 @@ namespace FPS_Framework
             _collider = this.GetComponent<Collider>();
             _rigidbody = this.GetComponent<Rigidbody>();
             _audioSource = this.GetComponent<AudioSource>();
-            // _muzzleFlashFx = this.transform.Find(MUZZLE_FLASH_NAME).GetComponent<VisualFxPlayer>();
+            _muzzleFlashFx = this.transform.Find(MUZZLE_FLASH_NAME).GetComponent<ParticleSystem>();
             _firePoint = this.transform.Find(FIRE_POINT_NAME);
 
             attatchmentHandler.SelectedSight.IsEquipped = true;
@@ -184,7 +184,7 @@ namespace FPS_Framework
         {
             CurrentMagCount--;
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].EnableObject((weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward), weaponTransformData.pivotPoint.rotation);
-            // _muzzleFlashFx.Play();
+            _muzzleFlashFx.Play();
 
             int randomIndex = Random.Range(0, fireClips.Length);
             _audioSource.PlayOneShot(fireClips[randomIndex]);

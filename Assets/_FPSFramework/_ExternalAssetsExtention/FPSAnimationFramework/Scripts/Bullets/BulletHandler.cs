@@ -29,20 +29,29 @@ namespace FPS_Framework
         [SerializeField]
         protected float speed;
 
+        [ContextMenu("AWSDASDASDAS")]
+        public void SEASEA()
+        {
+            maxPenetratePower = _currentPenetratePower;
+        }
+
         [Space(10)]
         [SerializeField]
-        protected float _penetratePower;
-        public float PenetratePower
+        protected float maxPenetratePower;
+        [ReadOnly]
+        [SerializeField]
+        protected float _currentPenetratePower;
+        public float CurrentPenetratePower
         {
             get
             {
-                return _penetratePower;
+                return _currentPenetratePower;
             }
             set
             {
-                _penetratePower = Mathf.Clamp(value, 0, float.MaxValue);
+                _currentPenetratePower = Mathf.Clamp(value, 0, float.MaxValue);
 
-                if (_penetratePower == 0f)
+                if (_currentPenetratePower == 0f)
                 {
                     BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
                 }
@@ -102,6 +111,8 @@ namespace FPS_Framework
 
         protected void OnEnable()
         {
+            CurrentPenetratePower = maxPenetratePower;
+
             _rigidbody.velocity = this.transform.forward * speed;
             _rigidbody.angularVelocity = Vector3.zero;
 
@@ -175,7 +186,7 @@ namespace FPS_Framework
                         _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");
                     }
 
-                    PenetratePower -= _impactable.thickness;
+                    CurrentPenetratePower -= _impactable.Thickness;
                 }
             }
         }

@@ -4916,7 +4916,7 @@ TrailRenderer:
   m_Time: 0.02
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -5019,7 +5019,8 @@ MonoBehaviour:
   _bulletType: 4
   lifeTime: 3
   speed: 300
-  _penetratePower: 0.1
+  maxPenetratePower: 0.1
+  _currentPenetratePower: 0
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0
