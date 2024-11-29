@@ -37,6 +37,8 @@ namespace FPS_Framework
             }
         }
 
+        public float thickness = 10f;
+
         public static string GetName(MaterialType _type)
         {
             string impactName;

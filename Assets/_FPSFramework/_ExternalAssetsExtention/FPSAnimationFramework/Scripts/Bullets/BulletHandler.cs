@@ -1,13 +1,11 @@
 using _KMH_Framework;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 
 namespace FPS_Framework
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(Collider))]
     public class BulletHandler : MonoBehaviour
     {
         public enum BulletType
@@ -31,11 +29,33 @@ namespace FPS_Framework
         [SerializeField]
         protected float speed;
 
+        [Space(10)]
+        [SerializeField]
+        protected float _penetratePower;
+        public float PenetratePower
+        {
+            get
+            {
+                return _penetratePower;
+            }
+            set
+            {
+                _penetratePower = Mathf.Clamp(value, 0, float.MaxValue);
+
+                if (_penetratePower == 0f)
+                {
+                    BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+                }
+            }
+        }
+
         protected Rigidbody _rigidbody;
 
         protected Vector3 enablePos;
         protected Vector3 disablePos;
         protected float flightDistance;
+
+        protected Vector3 currentPos;
 
         public static string GetName(BulletType _type)
         {
@@ -99,18 +119,29 @@ namespace FPS_Framework
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
         }
 
-        protected List<Collider> collidedList = new List<Collider>();
+        protected void Update()
+        {
+            if (currentPos != Vector3.zero)
+            {
+                Physics.Linecast(currentPos, this.transform.position, out RaycastHit hit);
+                if (hit.collider != null)
+                {
+                    OnHit(hit);
+                }
+            }
 
-        protected void OnCollisionEnter(Collision _collision)
+            currentPos = this.transform.position;
+        }
+
+        protected void OnHit(RaycastHit hit)
         {
             string impactName;
             if (_bulletType == BulletType._105_Cannon)
             {
                 impactName = ImpactPoolManager.EXPLOSION_105_CANNON;
 
-                ContactPoint _contactPoint = _collision.GetContact(0);
-                Vector3 impactPoint = _contactPoint.point;
-                Vector3 impactAngle = _contactPoint.normal + _contactPoint.point;
+                Vector3 impactPoint = hit.point;
+                Vector3 impactAngle = hit.normal + hit.point;
 
                 GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(impactPoint);
                 particleObj.transform.LookAt(impactAngle);
@@ -118,25 +149,21 @@ namespace FPS_Framework
                 BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
 
                 Collider[] colliders = Physics.OverlapSphere(impactPoint, 10f);
-                foreach (Collider hit in colliders)
+                if (hit.collider.TryGetComponent<Rigidbody>(out Rigidbody _rigidbody) == true)
                 {
-                    if (hit != null && hit.TryGetComponent<Rigidbody>(out Rigidbody _rigidbody) == true)
-                    {
-                        _rigidbody.isKinematic = false;
-                        _rigidbody.AddExplosionForce(130000f, impactPoint, 10f, 0.3f);
-                    }
+                    _rigidbody.isKinematic = false;
+                    _rigidbody.AddExplosionForce(130000f, impactPoint, 10f, 0.3f);
                 }
             }
             else
             {
-                if (_collision.collider.TryGetComponent<Impactable>(out Impactable _impactable) == true)
+                if (hit.collider.TryGetComponent<Impactable>(out Impactable _impactable) == true)
                 {
                     Impactable.MaterialType _materialType = _impactable._MaterialType;
                     impactName = Impactable.GetName(_materialType);
 
-                    ContactPoint _contactPoint = _collision.GetContact(0);
-                    Vector3 impactPoint = _contactPoint.point;
-                    Vector3 impactAngle = _contactPoint.normal + _contactPoint.point;
+                    Vector3 impactPoint = hit.point;
+                    Vector3 impactAngle = hit.normal + hit.point;
 
                     GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(impactPoint);
                     particleObj.transform.LookAt(impactAngle);
@@ -148,7 +175,7 @@ namespace FPS_Framework
                         _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");
                     }
 
-                    BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+                    PenetratePower -= _impactable.thickness;
                 }
             }
         }

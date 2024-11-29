@@ -4981,7 +4981,6 @@ GameObject:
   - component: {fileID: 2838602410088380813}
   - component: {fileID: 6867790323327365830}
   - component: {fileID: 7366162576436128689}
-  - component: {fileID: 1481492287919275780}
   m_Layer: 0
   m_Name: _577_450_SR_Bullet
   m_TagString: Untagged
@@ -5020,6 +5019,7 @@ MonoBehaviour:
   _bulletType: 1
   lifeTime: 3
   speed: 400
+  _penetratePower: 0.1
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5036,16 +5036,3 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &1481492287919275780
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6879916920074542158}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.02, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}

@@ -900,6 +900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 9
+  thickness: 0
 --- !u!1 &195306030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 5
+  thickness: 0.5
 --- !u!65 &227322323
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1193,6 +1195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 3
+  thickness: 0.5
 --- !u!65 &235666935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1304,6 +1307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 4
+  thickness: 0.5
 --- !u!135 &237538170
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1554,6 +1558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 6
+  thickness: 0.5
 --- !u!135 &254121641
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1665,6 +1670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 7
+  thickness: 0.5
 --- !u!65 &262297482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1777,6 +1783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 0
+  thickness: 10
 --- !u!95 &264902876
 Animator:
   serializedVersion: 4
@@ -2059,6 +2066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 0
+  thickness: 0.5
 --- !u!135 &290499473
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2878,6 +2886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 7
+  thickness: 0.5
 --- !u!135 &547965372
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3929,6 +3938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 4
+  thickness: 0.5
 --- !u!65 &636271852
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4499,6 +4509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 8
+  thickness: 0.05
 --- !u!65 &751389283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4782,6 +4793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 5
+  thickness: 0.5
 --- !u!135 &784304650
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4893,6 +4905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 2
+  thickness: 0
 --- !u!135 &789583512
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4969,6 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 10
+  thickness: 10
 --- !u!1 &932061737
 GameObject:
   m_ObjectHideFlags: 0
@@ -5069,6 +5083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 10
+  thickness: 10
 --- !u!64 &985400158
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5181,6 +5196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 0
+  thickness: 0.5
 --- !u!65 &1005227257
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5578,6 +5594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 1
+  thickness: 10
 --- !u!1 &1230739369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 190390, guid: 82c1c430f78cae74dadcb57255f73c39,
@@ -5754,6 +5771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 9
+  thickness: 0
 --- !u!1 &1299253495
 GameObject:
   m_ObjectHideFlags: 0
@@ -6270,6 +6288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 3
+  thickness: 0.5
 --- !u!135 &1384062458
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6503,6 +6522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 8
+  thickness: 0.05
 --- !u!135 &1395709285
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6751,6 +6771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 9
+  thickness: 0
 --- !u!1 &1457716377
 GameObject:
   m_ObjectHideFlags: 0
@@ -6836,6 +6857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 9
+  thickness: 0
 --- !u!65 &1463936031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6966,6 +6988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 10
+  thickness: 10
 --- !u!64 &1479333663
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7267,6 +7290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 10
+  thickness: 10
 --- !u!64 &1555156955
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7700,6 +7724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 0
+  thickness: 10
 --- !u!1 &1632178033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7811,6 +7836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 9
+  thickness: 0
 --- !u!1 &1658590806
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,6 +7885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 1
+  thickness: 0.5
 --- !u!65 &1658590809
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7970,6 +7997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 6
+  thickness: 0.5
 --- !u!65 &1705763453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8486,6 +8514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 0
+  thickness: 10
 --- !u!1 &1895156032
 GameObject:
   m_ObjectHideFlags: 0
@@ -9109,6 +9138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 1
+  thickness: 0.5
 --- !u!135 &1992613854
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9578,6 +9608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 2
+  thickness: 0
 --- !u!65 &2061389267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9725,6 +9756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 10
+  thickness: 10
 --- !u!64 &2082919682
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9856,6 +9888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 10
+  thickness: 10
 --- !u!64 &2095662109
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13453,6 +13486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _materialType: 9
+  thickness: 0
 --- !u!1 &5132654191404682185
 GameObject:
   m_ObjectHideFlags: 0
