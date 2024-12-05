@@ -1,0 +1,142 @@
+newmtl Skin_Body
+    Ns 20.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_23.jpg
+    map_Bump Zulu Warrior_Default_12.jpg
+    map_Ks Zulu Warrior_Default_30.jpg
+newmtl Skin_Head
+    Ns 20.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_16.png
+    map_D Zulu Warrior_Default_16.png
+    map_Bump Zulu Warrior_Default_13.jpg
+    map_Ks Zulu Warrior_Default_20.jpg
+newmtl Eyelash
+    Ns 20.000000
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_14.png
+    map_D Zulu Warrior_Default_14.png
+    map_Ks Zulu Warrior_Default_15.jpg
+newmtl Material.001
+    Ns 9.607843
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.800000 0.800000 0.800000
+    Ks 1.000000 1.000000 1.000000
+    map_Kd Zulu Warrior_Default_11.png
+    map_D Zulu Warrior_Default_11.png
+    map_Bump Zulu Warrior_Default_22.png
+    map_Ks Zulu Warrior_Default_08.png
+newmtl Material.004
+    Ns 9.607843
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.800000 0.800000 0.800000
+    Ks 1.000000 1.000000 1.000000
+    map_Kd Zulu Warrior_leg2.png
+    map_Bump Zulu Warrior_Default_07.png
+    map_Ks Zulu Warrior_Default_06.png
+newmtl Material
+    Ns 0.000000
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.800000 0.800000 0.800000
+    Ks 1.000000 1.000000 1.000000
+    map_Kd Zulu Warrior_Default_05.png
+    map_D Zulu Warrior_Default_05.png
+    map_Bump Zulu Warrior_Default_29.png
+    map_Ks Zulu Warrior_Default_24.png
+newmtl Material.002
+    Ns 9.607843
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.800000 0.800000 0.800000
+    Ks 1.000000 1.000000 1.000000
+    map_Kd Zulu Warrior_Arm.png
+    map_Bump Zulu Warrior_Default_10.png
+    map_Ks Zulu Warrior_Default_09.png
+newmtl Upper Teeth
+    Ns 34.901962
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_36.jpg
+newmtl Lower Teeth
+    Ns 34.901962
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_40.jpg
+newmtl Eye
+    Ns 36.000000
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.658824 0.658824 0.658824
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_37.jpg
+    map_Bump Zulu Warrior_Default_42.jpg
+newmtl Material.001_00
+    Ns 0.000000
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.800000 0.800000 0.800000
+    Ks 1.000000 1.000000 1.000000
+    map_Kd Zulu Warrior_HeadL3.png
+    map_Bump Zulu Warrior_Default_04.png
+    map_Ks Zulu Warrior_Default_02.png
+newmtl Cornea
+    Ns 100.000000
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_41.jpg
+    map_Bump Zulu Warrior_Default_35.jpg
+newmtl Fingernail
+    Ns 30.000002
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_25.jpg
+    map_Bump Zulu Warrior_Default_17.jpg
+    map_Ks Zulu Warrior_Default_28.jpg
+newmtl FrontColor.002
+    Ns 0.000000
+    d 1.000000
+    Ka 0.000000 0.000000 0.000000
+    Kd 0.882353 0.831373 0.721569
+    Ks 0.988235 0.988235 0.988235
+    map_Kd Zulu Warrior_Default_32.png
+    map_D Zulu Warrior_Default_32.png
+    map_Bump Zulu Warrior_Default_01.png
+    map_Ks Zulu Warrior_Default_03.png
+newmtl Tongue
+    Ns 30.000002
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_26.jpg
+    map_Bump Zulu Warrior_Default_27.jpg
+    map_Ks Zulu Warrior_Default_31.jpg
+newmtl Toenail
+    Ns 30.000002
+    d 1.000000
+    Ka 0.196078 0.196078 0.196078
+    Kd 1.000000 1.000000 1.000000
+    Ks 0.898039 0.898039 0.898039
+    map_Kd Zulu Warrior_Default_21.jpg
+    map_Bump Zulu Warrior_Default_19.jpg
+    map_Ks Zulu Warrior_Default_18.jpg
