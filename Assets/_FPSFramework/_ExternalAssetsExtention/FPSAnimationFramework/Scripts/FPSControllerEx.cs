@@ -16,6 +16,19 @@ namespace FPS_Framework
         private const string LOG_FORMAT = "<color=white><b>[FPSControllerEx]</b></color> {0}";
         private const float INTERACT_DISTANCE = 2f;
 
+        protected static FPSControllerEx _instance;
+        public static FPSControllerEx Instance
+        {
+            get
+            {
+                return _instance;
+            }
+            protected set
+            {
+                _instance = value;
+            }
+        }
+
         [HideInInspector]
         public SingleFPSPlayer _SingleFPSPlayer;
 
@@ -190,10 +203,31 @@ namespace FPS_Framework
 
         protected void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Debug.LogErrorFormat(LOG_FORMAT, "");
+                Destroy(this.gameObject);
+                return;
+            }
+
             fpsVCam = mainCamera.GetComponent<CinemachineVirtualCamera>();
             _characterController = this.GetComponent<CharacterController>();
 
             fpsVCam.Priority = 1;
+        }
+
+        protected void OnDestroy()
+        {
+            if (Instance != this)
+            {
+                return;
+            }
+
+            Instance = null;
         }
 
         protected override void Update()
@@ -506,6 +540,11 @@ namespace FPS_Framework
             PlayAnimation(reloadClip);
             CurrentEquipedWeapon.Reload();
             actionState = FPSActionState.Reloading;
+
+            if ((CurrentEquipedWeapon as WeaponEx)._BulletType == BulletHandler.BulletType._577_450_SR)
+            {
+                IsAim = false;
+            }
         }
 
         protected void ChangeWeapon_InternalEx(WeaponEx equipedWeapon, WeaponEx currentWeapon, Vector3 equipedWeaponPos, Quaternion equipedWeaponRot)

@@ -16,6 +16,14 @@ namespace FPS_Framework
         [Header("WeaponEx")]
         [SerializeField]
         protected BulletHandler.BulletType _bulletType;
+        public BulletHandler.BulletType _BulletType
+        {
+            get
+            {
+                return _bulletType;
+            }
+        }
+
         [SerializeField]
         protected AttatchmentHandler attatchmentHandler;
         public AttatchmentHandler AttatchmentHandler
@@ -59,6 +67,8 @@ namespace FPS_Framework
         [Header("Sounds")]
         [SerializeField]
         protected AudioClip[] fireClips;
+        [SerializeField]
+        protected AudioClip[] reloadClips;
 
         protected string bulletName;
 
@@ -178,6 +188,12 @@ namespace FPS_Framework
             base.Reload();
 
             CurrentMagCount = MaxMagCount;
+
+            if (reloadClips.Length != 0)
+            {
+                int randomIndex = Random.Range(0, reloadClips.Length);
+                _audioSource.PlayOneShot(reloadClips[randomIndex]);
+            }
         }
 
         public override void OnFire()
@@ -186,8 +202,11 @@ namespace FPS_Framework
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].EnableObject((weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward), weaponTransformData.pivotPoint.rotation);
             _muzzleFlashFx.Play();
 
-            int randomIndex = Random.Range(0, fireClips.Length);
-            _audioSource.PlayOneShot(fireClips[randomIndex]);
+            if (fireClips.Length != 0)
+            {
+                int randomIndex = Random.Range(0, fireClips.Length);
+                _audioSource.PlayOneShot(fireClips[randomIndex]);
+            }
 
             base.OnFire();
         }

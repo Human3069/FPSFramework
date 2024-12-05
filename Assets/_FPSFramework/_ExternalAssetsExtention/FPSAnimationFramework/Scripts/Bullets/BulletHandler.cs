@@ -1,4 +1,5 @@
 using _KMH_Framework;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,12 +30,6 @@ namespace FPS_Framework
         [SerializeField]
         protected float speed;
 
-        [ContextMenu("AWSDASDASDAS")]
-        public void SEASEA()
-        {
-            maxPenetratePower = _currentPenetratePower;
-        }
-
         [Space(10)]
         [SerializeField]
         protected float maxPenetratePower;
@@ -49,7 +44,7 @@ namespace FPS_Framework
             }
             set
             {
-                _currentPenetratePower = Mathf.Clamp(value, 0, float.MaxValue);
+                _currentPenetratePower = Mathf.Clamp(value, 0f, maxPenetratePower);
 
                 if (_currentPenetratePower == 0f)
                 {
@@ -112,36 +107,54 @@ namespace FPS_Framework
         protected void OnEnable()
         {
             CurrentPenetratePower = maxPenetratePower;
+            if (_bulletType == BulletType._577_450_SR)
+            {
+                PoolSmokeParticleAsync().Forget();
+            }
 
             _rigidbody.velocity = this.transform.forward * speed;
             _rigidbody.angularVelocity = Vector3.zero;
 
+            currentPos = Vector3.zero;
             enablePos = this.transform.position;
 
-            StartCoroutine(PostOnEnable());
+            CheckLifetimeAsync().Forget();
+            CheckTrajectoryAsync().Forget();
         }
 
-        protected IEnumerator PostOnEnable()
+        protected async UniTaskVoid CheckLifetimeAsync()
         {
-            yield return new WaitForSeconds(lifeTime);
+            await UniTask.WaitForSeconds(lifeTime);
 
             disablePos = this.transform.position;
             flightDistance = Vector3.Magnitude(enablePos - disablePos);
+
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
         }
 
-        protected void Update()
+        protected async UniTaskVoid PoolSmokeParticleAsync()
         {
-            if (currentPos != Vector3.zero)
+            GameObject targetObj = BulletPoolManager.Instance.PoolHandlerDictionary["Particle_Smoke"].EnableObject(this.transform);
+
+            await UniTask.WaitForSeconds(10f);
+
+            BulletPoolManager.Instance.PoolHandlerDictionary["Particle_Smoke"].ReturnObject(targetObj);
+        }
+
+        protected async UniTaskVoid CheckTrajectoryAsync()
+        {
+            while (this.gameObject.activeSelf == true)
             {
-                Physics.Linecast(currentPos, this.transform.position, out RaycastHit hit);
+                Physics.Linecast(currentPos == Vector3.zero ? enablePos : currentPos, this.transform.position, out RaycastHit hit);
                 if (hit.collider != null)
                 {
                     OnHit(hit);
                 }
-            }
 
-            currentPos = this.transform.position;
+                currentPos = this.transform.position;
+
+                await UniTask.NextFrame();
+            }
         }
 
         protected void OnHit(RaycastHit hit)

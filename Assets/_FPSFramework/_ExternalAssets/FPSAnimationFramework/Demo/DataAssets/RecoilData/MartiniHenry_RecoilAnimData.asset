@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44d5c4baccfa0e44898b6926e1243e9, type: 3}
-  m_Name: CZ_RecoilAnimData
+  m_Name: MartiniHenry_RecoilAnimData
   m_EditorClassIdentifier: 
-  pitch: {x: -1.5, y: -1.8}
-  roll: {x: -3, y: -2, z: 2, w: 3}
-  yaw: {x: -2, y: -1.5, z: 1.5, w: 2}
+  pitch: {x: -2, y: -3}
+  roll: {x: -4, y: -3, z: 3, w: 4}
+  yaw: {x: -3, y: -2, z: 2, w: 3}
   kickback: {x: -0.02, y: -0.03}
-  kickUp: {x: 0.015, y: 0.02}
+  kickUp: {x: 0.005, y: 0.006}
   kickRight: {x: -0.006, y: 0.007}
-  aimRot: {x: 0.3, y: 0.1, z: 1}
-  aimLoc: {x: 0.1, y: 0.1, z: 1}
+  aimRot: {x: 0.35, y: 0.25, z: 0.3}
+  aimLoc: {x: 0.5, y: 0.35, z: 0.5}
   smoothRot: {x: 0, y: 9, z: 5}
   smoothLoc: {x: 1.1, y: 25, z: 55}
   extraRot: {x: 1.2, y: 3, z: 5}
@@ -32,7 +32,7 @@ MonoBehaviour:
   pushAmount: -0.05
   pushAccel: 7
   pushDamp: 7
-  smoothRoll: 1
+  smoothRoll: 0
   playRate: 1.1
   recoilCurves:
     semiRotCurve:

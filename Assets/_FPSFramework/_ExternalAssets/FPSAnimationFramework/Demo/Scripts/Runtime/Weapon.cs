@@ -1,5 +1,6 @@
 // Designed by Kinemation, 2023
 
+using FPS_Framework;
 using Kinemation.FPSFramework.Runtime.Camera;
 using Kinemation.FPSFramework.Runtime.Core.Types;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
@@ -49,23 +50,29 @@ namespace Demo.Scripts.Runtime
         
         public virtual void OnFire()
         {
-            if (_animator == null)
+            if (FPSControllerEx.Instance.CurrentEquipedWeapon == this)
             {
-                return;
+                if (_animator == null)
+                {
+                    return;
+                }
+
+                _animator.Play("Fire", 0, 0f);
             }
-            
-            _animator.Play("Fire", 0, 0f);
         }
 
         public virtual void Reload()
         {
-            if (_animator == null)
+            if (FPSControllerEx.Instance.CurrentEquipedWeapon == this)
             {
-                return;
+                if (_animator == null)
+                {
+                    return;
+                }
+
+                _animator.Rebind();
+                _animator.Play("Reload", 0);
             }
-            
-            _animator.Rebind();
-            _animator.Play("Reload", 0);
         }
     }
 }
