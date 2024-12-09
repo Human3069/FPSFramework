@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3399879f743e4df2b0f3e0021bea0961, type: 3}
   m_Name: WAA_MartiniHenry
   m_EditorClassIdentifier: 
-  rotationOffset: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
+  rotationOffset: {x: 0.70710677, y: 0, z: 0, w: -0.70710677}
   aimOffsetTable: {fileID: 11400000, guid: 7058601491d8f444287872b2f8c05086, type: 2}
   recoilData: {fileID: 11400000, guid: 99964a885ba48e04aabd99a678abb5bd, type: 2}
   overlayPose: {fileID: 11400000, guid: e42b96ce4fc27c542ba5b4be9bfe87ef, type: 2}
@@ -41,12 +41,12 @@ MonoBehaviour:
       rotation: {x: 0, y: 0, z: 0, w: 1}
     rightHandOffset:
       position: {x: 0, y: 1.53, z: 5.48}
-      rotation: {x: 0.09810399, y: 0, z: 0, w: 0.9951762}
+      rotation: {x: 0.09810444, y: 4.5425294e-10, z: 0.0000000036985677, w: 0.99517614}
     leftHandOffset:
       position: {x: 0, y: 0, z: 10}
       rotation: {x: 0, y: 0, z: 0, w: 1}
   viewOffset:
-    position: {x: -0.01, y: 0.04, z: 0}
+    position: {x: 0.01, y: 0.04, z: 0.05}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   aimSwaySettings:
     loc:

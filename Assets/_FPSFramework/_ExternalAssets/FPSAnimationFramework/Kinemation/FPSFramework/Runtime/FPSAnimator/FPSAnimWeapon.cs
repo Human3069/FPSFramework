@@ -1,5 +1,6 @@
 // Designed by KINEMATION, 2023
 
+using Kinemation.FPSFramework.Runtime.Attributes;
 using Kinemation.FPSFramework.Runtime.Core.Types;
 using Kinemation.FPSFramework.Runtime.Recoil;
 
@@ -12,7 +13,9 @@ namespace Kinemation.FPSFramework.Runtime.FPSAnimator
         public WeaponAnimAsset weaponAsset;
         public WeaponTransformData weaponTransformData;
 
-        public FireMode fireMode = FireMode.Semi;
+        [ReadOnly]
+        public FireMode CurrentFireMode = FireMode.Semi;
+        public FireMode AllowedFireMode;
         public float fireRate = 600f;
         public int burstAmount = 0;
 

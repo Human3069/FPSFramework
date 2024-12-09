@@ -365,8 +365,6 @@ namespace Demo.Scripts.Runtime
 
         protected virtual void OnFireReleased()
         {
-            Debug.LogFormat(LOG_FORMAT, "OnFireReleased()");
-
             if (weapons.Count == 0) return;
 
             if (recoilComponent != null)

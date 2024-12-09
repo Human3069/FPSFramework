@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44d5c4baccfa0e44898b6926e1243e9, type: 3}
   m_Name: M16A4_RecoilData_SemiAuto
   m_EditorClassIdentifier: 
-  pitch: {x: -1.2, y: -1.4}
-  roll: {x: -3, y: -2, z: 2, w: 3}
-  yaw: {x: -1, y: -0.5, z: 0.5, w: 1}
+  pitch: {x: -0.6, y: -0.7}
+  roll: {x: -1.5, y: -1, z: 1, w: 1.5}
+  yaw: {x: -0.5, y: -0.25, z: 0.25, w: 0.5}
   kickback: {x: -0.005, y: -0.01}
   kickUp: {x: 0, y: 0}
   kickRight: {x: 0, y: 0}

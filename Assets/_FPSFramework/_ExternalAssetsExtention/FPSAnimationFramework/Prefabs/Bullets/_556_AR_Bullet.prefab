@@ -5019,8 +5019,9 @@ MonoBehaviour:
   _bulletType: 0
   lifeTime: 3
   speed: 1100
-  maxPenetratePower: 0.5
+  maxPenetratePower: 0.8
   _currentPenetratePower: 0
+  damage: 40
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0

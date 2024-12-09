@@ -1,5 +1,6 @@
 using _KMH_Framework;
 using Cinemachine;
+using Cysharp.Threading.Tasks;
 using Demo.Scripts.Runtime;
 using Kinemation.FPSFramework.Runtime.Core.Types;
 using Kinemation.FPSFramework.Runtime.FPSAnimator;
@@ -7,11 +8,12 @@ using Kinemation.FPSFramework.Runtime.Recoil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 namespace FPS_Framework
 {
     [RequireComponent(typeof(CharacterController))]
-    public class FPSControllerEx : Demo.Scripts.Runtime.FPSController
+    public class FPSControllerEx : Demo.Scripts.Runtime.FPSController, IDamageable
     {
         private const string LOG_FORMAT = "<color=white><b>[FPSControllerEx]</b></color> {0}";
         private const float INTERACT_DISTANCE = 2f;
@@ -27,6 +29,46 @@ namespace FPS_Framework
             {
                 _instance = value;
             }
+        }
+
+        [SerializeField]
+        protected float maxHealth = 100;
+
+        [ReadOnly]
+        [SerializeField]
+        protected float _currentHealth;
+        public float CurrentHealth
+        {
+            get
+            {
+                return _currentHealth;
+            }
+            set
+            {
+                if (_currentHealth > value)
+                {
+                    _currentHealth = Mathf.Clamp(value, 0f, maxHealth);
+
+                    if (_currentHealth == 0f)
+                    {
+                        OnDead();
+                    }
+                    else
+                    {
+                        OnDamaged();
+                    }
+                }
+            }
+        }
+
+        public void OnDamaged()
+        {
+          
+        }
+
+        public void OnDead()
+        {
+ 
         }
 
         [HideInInspector]
@@ -101,9 +143,31 @@ namespace FPS_Framework
             }
             set
             {
-                _isSeated = value;
-                _characterController.enabled = !IsSeated;
-                movementComponent.enabled = !value;
+                if (_isSeated != value)
+                {
+                    if (value == true)
+                    {
+                        animator.SetFloat("MoveX", 0f);
+                        animator.SetFloat("MoveY", 0f);
+                        animator.SetFloat("Velocity", 0f);
+                        animator.SetBool("Moving", false);
+
+                        if (CurrentEquipedWeapon != null)
+                        {
+                            DisableAim();
+                            UnequipWeapon();
+                            EnableUnarmedState();
+                        }
+                    }
+                    else
+                    {
+                        EquipWeapon();
+                    }
+
+                    _isSeated = value;
+                    _characterController.enabled = !IsSeated;
+                    movementComponent.enabled = !value;
+                }
             }
         }
 
@@ -218,6 +282,15 @@ namespace FPS_Framework
             _characterController = this.GetComponent<CharacterController>();
 
             fpsVCam.Priority = 1;
+
+            PostAwake().Forget();
+        }
+
+        protected async UniTaskVoid PostAwake()
+        {
+            await UniTask.WaitUntil(() => KeyInputManager.Instance != null);
+
+            KeyInputManager.Instance.KeyData["Change FireMode"].OnValueChanged += OnFireModeChanged;
         }
 
         protected void OnDestroy()
@@ -228,6 +301,11 @@ namespace FPS_Framework
             }
 
             Instance = null;
+        }
+
+        protected virtual void OnEnable()
+        {
+            CurrentHealth = maxHealth;
         }
 
         protected override void Update()
@@ -272,7 +350,7 @@ namespace FPS_Framework
                 IsEquipable = isInteractable && isTypeEquipable; // Property
                 IsSeatable = isInteractable && isTypeSittable && (IsSeated == false); // Property
 
-                if (_keyData["Interact"].IsInput == true)
+                if (_keyData["Interact"].IsInputDown == true)
                 {
                     if (IsEquipable == true)
                     {
@@ -334,7 +412,7 @@ namespace FPS_Framework
                 }
 
                 Vector2 _horizontalVar = CurrentEquipedWeapon.recoilPattern.horizontalVariation;
-                float hRecoil = UnityEngine.Random.Range(_horizontalVar.x, _horizontalVar.y);
+                float hRecoil = Random.Range(_horizontalVar.x, _horizontalVar.y);
 
                 _controllerRecoil += new Vector2(hRecoil, _recoilStep) * aimRatio;
             }
@@ -352,8 +430,6 @@ namespace FPS_Framework
             {
                 _bursts--;
             }
-
-
         }
 
         protected void OnFirePressed_Constantly()
@@ -391,10 +467,9 @@ namespace FPS_Framework
 
         protected override void OnFirePressed()
         {
-            Debug.LogFormat(LOG_FORMAT, "OnFirePressed()");
-
             if (CurrentEquipedWeapon == null ||
-                HasActiveAction() == true)
+                HasActiveAction() == true ||
+                IsSeated == true)
             {
                 return;
             }
@@ -481,7 +556,7 @@ namespace FPS_Framework
         {
             WeaponEx weaponEx = weapon as WeaponEx;
 
-            recoilComponent.Init(weaponEx.weaponAsset.recoilData, weaponEx.fireRate, weaponEx.fireMode);
+            recoilComponent.Init(weaponEx.weaponAsset.recoilData, weaponEx.fireRate, weaponEx.CurrentFireMode);
 
             WeaponTransformData _transformData = weaponEx.weaponTransformData;
             _transformData.aimPoint = weaponEx.AttatchmentHandler.SelectedSight.AimPoint;
@@ -541,7 +616,7 @@ namespace FPS_Framework
             CurrentEquipedWeapon.Reload();
             actionState = FPSActionState.Reloading;
 
-            if ((CurrentEquipedWeapon as WeaponEx)._BulletType == BulletHandler.BulletType._577_450_SR)
+            if (CurrentEquipedWeapon._BulletType == BulletHandler.BulletType._577_450_SR)
             {
                 IsAim = false;
             }
@@ -572,6 +647,15 @@ namespace FPS_Framework
 
             UnequipWeapon();
             StartCoroutine(EquipWeaponEx(equipedWeapon, currentWeapon, equipedWeaponPos, equipedWeaponRot));
+        }
+
+        protected virtual void OnFireModeChanged(bool isOn)
+        {
+            if (isOn == true)
+            {
+                CurrentEquipedWeapon?.MoveNextFireMode();
+                recoilComponent.fireMode = CurrentEquipedWeapon.CurrentFireMode;
+            }
         }
 
         #region #Movement
@@ -664,19 +748,19 @@ namespace FPS_Framework
                     ChangeScope();
                 }
 
-                if (Input.GetKeyDown(KeyCode.B) && IsAiming() == true)
-                {
-                    if (aimState == FPSAimState.PointAiming)
-                    {
-                        adsLayer.SetPointAim(false);
-                        aimState = FPSAimState.Aiming;
-                    }
-                    else
-                    {
-                        adsLayer.SetPointAim(true);
-                        aimState = FPSAimState.PointAiming;
-                    }
-                }
+                // if (Input.GetKeyDown(KeyCode.B) && IsAiming() == true)
+                // {
+                //     if (aimState == FPSAimState.PointAiming)
+                //     {
+                //         adsLayer.SetPointAim(false);
+                //         aimState = FPSAimState.Aiming;
+                //     }
+                //     else
+                //     {
+                //         adsLayer.SetPointAim(true);
+                //         aimState = FPSAimState.PointAiming;
+                //     }
+                // }
             }
 
             if (Input.GetKeyDown(KeyCode.H) == true)

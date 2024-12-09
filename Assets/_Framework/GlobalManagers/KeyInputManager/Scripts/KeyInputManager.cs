@@ -32,6 +32,14 @@ namespace _KMH_Framework
             }
         }
 
+        internal bool IsInputDown
+        {
+            get
+            {
+                return Input.GetKeyDown(_KeyCode);
+            }
+        }
+
         public delegate void ValueChanged(bool _value);
         public event ValueChanged OnValueChanged;
 

@@ -1,5 +1,6 @@
 using _KMH_Framework;
 using Demo.Scripts.Runtime;
+using Kinemation.FPSFramework.Runtime.Recoil;
 using System.Collections;
 using UnityEngine;
 
@@ -209,6 +210,24 @@ namespace FPS_Framework
             }
 
             base.OnFire();
+        }
+
+        public virtual void MoveNextFireMode()
+        {
+            FireMode[] fireModes = { FireMode.Semi, FireMode.Burst, FireMode.Auto };
+            int currentIndex = System.Array.IndexOf(fireModes, CurrentFireMode);
+
+            for (int i = 1; i <= fireModes.Length; i++)
+            {
+                int nextIndex = (currentIndex + i) % fireModes.Length;
+                FireMode nextFireMode = fireModes[nextIndex];
+
+                if (AllowedFireMode.HasFlag(nextFireMode) == true)
+                {
+                    CurrentFireMode = nextFireMode;
+                    break;
+                }
+            }
         }
     }
 }

@@ -5190,7 +5190,8 @@ MonoBehaviour:
     pivotPoint: {fileID: 7935701762457998248}
     aimPoint: {fileID: 0}
     leftHandTarget: {fileID: 0}
-  fireMode: 2
+  CurrentFireMode: 1
+  AllowedFireMode: 5
   fireRate: 600
   burstAmount: 0
   reloadClip: {fileID: 11400000, guid: c7d969ae5244cd14487d86a6f3c2d61e, type: 2}
@@ -5206,13 +5207,12 @@ MonoBehaviour:
   _maxMagCount: 0
   _currentMagCount: 0
   fireClips:
-  - {fileID: 8300000, guid: 8d2862ec699b1d24fb72dfc5726dfa8f, type: 3}
-  - {fileID: 8300000, guid: b0282b2e49d94f14fba484632cd912e1, type: 3}
-  - {fileID: 8300000, guid: 4b989c987b1c8964bac4763cc9c43f10, type: 3}
-  - {fileID: 8300000, guid: 08021f871a953ce4d8aaeef96b77d5a3, type: 3}
-  - {fileID: 8300000, guid: abd3f53750ac22545b487ea1a7268ad2, type: 3}
-  - {fileID: 8300000, guid: 6b8c7f5ac12c10244a4cd22791a742d1, type: 3}
-  - {fileID: 8300000, guid: 1e48fd9e37b2cd844b6659b71482be1a, type: 3}
+  - {fileID: 8300000, guid: b7ea397a74d534a4594f370aac18d2fd, type: 3}
+  - {fileID: 8300000, guid: d380be9403b75ec44bbab66a01612ad5, type: 3}
+  - {fileID: 8300000, guid: 012a990899a5a0b4db8ad64122df7a8f, type: 3}
+  - {fileID: 8300000, guid: 104fd4642b3cf5f4da79f375d58a0742, type: 3}
+  - {fileID: 8300000, guid: e717bf8cd82de3f4995b8e29745888be, type: 3}
+  reloadClips: []
 --- !u!65 &1670458181512350704
 BoxCollider:
   m_ObjectHideFlags: 0

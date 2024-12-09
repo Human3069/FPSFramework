@@ -58,7 +58,8 @@ MonoBehaviour:
     pivotPoint: {fileID: 447321888296211175}
     aimPoint: {fileID: 0}
     leftHandTarget: {fileID: 0}
-  fireMode: 2
+  CurrentFireMode: 1
+  AllowedFireMode: -1
   fireRate: 750
   burstAmount: 0
   reloadClip: {fileID: 11400000, guid: 10267ceb909c5a14b8d7d0743e573d1a, type: 2}
@@ -74,6 +75,7 @@ MonoBehaviour:
   _maxMagCount: 0
   _currentMagCount: 0
   fireClips: []
+  reloadClips: []
 --- !u!65 &5998773963881264845
 BoxCollider:
   m_ObjectHideFlags: 0

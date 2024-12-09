@@ -1,7 +1,5 @@
 using _KMH_Framework;
 using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -52,6 +50,8 @@ namespace FPS_Framework
                 }
             }
         }
+        [SerializeField]
+        protected float damage = 50f;
 
         protected Rigidbody _rigidbody;
 
@@ -194,6 +194,16 @@ namespace FPS_Framework
 
                     disablePos = this.transform.position;
                     flightDistance = Vector3.Magnitude(enablePos - disablePos);
+                    if (_impactable.Warrior != null)
+                    {
+                        if (_impactable.Warrior.CurrentHealth > 0f)
+                        {
+                            FPSManager.Instance.PlayHitMarkerSoundIfAllowed();
+                        }
+
+                        _impactable.Warrior.CurrentHealth -= (damage * _impactable.DamageMultiplier);
+                    }
+
                     if (_materialType == Impactable.MaterialType.ShootingTarget)
                     {
                         _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");

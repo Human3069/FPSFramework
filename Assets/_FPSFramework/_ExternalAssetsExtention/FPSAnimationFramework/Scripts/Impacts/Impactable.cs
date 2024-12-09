@@ -21,6 +21,7 @@ namespace FPS_Framework
             Dirt,
             Glass,
             Water,
+            Flesh,
 
             ShootingTarget,
 
@@ -38,6 +39,10 @@ namespace FPS_Framework
         }
 
         public float Thickness = 1f;
+
+        [Space(10)]
+        public WarriorController Warrior;
+        public float DamageMultiplier = 1f;
 
         public static string GetName(MaterialType _type)
         {
@@ -81,6 +86,10 @@ namespace FPS_Framework
             else if (_type == MaterialType.Wood)
             {
                 impactName = ImpactPoolManager.WOOD_IMPACT;
+            }
+            else if (_type == MaterialType.Flesh)
+            {
+                impactName = ImpactPoolManager.FLESH_IMPACT;
             }
             else if (_type == MaterialType.ShootingTarget)
             {

@@ -10,11 +10,12 @@ using Random = UnityEngine.Random;
 namespace Kinemation.FPSFramework.Runtime.Recoil
 {
     [Serializable]
+    [Flags]
     public enum FireMode
     {
-        Semi,
-        Burst,
-        Auto
+        Semi = 1,
+        Burst = 2,
+        Auto = 4
     }
 
     public struct StartRest

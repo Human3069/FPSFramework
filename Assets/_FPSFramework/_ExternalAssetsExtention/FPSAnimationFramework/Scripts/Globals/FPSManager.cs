@@ -1,11 +1,8 @@
-using _KMH_Framework;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace FPS_Framework
 {
+    [RequireComponent(typeof(AudioSource))]
     public class FPSManager : MonoBehaviour
     {
         protected static FPSManager _instance;
@@ -20,6 +17,8 @@ namespace FPS_Framework
                 _instance = value;
             }
         }
+
+        protected AudioSource audioSource;
 
         [SerializeField]
         protected float _mouseSenstivity = 1f;
@@ -39,6 +38,12 @@ namespace FPS_Framework
             }
         }
 
+        [Space(10)]
+        [SerializeField]
+        protected bool isAllowHitMarkerSound = true;
+        [SerializeField]
+        protected AudioClip hitMarkerSoundClip;
+
         public float ActualSenstivity
         {
             get
@@ -55,8 +60,12 @@ namespace FPS_Framework
             }
             else
             {
-                // Debug.LogErrorFormat(_Log._Format(this), "Awake()");
+                Debug.LogError("");
+                Destroy(this.gameObject);
+                return;
             }
+
+            audioSource = this.GetComponent<AudioSource>();
         }
 
         protected void OnDestroy()
@@ -67,6 +76,14 @@ namespace FPS_Framework
             }
 
             Instance = null;
+        }
+
+        public void PlayHitMarkerSoundIfAllowed()
+        {
+            if (isAllowHitMarkerSound == true)
+            {
+                audioSource.PlayOneShot(hitMarkerSoundClip);
+            }
         }
     }
 }

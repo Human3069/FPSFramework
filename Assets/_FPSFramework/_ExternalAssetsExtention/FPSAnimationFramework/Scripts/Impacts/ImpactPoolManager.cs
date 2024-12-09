@@ -19,6 +19,7 @@ namespace _KMH_Framework
         public static string ROCK_IMPACT;
         public static string WATER_IMPACT;
         public static string WOOD_IMPACT;
+        public static string FLESH_IMPACT;
 
         public static string EXPLOSION_105_CANNON;
 
@@ -70,8 +71,9 @@ namespace _KMH_Framework
             ROCK_IMPACT = _InitInfos[7].Obj.name;
             WATER_IMPACT = _InitInfos[8].Obj.name;
             WOOD_IMPACT = _InitInfos[9].Obj.name;
+            FLESH_IMPACT = _InitInfos[10].Obj.name;
 
-            EXPLOSION_105_CANNON = _InitInfos[10].Obj.name;
+            EXPLOSION_105_CANNON = _InitInfos[11].Obj.name;
 
             for (int i = 0; i < _InitInfos.Length; i++)
             {

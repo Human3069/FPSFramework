@@ -5021,6 +5021,7 @@ MonoBehaviour:
   speed: 700
   maxPenetratePower: 0.3
   _currentPenetratePower: 0
+  damage: 60
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0

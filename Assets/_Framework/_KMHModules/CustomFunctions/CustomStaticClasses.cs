@@ -1,3 +1,4 @@
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -65,6 +66,18 @@ namespace _KMH_Framework
         {
             float _magnitude = (targetPos - myPos).magnitude;
             Vector3 targetPredict = targetPos + (targetVelocity * _magnitude / projectileSpeed);
+
+            return targetPredict;
+        }
+
+        public static Vector3 GetPredictPositionOnGravity(Vector3 myPos, Vector3 targetPos, Vector3 targetVelocity, float projectileSpeed)
+        {
+            float _magnitude = (targetPos - myPos).magnitude;
+            float floatTime = _magnitude / projectileSpeed;
+            float gravityApproximate = (float)((2.3f * floatTime * floatTime) + (2.4 * floatTime));
+
+            Vector3 targetPredict = targetPos + (targetVelocity * floatTime);
+            targetPredict -= new Vector3(0f, gravityApproximate, 0f);
 
             return targetPredict;
         }
