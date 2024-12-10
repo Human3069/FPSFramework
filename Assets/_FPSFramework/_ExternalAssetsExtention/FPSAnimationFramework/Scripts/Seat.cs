@@ -13,6 +13,8 @@ namespace FPS_Framework
         protected Transform _seatTransform;
         [SerializeField]
         protected UnityEvent<bool> _onSeat;
+        [SerializeField]
+        protected bool isSetParent = true;
 
         [ReadOnly]
         [SerializeField]
@@ -32,10 +34,21 @@ namespace FPS_Framework
             }
         }
 
-        public virtual void Interact(Transform _transform, bool isSeated)
+        public virtual void Interact(Transform _transform, bool isSeated, SingleFPSPlayer seatPlayer)
         {
             IsSeated = isSeated;
-
+            if (isSetParent == true)
+            {
+                if (isSeated == true)
+                {
+                    seatPlayer.transform.parent = this.transform;
+                }
+                else
+                {
+                    seatPlayer.transform.parent = null;
+                }
+            }
+          
             _transform.position = _seatTransform.position;
             _onSeat.Invoke(isSeated);
         }

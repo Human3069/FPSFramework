@@ -14,6 +14,9 @@ public class FPS_Decal : MonoBehaviour
     MeshRenderer rend;
     private Vector3 startScale;
 
+    [SerializeField]
+    protected bool isRotateRandomely = true;
+
     void Awake()
     {
         startScale = transform.localScale;
@@ -38,9 +41,13 @@ public class FPS_Decal : MonoBehaviour
         //        meshRend.sharedMaterial.SetInt("_ZTest1", (int)UnityEngine.Rendering.CompareFunction.LessEqual);
         //    }
         //}
-        if (Application.isPlaying)
+        if (Application.isPlaying == true)
         {
-            transform.localRotation = Quaternion.Euler(Random.Range(0, 360), 90, 90);
+            if (isRotateRandomely == true)
+            {
+               this.transform.localRotation = Quaternion.Euler(Random.Range(0, 360), 90, 90);
+            }
+
             var randomScaleRange = Random.Range(startScale.x - startScale.x * randomScalePercent * 0.01f,
                 startScale.x + startScale.x * randomScalePercent * 0.01f);
             transform.localScale = new Vector3(randomScaleRange, ScreenSpaceDecals ? startScale.y : 0.001f, randomScaleRange);

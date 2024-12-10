@@ -1,0 +1,320 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f198b9ff4d22a0849b290a94c78e3e93, type: 3}
+  m_Name: _105_Cannon_PredictData
+  m_EditorClassIdentifier: 
+  _BulletType: 6
+  Predicts:
+  - Duration: 0
+    zDirection: 0
+    yDirection: 0
+    Magnitude: 0
+  - Duration: 0.1
+    zDirection: 115.04356
+    yDirection: 0.098585844
+    Magnitude: 115.0436
+  - Duration: 0.2
+    zDirection: 227.27138
+    yDirection: 0.37277818
+    Magnitude: 227.27168
+  - Duration: 0.3
+    zDirection: 334.20004
+    yDirection: 0.8015802
+    Magnitude: 334.201
+  - Duration: 0.4
+    zDirection: 454.326
+    yDirection: 1.4851477
+    Magnitude: 454.32843
+  - Duration: 0.5
+    zDirection: 564.78265
+    yDirection: 2.306447
+    Magnitude: 564.78735
+  - Duration: 0.6
+    zDirection: 681.2285
+    yDirection: 3.378322
+    Magnitude: 681.2369
+  - Duration: 0.70000005
+    zDirection: 794.9283
+    yDirection: 4.635256
+    Magnitude: 794.9418
+  - Duration: 0.8
+    zDirection: 885.448
+    yDirection: 5.788499
+    Magnitude: 885.4669
+  - Duration: 0.9
+    zDirection: 968.0682
+    yDirection: 6.9627066
+    Magnitude: 968.0932
+  - Duration: 1.0000001
+    zDirection: 1050.3844
+    yDirection: 8.249356
+    Magnitude: 1050.4167
+  - Duration: 1.1000001
+    zDirection: 1165.9928
+    yDirection: 10.260365
+    Magnitude: 1166.038
+  - Duration: 1.2000002
+    zDirection: 1252.2916
+    yDirection: 11.920232
+    Magnitude: 1252.3484
+  - Duration: 1.3000002
+    zDirection: 1346.0988
+    yDirection: 13.88265
+    Magnitude: 1346.1703
+  - Duration: 1.4000002
+    zDirection: 1429.8186
+    yDirection: 15.776438
+    Magnitude: 1429.9056
+  - Duration: 1.5000002
+    zDirection: 1533.3254
+    yDirection: 18.308977
+    Magnitude: 1533.4347
+  - Duration: 1.6000003
+    zDirection: 1635.4689
+    yDirection: 21.020231
+    Magnitude: 1635.604
+  - Duration: 1.7000003
+    zDirection: 1714.9556
+    yDirection: 23.28096
+    Magnitude: 1715.1135
+  - Duration: 1.8000003
+    zDirection: 1786.9706
+    yDirection: 25.445303
+    Magnitude: 1787.1517
+  - Duration: 1.9000003
+    zDirection: 1865.9946
+    yDirection: 27.950525
+    Magnitude: 1866.204
+  - Duration: 2.0000002
+    zDirection: 1935.393
+    yDirection: 30.265905
+    Magnitude: 1935.6296
+  - Duration: 2.1000001
+    zDirection: 2011.5934
+    yDirection: 32.93443
+    Magnitude: 2011.8629
+  - Duration: 2.2
+    zDirection: 2078.2678
+    yDirection: 35.380768
+    Magnitude: 2078.5688
+  - Duration: 2.3
+    zDirection: 2147.2004
+    yDirection: 38.021126
+    Magnitude: 2147.537
+  - Duration: 2.3999999
+    zDirection: 2244.8784
+    yDirection: 41.961754
+    Magnitude: 2245.2705
+  - Duration: 2.4999998
+    zDirection: 2318.8303
+    yDirection: 45.104176
+    Magnitude: 2319.269
+  - Duration: 2.5999997
+    zDirection: 2400.4385
+    yDirection: 48.735252
+    Magnitude: 2400.933
+  - Duration: 2.6999996
+    zDirection: 2485.6814
+    yDirection: 52.716446
+    Magnitude: 2486.2402
+  - Duration: 2.8
+    zDirection: 2558.8755
+    yDirection: 56.292458
+    Magnitude: 2559.4946
+  - Duration: 2.9
+    zDirection: 2625.0854
+    yDirection: 59.655296
+    Magnitude: 2625.7632
+  - Duration: 3
+    zDirection: 2707.36
+    yDirection: 64.008865
+    Magnitude: 2708.1167
+  - Duration: 3.1
+    zDirection: 2782.1755
+    yDirection: 68.14041
+    Magnitude: 2783.0098
+  - Duration: 3.2
+    zDirection: 2866.7593
+    yDirection: 73.01355
+    Magnitude: 2867.689
+  - Duration: 3.3
+    zDirection: 2933.9497
+    yDirection: 77.042755
+    Magnitude: 2934.9612
+  - Duration: 3.4
+    zDirection: 2999.4617
+    yDirection: 81.10946
+    Magnitude: 3000.558
+  - Duration: 3.5
+    zDirection: 3075.3577
+    yDirection: 85.995476
+    Magnitude: 3076.5598
+  - Duration: 3.6
+    zDirection: 3142.9727
+    yDirection: 90.51054
+    Magnitude: 3144.2756
+  - Duration: 3.7
+    zDirection: 3200.214
+    yDirection: 94.45545
+    Magnitude: 3201.6077
+  - Duration: 3.8
+    zDirection: 3253.6848
+    yDirection: 98.24394
+    Magnitude: 3255.1677
+  - Duration: 3.9
+    zDirection: 3318.755
+    yDirection: 102.99221
+    Magnitude: 3320.3525
+  - Duration: 4
+    zDirection: 3378.2854
+    yDirection: 107.472664
+    Magnitude: 3379.9944
+  - Duration: 4.1
+    zDirection: 3436.72
+    yDirection: 111.99983
+    Magnitude: 3438.5444
+  - Duration: 4.2
+    zDirection: 3487.7268
+    yDirection: 116.05858
+    Magnitude: 3489.6572
+  - Duration: 4.3
+    zDirection: 3544.2012
+    yDirection: 120.67127
+    Magnitude: 3546.255
+  - Duration: 4.4
+    zDirection: 3605.82
+    yDirection: 125.850525
+    Magnitude: 3608.0156
+  - Duration: 4.5
+    zDirection: 3699.3467
+    yDirection: 134.01083
+    Magnitude: 3701.7732
+  - Duration: 4.6
+    zDirection: 3767.303
+    yDirection: 140.17412
+    Magnitude: 3769.91
+  - Duration: 4.7
+    zDirection: 3814.7117
+    yDirection: 144.59377
+    Magnitude: 3817.451
+  - Duration: 4.8
+    zDirection: 3865.218
+    yDirection: 149.413
+    Magnitude: 3868.1047
+  - Duration: 4.9
+    zDirection: 3915.952
+    yDirection: 154.37198
+    Magnitude: 3918.9934
+  - Duration: 5
+    zDirection: 3971.5813
+    yDirection: 159.94821
+    Magnitude: 3974.8008
+  - Duration: 5.1
+    zDirection: 4036.2878
+    yDirection: 166.62169
+    Magnitude: 4039.7256
+  - Duration: 5.2
+    zDirection: 4100.3286
+    yDirection: 173.4301
+    Magnitude: 4103.9946
+  - Duration: 5.3
+    zDirection: 4152.3755
+    yDirection: 179.11728
+    Magnitude: 4156.237
+  - Duration: 5.4
+    zDirection: 4197.276
+    yDirection: 184.13664
+    Magnitude: 4201.313
+  - Duration: 5.5
+    zDirection: 4260.749
+    yDirection: 191.41669
+    Magnitude: 4265.0464
+  - Duration: 5.6
+    zDirection: 4318.8545
+    yDirection: 198.27429
+    Magnitude: 4323.4033
+  - Duration: 5.7
+    zDirection: 4379.4355
+    yDirection: 205.62683
+    Magnitude: 4384.2603
+  - Duration: 5.8
+    zDirection: 4428.4175
+    yDirection: 211.72722
+    Magnitude: 4433.476
+  - Duration: 5.9
+    zDirection: 4470.3115
+    yDirection: 217.05777
+    Magnitude: 4475.578
+  - Duration: 6
+    zDirection: 4518.2275
+    yDirection: 223.28568
+    Magnitude: 4523.741
+  - Duration: 6.1
+    zDirection: 4566.833
+    yDirection: 229.74919
+    Magnitude: 4572.6084
+  - Duration: 6.2
+    zDirection: 4610.558
+    yDirection: 235.69247
+    Magnitude: 4616.5786
+  - Duration: 6.3
+    zDirection: 4671.6675
+    yDirection: 244.2081
+    Magnitude: 4678.046
+  - Duration: 6.4
+    zDirection: 4728.3696
+    yDirection: 252.33405
+    Magnitude: 4735.0977
+  - Duration: 6.5
+    zDirection: 4766.4985
+    yDirection: 257.9236
+    Magnitude: 4773.4717
+  - Duration: 6.6
+    zDirection: 4806.341
+    yDirection: 263.87448
+    Magnitude: 4813.579
+  - Duration: 6.7
+    zDirection: 4843.571
+    yDirection: 269.53864
+    Magnitude: 4851.065
+  - Duration: 6.8
+    zDirection: 4884.817
+    yDirection: 275.9336
+    Magnitude: 4892.604
+  - Duration: 6.9
+    zDirection: 4934.1494
+    yDirection: 283.75107
+    Magnitude: 4942.302
+  - Duration: 7
+    zDirection: 4987.6763
+    yDirection: 292.4471
+    Magnitude: 4996.2427
+  - Duration: 7.1
+    zDirection: 5029.1934
+    yDirection: 299.34973
+    Magnitude: 5038.0947
+  - Duration: 7.2
+    zDirection: 5064.1104
+    yDirection: 305.26422
+    Magnitude: 5073.3027
+  - Duration: 7.3
+    zDirection: 5114.689
+    yDirection: 314.01355
+    Magnitude: 5124.3193
+  - Duration: 7.4
+    zDirection: 5160.8765
+    yDirection: 322.19534
+    Magnitude: 5170.924
+  - Duration: 7.5
+    zDirection: 5203.199
+    yDirection: 329.8587
+    Magnitude: 5213.6445

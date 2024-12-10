@@ -39,7 +39,9 @@ namespace FPS_Framework
                 float length = delta.magnitude; 
                 float yDelta = delta.y;
                 float zDelta = Mathf.Sqrt(Mathf.Pow(length, 2) - Mathf.Pow(yDelta, 2));
-               
+
+                totalDuration = Mathf.Round(totalDuration * 10f) * 0.1f;
+
                 Debug.Log(totalDuration + " sec, zDelta : " + zDelta + ", yDelta : " + yDelta);
                 predictList.Add(new Predict(totalDuration, zDelta, yDelta));
 

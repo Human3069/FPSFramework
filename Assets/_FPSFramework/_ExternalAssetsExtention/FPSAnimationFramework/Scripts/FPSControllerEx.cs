@@ -8,7 +8,6 @@ using Kinemation.FPSFramework.Runtime.Recoil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 namespace FPS_Framework
 {
@@ -366,8 +365,7 @@ namespace FPS_Framework
                         IsSeated = true;
 
                         Seat _seat = _interactable as Seat;
-                        _seat.Interact(this.transform, IsSeated);
-                        _SingleFPSPlayer.transform.parent = _seat.transform;
+                        _seat.Interact(this.transform, IsSeated, _SingleFPSPlayer);
 
                         currentSeat = _seat;
 
@@ -377,8 +375,7 @@ namespace FPS_Framework
                     {
                         IsSeated = false;
 
-                        currentSeat.Interact(this.transform, IsSeated);
-                        _SingleFPSPlayer.transform.parent = null;
+                        currentSeat.Interact(this.transform, IsSeated, _SingleFPSPlayer);
                         currentSeat = null;
 
                         fpsVCam.Priority = 1;

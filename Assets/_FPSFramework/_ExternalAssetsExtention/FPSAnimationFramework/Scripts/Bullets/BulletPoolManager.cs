@@ -14,6 +14,8 @@ namespace _KMH_Framework
         public static string _762_AR_BULLET;
         public static string _762_SR_BULLET;
         public static string _9_SMG_BULLET;
+
+        public static string _57_SHRAPNEL_BULLET;
         public static string _105_CANNON_BULLET;
 
         public static new BulletPoolManager Instance
@@ -59,7 +61,9 @@ namespace _KMH_Framework
             _762_AR_BULLET = _InitInfos[2].Obj.name;
             _762_SR_BULLET = _InitInfos[3].Obj.name;
             _9_SMG_BULLET = _InitInfos[4].Obj.name;
-            _105_CANNON_BULLET = _InitInfos[5].Obj.name;
+
+            _57_SHRAPNEL_BULLET = _InitInfos[5].Obj.name;
+            _105_CANNON_BULLET = _InitInfos[6].Obj.name;
 
             for (int i = 0; i < _InitInfos.Length; i++)
             {
