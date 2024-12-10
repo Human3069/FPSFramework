@@ -143,7 +143,7 @@ public class WarriorController : MonoBehaviour, IDamageable
     protected void OnEnable()
     {
         CurrentHealth = maxHealth;
-        // _State = State.Attack;
+        _State = State.Attack;
     }
 
     protected void OnDisable()

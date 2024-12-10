@@ -29,6 +29,8 @@ namespace FPS_Framework
 
         [Header("SeatableTurrent")]
         [SerializeField]
+        protected bool isRotateToKey = true;
+        [SerializeField]
         protected Transform firePos;
         [SerializeField]
         protected Camera targetCamera;
@@ -65,11 +67,17 @@ namespace FPS_Framework
         [SerializeField]
         protected float rotateSpeed = 2f;
 
+        protected static BulletPredictData predictData;
         protected bool isFireRating = false;
 
         protected void Awake()
         {
             audioSource = this.GetComponent<AudioSource>();
+            if (predictData == null)
+            {
+                predictData = Resources.Load<BulletPredictData>(bulletType.ToString() + "_PredictData");
+            }
+
             PostAwake().Forget();
         }
     
@@ -90,34 +98,64 @@ namespace FPS_Framework
                     FireAsync().Forget();
                 }
 
-                float actualRotateSpeed = rotateSpeed * Time.deltaTime;
-                if (KeyInputManager.Instance.KeyData["Move Forward"].IsInput == true)
+                if (isRotateToKey == true)
                 {
-                    this.transform.Rotate(-actualRotateSpeed, 0f, 0f);
-                }
-                else if (KeyInputManager.Instance.KeyData["Move Backward"].IsInput == true)
-                {
-                    this.transform.Rotate(actualRotateSpeed, 0f, 0f);
-                }
+                    float actualRotateSpeed = rotateSpeed * Time.deltaTime;
+                    if (KeyInputManager.Instance.KeyData["Move Forward"].IsInput == true)
+                    {
+                        this.transform.Rotate(-actualRotateSpeed, 0f, 0f);
+                    }
+                    else if (KeyInputManager.Instance.KeyData["Move Backward"].IsInput == true)
+                    {
+                        this.transform.Rotate(actualRotateSpeed, 0f, 0f);
+                    }
 
-                if (KeyInputManager.Instance.KeyData["Move Right"].IsInput == true)
-                {
-                    this.transform.Rotate(0f, actualRotateSpeed, 0f);
+                    if (KeyInputManager.Instance.KeyData["Move Right"].IsInput == true)
+                    {
+                        this.transform.Rotate(0f, actualRotateSpeed, 0f);
+                    }
+                    else if (KeyInputManager.Instance.KeyData["Move Left"].IsInput == true)
+                    {
+                        this.transform.Rotate(0f, -actualRotateSpeed, 0f);
+                    }
                 }
-                else if (KeyInputManager.Instance.KeyData["Move Left"].IsInput == true)
+                else
                 {
-                    this.transform.Rotate(0f, -actualRotateSpeed, 0f);
+                    this.transform.transform.Rotate(-Input.GetAxis("Mouse Y") * rotateSpeed, Input.GetAxis("Mouse X") * rotateSpeed, 0f);
                 }
-
-                float scrollDelta = Input.mouseScrollDelta.y;
-                if (scrollDelta != 0)
-                {
-                    currentPredictRange = Mathf.Clamp(currentPredictRange + scrollDelta * predictRangeDelta, predictRange.x, predictRange.y);
-                    predictRangeText.text = currentPredictRange + "m";
-                }
+          
+                DrawPredict();
 
                 await UniTask.Yield();
             }
+        }
+
+        protected void DrawPredict()
+        {
+            float scrollDelta = Input.mouseScrollDelta.y;
+            if (scrollDelta != 0)
+            {
+                currentPredictRange = Mathf.Clamp(currentPredictRange + scrollDelta * predictRangeDelta, predictRange.x, predictRange.y);
+                predictRangeText.text = currentPredictRange + "m";
+            }
+
+            Predict[] predicts = predictData.Predicts;
+            Predict foundPredict = new Predict();
+
+            for (int i = 0; i < predicts.Length; i++)
+            {
+                if (predicts[i].Magnitude > currentPredictRange)
+                {
+                    foundPredict = predicts[i];
+                    break;
+                }
+            }
+
+            Vector3 worldPredictPos = firePos.transform.position
+                                    + (firePos.transform.forward * foundPredict.zDirection)
+                                    - (firePos.transform.up * foundPredict.yDirection);
+            Vector3 screenPredictPos = targetCamera.WorldToScreenPoint(worldPredictPos);
+            predictCrosshairRect.position = screenPredictPos;
         }
 
         protected virtual async UniTaskVoid FireAsync()
@@ -137,16 +175,6 @@ namespace FPS_Framework
 
                 await UniTask.WaitForSeconds(fireRate);
                 isFireRating = false;
-            }
-        }
-
-        protected void Update()
-        {
-            if (IsSeated == true)
-            {
-                Vector3 predictPos = Vector3Ex.GetPredictPositionOnGravity(firePos.position, firePos.position + firePos.forward * currentPredictRange, Vector3.zero, 400f);
-                Vector3 screenPos = targetCamera.WorldToScreenPoint(predictPos);
-                predictCrosshairRect.position = screenPos;
             }
         }
     }

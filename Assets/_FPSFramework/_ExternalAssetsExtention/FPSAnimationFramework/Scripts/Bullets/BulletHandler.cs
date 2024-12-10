@@ -20,6 +20,14 @@ namespace FPS_Framework
 
         [SerializeField]
         protected BulletType _bulletType;
+        public BulletType _BulletType
+        {
+            get
+            {
+                return _bulletType;
+            }
+        }
+
         protected string bulletName;
 
         [Space(10)]
