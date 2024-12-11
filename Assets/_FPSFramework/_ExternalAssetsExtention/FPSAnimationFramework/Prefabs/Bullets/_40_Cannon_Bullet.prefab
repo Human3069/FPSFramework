@@ -79,7 +79,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
-  m_MinParticleSize: 0.003
+  m_MinParticleSize: 0.001
   m_MaxParticleSize: 3
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
@@ -358,7 +358,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4916,7 +4916,7 @@ TrailRenderer:
   m_Time: 0.02
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -4979,10 +4979,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2838602410088380813}
-  - component: {fileID: -1563129579854590447}
+  - component: {fileID: 6867790323327365830}
   - component: {fileID: 7366162576436128689}
   m_Layer: 0
-  m_Name: _57_Shrapnel_Bullet
+  m_Name: _40_Cannon_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5004,7 +5004,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1563129579854590447
+--- !u!114 &6867790323327365830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5013,20 +5013,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6879916920074542158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515aeae3a82c9b144817cae1f018b314, type: 3}
+  m_Script: {fileID: 11500000, guid: bf87138e67743124ea961aeff8db3cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 6
-  lifeTime: 20
-  speed: 100
+  _bulletType: 7
+  lifeTime: 7.5
+  speed: 850
   maxPenetratePower: 0.01
-  _currentPenetratePower: 0
-  damage: 0
-  clusterBulletType: 5
-  isReactOnStatic: 1
-  clusterCount: 200
-  clusterDistance: 30
-  clusterRandomAngle: 15
+  _currentPenetratePower: 0.01
+  damage: 200
+  splashMaxRadius: 10
   impactName: 40mm_Explosion_Air
 --- !u!54 &7366162576436128689
 Rigidbody:

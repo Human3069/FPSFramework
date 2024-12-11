@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f198b9ff4d22a0849b290a94c78e3e93, type: 3}
   m_Name: _57_Shrapnel_PredictData
   m_EditorClassIdentifier: 
-  _BulletType: 5
+  _BulletType: 6
   Predicts:
   - Duration: 0
     zDirection: 0

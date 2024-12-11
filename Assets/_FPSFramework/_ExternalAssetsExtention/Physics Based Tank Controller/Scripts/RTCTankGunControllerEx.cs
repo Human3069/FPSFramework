@@ -202,7 +202,7 @@ namespace FPS_Framework
                 isShootable == true &&
                 ammoCount > 0)
             {
-                BulletPoolManager.Instance.PoolHandlerDictionary[BulletPoolManager._105_CANNON_BULLET].EnableObject(barrelOut);
+                BulletPoolManager.Instance.PoolHandlerDictionary[BulletPoolManager._40_CANNON_BULLET].EnableObject(barrelOut);
 
                 muzzleFlashParticle.Play();
                 _rigidbody.AddForce(-transform.forward * recoilForce, ForceMode.VelocityChange);

@@ -16,10 +16,13 @@ namespace FPS_Framework
             _762_SR,
             _9_SMG,
 
+            _Shrapnel_Piece,
+
             _57_Shrapnel,
-            _105_Cannon,
+            _40_Cannon,
         }
 
+        [Header("=== BulletHandler ===")]
         [SerializeField]
         protected BulletType _bulletType;
         public BulletType _BulletType
@@ -63,14 +66,6 @@ namespace FPS_Framework
         [SerializeField]
         protected float damage = 50f;
 
-        [Space(10)]
-        [SerializeField]
-        protected bool isSplashDamage = false;
-        [SerializeField]
-        protected float splashMaxRadius = 10f;
-        [SerializeField]
-        protected string impactName = "105mm_Explosion";
-
         protected Rigidbody _rigidbody;
 
         protected Vector3 enablePos;
@@ -103,13 +98,18 @@ namespace FPS_Framework
                 bulletName = BulletPoolManager._9_SMG_BULLET;
             }
 
+            else if (_type == BulletType._Shrapnel_Piece)
+            {
+                bulletName = BulletPoolManager._SHRAPNEL_PIECE;
+            }
+
             else if (_type == BulletType._57_Shrapnel)
             {
                 bulletName = BulletPoolManager._57_SHRAPNEL_BULLET;
             }
-            else if (_type == BulletType._105_Cannon)
+            else if (_type == BulletType._40_Cannon)
             {
-                bulletName = BulletPoolManager._105_CANNON_BULLET;
+                bulletName = BulletPoolManager._40_CANNON_BULLET;
             }
             else
             {
@@ -120,14 +120,14 @@ namespace FPS_Framework
             return bulletName;
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             _rigidbody = this.GetComponent<Rigidbody>();
 
             bulletName = GetName(_bulletType);
         }
 
-        protected void OnEnable()
+        protected virtual void OnEnable()
         {
             CurrentPenetratePower = maxPenetratePower;
             if (_bulletType == BulletType._577_450_SR)
@@ -145,7 +145,7 @@ namespace FPS_Framework
             CheckTrajectoryAsync().Forget();
         }
 
-        protected async UniTaskVoid CheckLifetimeAsync()
+        protected virtual async UniTaskVoid CheckLifetimeAsync()
         {
             await UniTask.WaitForSeconds(lifeTime);
 
@@ -155,7 +155,7 @@ namespace FPS_Framework
             BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
         }
 
-        protected async UniTaskVoid PoolSmokeParticleAsync()
+        protected virtual async UniTaskVoid PoolSmokeParticleAsync()
         {
             GameObject targetObj = BulletPoolManager.Instance.PoolHandlerDictionary["Particle_Smoke"].EnableObject(this.transform);
 
@@ -164,7 +164,7 @@ namespace FPS_Framework
             BulletPoolManager.Instance.PoolHandlerDictionary["Particle_Smoke"].ReturnObject(targetObj);
         }
 
-        protected async UniTaskVoid CheckTrajectoryAsync()
+        protected virtual async UniTaskVoid CheckTrajectoryAsync()
         {
             while (this.gameObject.activeSelf == true)
             {
@@ -185,69 +185,38 @@ namespace FPS_Framework
             }
         }
 
-        protected void OnHit(RaycastHit[] hits)
+        protected virtual void OnHit(RaycastHit[] hits)
         {
-            if (isSplashDamage == true)
+            for (int i = 0; i < hits.Length; i++)
             {
-                Vector3 impactPoint = hits[0].point;
-
-                GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(impactPoint, Quaternion.identity);
-                BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
-
-                Collider[] colliders = Physics.OverlapSphere(impactPoint, splashMaxRadius);
-                foreach (Collider collider in colliders)
+                if (hits[i].collider.TryGetComponent<Impactable>(out Impactable _impactable) == true)
                 {
-                    if (collider.TryGetComponent<WarriorController>(out WarriorController warrior) == true)
+                    Impactable.MaterialType _materialType = _impactable._MaterialType;
+                    string _impactName = Impactable.GetName(_materialType);
+                    Vector3 impactPoint = hits[i].point;
+                    Vector3 impactAngle = hits[i].normal + hits[i].point;
+
+                    GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[_impactName].EnableObject(impactPoint);
+                    particleObj.transform.LookAt(impactAngle);
+
+                    disablePos = this.transform.position;
+                    flightDistance = Vector3.Magnitude(enablePos - disablePos);
+                    if (_impactable.Warrior != null)
                     {
-                        float distance = (warrior.transform.position - impactPoint).magnitude;
-                        float splashDamage = Mathf.Lerp(damage, 0f, distance / splashMaxRadius);
-
-                        warrior.CurrentHealth -= splashDamage;
-                    }
-                }
-
-                if (hits[0].collider.TryGetComponent<Rigidbody>(out Rigidbody _rigidbody) == true)
-                {
-                    float distance = (_rigidbody.transform.position - impactPoint).magnitude;
-                    float explosionForce = Mathf.Lerp(130000f, 0f, distance / splashMaxRadius);
-
-                    _rigidbody.isKinematic = false;
-                    _rigidbody.AddExplosionForce(explosionForce, impactPoint, splashMaxRadius, 0.3f);
-                }
-            }
-            else
-            {
-                for (int i = 0; i < hits.Length; i++)
-                {
-                    if (hits[i].collider.TryGetComponent<Impactable>(out Impactable _impactable) == true)
-                    {
-                        Impactable.MaterialType _materialType = _impactable._MaterialType;
-                        string _impactName = Impactable.GetName(_materialType);
-                        Vector3 impactPoint = hits[i].point;
-                        Vector3 impactAngle = hits[i].normal + hits[i].point;
-
-                        GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[_impactName].EnableObject(impactPoint);
-                        particleObj.transform.LookAt(impactAngle);
-
-                        disablePos = this.transform.position;
-                        flightDistance = Vector3.Magnitude(enablePos - disablePos);
-                        if (_impactable.Warrior != null)
+                        if (_impactable.Warrior.CurrentHealth > 0f)
                         {
-                            if (_impactable.Warrior.CurrentHealth > 0f)
-                            {
-                                FPSManager.Instance.PlayHitMarkerSoundIfAllowed();
-                            }
-
-                            _impactable.Warrior.CurrentHealth -= (damage * _impactable.DamageMultiplier);
+                            FPSManager.Instance.PlayHitMarkerSoundIfAllowed();
                         }
 
-                        if (_materialType == Impactable.MaterialType.ShootingTarget)
-                        {
-                            _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");
-                        }
-
-                        CurrentPenetratePower -= _impactable.Thickness;
+                        _impactable.Warrior.CurrentHealth -= (damage * _impactable.DamageMultiplier);
                     }
+
+                    if (_materialType == Impactable.MaterialType.ShootingTarget)
+                    {
+                        _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");
+                    }
+
+                    CurrentPenetratePower -= _impactable.Thickness;
                 }
             }
         }

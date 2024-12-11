@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f198b9ff4d22a0849b290a94c78e3e93, type: 3}
-  m_Name: _105_Cannon_PredictData
+  m_Name: _40_Cannon_PredictData
   m_EditorClassIdentifier: 
-  _BulletType: 6
+  _BulletType: 7
   Predicts:
   - Duration: 0
     zDirection: 0

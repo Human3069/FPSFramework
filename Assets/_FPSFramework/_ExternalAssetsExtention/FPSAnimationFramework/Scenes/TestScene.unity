@@ -2158,7 +2158,7 @@ GameObject:
   - component: {fileID: 229050384}
   - component: {fileID: 229050385}
   m_Layer: 0
-  m_Name: 105mm Cannon
+  m_Name: 40mm Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2223,7 +2223,7 @@ MonoBehaviour:
   predictRangeDelta: 50
   predictCrosshairRect: {fileID: 1050722575}
   predictRangeText: {fileID: 557566117}
-  bulletType: 6
+  bulletType: 7
   fireRate: 1
   fireRandomAngle: 0.01
   firePerShot: 1
@@ -2540,7 +2540,7 @@ MonoBehaviour:
   predictRangeDelta: 50
   predictCrosshairRect: {fileID: 1672629719}
   predictRangeText: {fileID: 14854957}
-  bulletType: 5
+  bulletType: 6
   fireRate: 1
   fireRandomAngle: 0.01
   firePerShot: 1
@@ -19876,6 +19876,9 @@ MonoBehaviour:
     Obj: {fileID: 6879916920074542158, guid: 6804a094e5231b146a31588c05ab91c2, type: 3}
     ObjInitCount: 100
   - Title: 
+    Obj: {fileID: 6879916920074542158, guid: 40229014c90e6784a82b1b68111c22ef, type: 3}
+    ObjInitCount: 10
+  - Title: 
     Obj: {fileID: 6879916920074542158, guid: 6d2f35dbac9e6414b85449977a241f27, type: 3}
     ObjInitCount: 10
   - Title: 
@@ -21983,6 +21986,9 @@ MonoBehaviour:
     ObjInitCount: 5
   - Title: Explosion 105mm
     Obj: {fileID: 9180080523680794357, guid: bf2f57fe6ba6d884691ca0973fe26b5f, type: 3}
+    ObjInitCount: 5
+  - Title: Explosion 40mm Air
+    Obj: {fileID: 9180080523680794357, guid: 48ec8da3ea5358d448b2b0125f9a6d02, type: 3}
     ObjInitCount: 5
 --- !u!222 &6917087551440744857
 CanvasRenderer:
