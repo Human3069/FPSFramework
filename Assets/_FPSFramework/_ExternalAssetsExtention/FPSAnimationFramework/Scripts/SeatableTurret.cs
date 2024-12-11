@@ -81,17 +81,19 @@ namespace FPS_Framework
         [SerializeField]
         protected float rotateSpeed = 2f;
 
-        protected static Dictionary<BulletType, BulletPredictData> predictDic = new Dictionary<BulletType, BulletPredictData>();
+        // protected static Dictionary<BulletType, BulletPredictData> predictDic = new Dictionary<BulletType, BulletPredictData>();
         protected bool isFireRating = false;
         protected bool isZoom = false;
 
         protected void Awake()
         {
             audioSource = this.GetComponent<AudioSource>();
+#if false
             if (predictDic.ContainsKey(bulletType) == false || predictDic[bulletType] == null)
             {
                 predictDic[bulletType] = Resources.Load<BulletPredictData>(bulletType.ToString() + "_PredictData");
             }
+#endif
             
             PostAwake().Forget();
         }
@@ -139,7 +141,7 @@ namespace FPS_Framework
                     // this.transform.transform.Rotate(-Input.GetAxis("Mouse Y") * rotateSpeed, Input.GetAxis("Mouse X") * rotateSpeed, 0f);
                     this.transform.forward = Vector3.Lerp(this.transform.forward, targetCamera.transform.forward, rotateSpeed * Time.deltaTime);
                 }
-          
+
                 if (Input.GetMouseButtonDown(1))
                 {
                     isZoom = !isZoom;
@@ -153,85 +155,12 @@ namespace FPS_Framework
                     }
                 }
 
-                DrawPredict();
+                // DrawPredict();
+                Vector3 crosshairWorldPos = firePos.position + (firePos.forward * 600f);
+                Vector3 crosshairScreenPos = targetCamera.WorldToScreenPoint(crosshairWorldPos);
+                predictCrosshairRect.position = crosshairScreenPos;
 
                 await UniTask.Yield();
-            }
-        }
-
-        protected void DrawPredict()
-        {
-            float scrollDelta = Input.mouseScrollDelta.y;
-            if (scrollDelta != 0)
-            {
-                currentPredictRange = Mathf.Clamp(currentPredictRange + scrollDelta * predictRangeDelta, predictRange.x, predictRange.y);
-                predictRangeText.text = currentPredictRange + "m";
-            }
-
-            Predict[] predicts = predictDic[bulletType].Predicts;
-            if (isPredictStaticHit == true)
-            {
-                bool isFoundStatic = false;
-                Vector3 staticHitPoint = Vector3.zero;
-
-                for (int i = 0; i < predicts.Length; i++)
-                {
-                    if (i != 0)
-                    {
-                        Vector3 startPos = firePos.transform.position
-                                         + (firePos.transform.forward * predicts[i - 1].zDirection)
-                                         - (firePos.transform.up * predicts[i - 1].yDirection);
-
-                        Vector3 endPos = firePos.transform.position
-                                         + (firePos.transform.forward * predicts[i].zDirection)
-                                         - (firePos.transform.up * predicts[i].yDirection);
-
-                        Vector3 direction = (endPos - startPos).normalized;
-                        float length = (endPos - startPos).magnitude;
-
-                        RaycastHit[] hits = Physics.RaycastAll(startPos, direction, length);
-                        foreach (RaycastHit hit in hits)
-                        {
-                            if (hit.collider.gameObject.isStatic == true)
-                            {
-                                isFoundStatic = true;
-                                staticHitPoint = hit.point;
-
-                                break;
-                            }
-                        }
-
-                        if (isFoundStatic == true)
-                        {
-                            break;
-                        }
-                    }
-                }
-
-                if (isFoundStatic == true)
-                {
-                    Vector3 screenPredictPos = targetCamera.WorldToScreenPoint(staticHitPoint);
-                    predictCrosshairRect.position = screenPredictPos;
-                }
-            }
-            else
-            {
-                Predict foundPredict = new Predict();
-
-                for (int i = 0; i < predicts.Length; i++)
-                {
-                    if (predicts[i].Magnitude > currentPredictRange)
-                    {
-                        foundPredict = predicts[i];
-                        break;
-                    }
-                }
-
-                Vector3 worldPredictPos = firePos.transform.position
-                                        + (firePos.transform.forward * foundPredict.zDirection)
-                                        - (firePos.transform.up * foundPredict.yDirection);
-                Vector3 screenPredictPos = targetCamera.WorldToScreenPoint(worldPredictPos);
-                predictCrosshairRect.position = screenPredictPos;
             }
         }
 
@@ -252,6 +181,22 @@ namespace FPS_Framework
 
                 await UniTask.WaitForSeconds(fireRate);
                 isFireRating = false;
+            }
+        }
+
+        protected void OnDrawGizmos()
+        {
+            // if (IsSeated == true)
+            {
+                Gizmos.color = Color.red;
+                Vector3[] predictPoints = PredictHelper.LoadPredictPoints(bulletType, firePos);
+                for (int i = 0; i < predictPoints.Length; i++)
+                {
+                    if (i != 0)
+                    {
+                        Gizmos.DrawLine(predictPoints[i - 1], predictPoints[i]);
+                    }
+                }
             }
         }
     }

@@ -28,8 +28,6 @@ namespace FPS_Framework
 
         protected override async UniTaskVoid CheckTrajectoryAsync()
         {
-            Debug.Log(bulletName);
-
             while (this.gameObject.activeSelf == true)
             {
                 Vector3 startPos = currentPos == Vector3.zero ? enablePos : currentPos;

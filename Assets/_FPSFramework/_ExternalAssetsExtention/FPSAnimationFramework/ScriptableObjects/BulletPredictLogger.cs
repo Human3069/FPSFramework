@@ -9,9 +9,9 @@ namespace FPS_Framework
     {
         [Space(10)]
         [SerializeField]
-        protected float duration = 3f;
+        protected float duration = 3.25f;
         [SerializeField]
-        protected float snapshotDuration = 0.1f;
+        protected float snapshotDuration = 0.25f;
 
         [Space(10)]
         [SerializeField]
@@ -40,7 +40,7 @@ namespace FPS_Framework
                 float yDelta = delta.y;
                 float zDelta = Mathf.Sqrt(Mathf.Pow(length, 2) - Mathf.Pow(yDelta, 2));
 
-                totalDuration = Mathf.Round(totalDuration * 10f) * 0.1f;
+                totalDuration = Mathf.Round(totalDuration * 100f) * 0.01f;
 
                 Debug.Log(totalDuration + " sec, zDelta : " + zDelta + ", yDelta : " + yDelta);
                 predictList.Add(new Predict(totalDuration, zDelta, yDelta));
@@ -50,22 +50,22 @@ namespace FPS_Framework
             }
         }
 
-        [ContextMenu("Insert Data")]
-        protected void InsertData()
+        [ContextMenu("Insert Forward Data")]
+        protected void InsertForwardData()
         {
-            BulletPredictData[] allDatas = Resources.LoadAll<BulletPredictData>("");
-            BulletPredictData targetData = null;
+            BulletType type = this.GetComponent<BulletHandler>()._BulletType;
 
-            foreach (BulletPredictData data in allDatas)
-            {
-                if (data._BulletType == this.GetComponent<BulletHandler>()._BulletType)
-                {
-                    targetData = data;
-                    break;
-                }
-            }
+            BulletPredictData targetData = Resources.Load<BulletPredictData>(type.ToString() + "_PredictData");
+            targetData.ForwardPredicts = predictList.ToArray();
+        }
 
-            targetData.Predicts = predictList.ToArray();
+        [ContextMenu("Insert Up Data")]
+        protected void InsertUpData()
+        {
+            BulletType type = this.GetComponent<BulletHandler>()._BulletType;
+
+            BulletPredictData targetData = Resources.Load<BulletPredictData>(type.ToString() + "_PredictData");
+            targetData.UpPredicts = predictList.ToArray();
         }
     }
 }
