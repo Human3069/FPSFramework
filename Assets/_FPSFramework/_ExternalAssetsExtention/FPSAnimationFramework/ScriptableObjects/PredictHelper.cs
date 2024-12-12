@@ -29,15 +29,14 @@ namespace FPS_Framework
             Predict[] upwardPredicts = predictDataDic[type].UpPredicts;
             Vector3[] points = new Vector3[forwardPredicts.Length];
 
-            float normal = Vector3.Cross(firePosT.forward, Vector3.up).magnitude;
-            Debug.Log(normal);
+            float normal = Mathf.Pow(Vector3.Dot(firePosT.forward, Vector3.up), 18f);
             
             for (int i = 0; i < forwardPredicts.Length; i++)
             {
-                float normalizedForward = Mathf.Lerp(upwardPredicts[i].forwardDirection, forwardPredicts[i].forwardDirection, normal);
-                float normalizedUpward = Mathf.Lerp(upwardPredicts[i].upDirection, forwardPredicts[i].upDirection, normal);
+                float normalizedForward = Mathf.Lerp(forwardPredicts[i].forwardDirection, upwardPredicts[i].forwardDirection, normal);
+                float normalizedUpward = Mathf.Lerp(forwardPredicts[i].upDirection, upwardPredicts[i].upDirection, normal);
 
-                Vector3 point = firePosT.position + (firePosT.forward * normalizedForward) - (firePosT.up * normalizedUpward);
+                Vector3 point = firePosT.position + (firePosT.forward * normalizedForward) - (Vector3.up * normalizedUpward);
                 points[i] = point;
             }
 

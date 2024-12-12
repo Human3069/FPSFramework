@@ -4916,7 +4916,7 @@ TrailRenderer:
   m_Time: 0.02
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -5026,7 +5026,7 @@ MonoBehaviour:
   isReactOnStatic: 1
   clusterCount: 200
   clusterDistance: 30
-  clusterRandomAngle: 15
+  clusterRandomAngle: 90
   impactName: 40mm_Explosion_Air
 --- !u!54 &7366162576436128689
 Rigidbody:

@@ -13,128 +13,47 @@ MonoBehaviour:
   m_Name: _577_450_SR_PredictData
   m_EditorClassIdentifier: 
   _BulletType: 1
-  Predicts:
+  ForwardPredicts:
   - Duration: 0
-    zDirection: 0
-    yDirection: 0
-    Magnitude: 0
-  - Duration: 0.1
-    zDirection: 38.924236
-    yDirection: -0.008306503
-    Magnitude: 38.924236
-  - Duration: 0.2
-    zDirection: 76.99927
-    yDirection: 0.08376205
-    Magnitude: 76.99931
-  - Duration: 0.3
-    zDirection: 112.78428
-    yDirection: 0.27000666
-    Magnitude: 112.7846
-  - Duration: 0.4
-    zDirection: 147.88817
-    yDirection: 0.5569966
-    Magnitude: 147.88922
+    forwardDirection: 0
+    upDirection: 0
   - Duration: 0.5
-    zDirection: 179.78874
-    yDirection: 0.9170811
-    Magnitude: 179.79108
-  - Duration: 0.6
-    zDirection: 211.91678
-    yDirection: 1.3855702
-    Magnitude: 211.92131
-  - Duration: 0.70000005
-    zDirection: 242.49889
-    yDirection: 1.9424623
-    Magnitude: 242.50667
-  - Duration: 0.8000001
-    zDirection: 271.22348
-    yDirection: 2.574023
-    Magnitude: 271.2357
-  - Duration: 0.9000001
-    zDirection: 297.79602
-    yDirection: 3.2626264
-    Magnitude: 297.8139
-  - Duration: 1.0000001
-    zDirection: 323.90744
-    yDirection: 4.0487757
-    Magnitude: 323.93274
-  - Duration: 1.1000001
-    zDirection: 348.1219
-    yDirection: 4.8849263
-    Magnitude: 348.15616
-  - Duration: 1.2000002
-    zDirection: 374.48178
-    yDirection: 5.926472
-    Magnitude: 374.5287
-  - Duration: 1.3000002
-    zDirection: 396.01068
-    yDirection: 6.8904414
-    Magnitude: 396.07062
-  - Duration: 1.4000002
-    zDirection: 417.3317
-    yDirection: 7.958607
-    Magnitude: 417.40756
-  - Duration: 1.5000002
-    zDirection: 437.07288
-    yDirection: 9.058428
-    Magnitude: 437.16675
-  - Duration: 1.6000003
-    zDirection: 454.6718
-    yDirection: 10.139587
-    Magnitude: 454.78485
-  - Duration: 1.7000003
-    zDirection: 471.6331
-    yDirection: 11.2811985
-    Magnitude: 471.76797
-  - Duration: 1.8000003
-    zDirection: 488.17648
-    yDirection: 12.499464
-    Magnitude: 488.3365
-  - Duration: 1.9000003
-    zDirection: 503.36032
-    yDirection: 13.718054
-    Magnitude: 503.5472
-  - Duration: 2.0000002
-    zDirection: 519.3726
-    yDirection: 15.11907
-    Magnitude: 519.59265
-  - Duration: 2.1000001
-    zDirection: 533.74927
-    yDirection: 16.490847
-    Magnitude: 534.00397
-  - Duration: 2.2
-    zDirection: 546.6185
-    yDirection: 17.819872
-    Magnitude: 546.90894
-  - Duration: 2.3
-    zDirection: 559.01965
-    yDirection: 19.201061
-    Magnitude: 559.3493
-  - Duration: 2.3999999
-    zDirection: 571.3585
-    yDirection: 20.68415
-    Magnitude: 571.7328
-  - Duration: 2.4999998
-    zDirection: 582.68005
-    yDirection: 22.151402
-    Magnitude: 583.10095
-  - Duration: 2.5999997
-    zDirection: 593.553
-    yDirection: 23.666721
-    Magnitude: 594.0246
-  - Duration: 2.6999996
-    zDirection: 603.3253
-    yDirection: 25.127443
-    Magnitude: 603.8483
-  - Duration: 2.8
-    zDirection: 612.8588
-    yDirection: 26.65228
-    Magnitude: 613.4381
-  - Duration: 2.9
-    zDirection: 616.3252
-    yDirection: 27.233416
-    Magnitude: 616.9266
+    forwardDirection: 187.91125
+    upDirection: 1.3440652
+  - Duration: 1
+    forwardDirection: 343.83023
+    upDirection: 5.3129272
+  - Duration: 1.5
+    forwardDirection: 450.64478
+    upDirection: 10.649244
+  - Duration: 2
+    forwardDirection: 535.02386
+    upDirection: 17.526665
+  - Duration: 2.5
+    forwardDirection: 597.6335
+    upDirection: 25.280092
   - Duration: 3
-    zDirection: 620
-    yDirection: 28
-    Magnitude: 620.63196
+    forwardDirection: 643.6495
+    upDirection: 33.48846
+  UpPredicts:
+  - Duration: 0
+    forwardDirection: 0
+    upDirection: 0
+  - Duration: 0.5
+    forwardDirection: 0
+    upDirection: -198.2965
+  - Duration: 1
+    forwardDirection: 0
+    upDirection: -334.81226
+  - Duration: 1.5
+    forwardDirection: 0
+    upDirection: -437.38794
+  - Duration: 2
+    forwardDirection: 0
+    upDirection: -518.7153
+  - Duration: 2.5
+    forwardDirection: 0
+    upDirection: -571.99615
+  - Duration: 3
+    forwardDirection: 0
+    upDirection: -610.1925

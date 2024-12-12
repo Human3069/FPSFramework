@@ -61,9 +61,10 @@ namespace FPS_Framework
         {
             for (int i = 0; i < clusterCount; i++)
             {
-                Vector3 randomized = Random.insideUnitCircle * clusterRandomAngle;
-                Vector3 randomedEuler = this.transform.eulerAngles + randomized;
-                BulletPoolManager.Instance.PoolHandlerDictionary[BulletHandler.GetName(clusterBulletType)].EnableObject(this.transform.position, Quaternion.Euler(randomedEuler));
+                Vector3 randomCircle = Random.onUnitSphere;
+                Vector3 randomDir = Vector3.Slerp(this.transform.forward, randomCircle, Random.Range(0f, clusterRandomAngle / 360f));
+
+                BulletPoolManager.Instance.PoolHandlerDictionary[BulletHandler.GetName(clusterBulletType)].EnableObject(this.transform.position, randomDir);
             }
 
             ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(this.transform.position, Quaternion.identity);

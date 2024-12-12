@@ -17,39 +17,21 @@ MonoBehaviour:
   - Duration: 0
     forwardDirection: 0
     upDirection: 0
-  - Duration: 0.25
-    forwardDirection: 204.21295
-    upDirection: 0.28709823
   - Duration: 0.5
     forwardDirection: 410.35904
     upDirection: 1.180571
-  - Duration: 0.75
-    forwardDirection: 626.3689
-    upDirection: 2.80189
   - Duration: 1
     forwardDirection: 842.66266
     upDirection: 5.1663055
-  - Duration: 1.25
-    forwardDirection: 1041.9064
-    upDirection: 8.037311
   - Duration: 1.5
     forwardDirection: 1242.6831
     upDirection: 11.639711
-  - Duration: 1.75
-    forwardDirection: 1429.4539
-    upDirection: 15.665749
   - Duration: 2
     forwardDirection: 1625.0822
     upDirection: 20.61888
-  - Duration: 2.25
-    forwardDirection: 1795.7142
-    upDirection: 25.587524
   - Duration: 2.5
     forwardDirection: 1970.6305
     upDirection: 31.342209
-  - Duration: 2.75
-    forwardDirection: 2142.7986
-    upDirection: 37.69616
   - Duration: 3
     forwardDirection: 2307.0522
     upDirection: 44.429577
@@ -57,39 +39,21 @@ MonoBehaviour:
   - Duration: 0
     forwardDirection: 0
     upDirection: 0
-  - Duration: 0.25
-    forwardDirection: 0
-    upDirection: -200.77368
   - Duration: 0.5
     forwardDirection: 0
     upDirection: -414.07584
-  - Duration: 0.75
-    forwardDirection: 0
-    upDirection: -618.5711
   - Duration: 1
     forwardDirection: 0
     upDirection: -821.315
-  - Duration: 1.25
-    forwardDirection: 0
-    upDirection: -1011.8533
   - Duration: 1.5
     forwardDirection: 0
     upDirection: -1201.5392
-  - Duration: 1.75
-    forwardDirection: 0
-    upDirection: -1385.8268
   - Duration: 2
     forwardDirection: 0
     upDirection: -1572.2974
-  - Duration: 2.25
-    forwardDirection: 0
-    upDirection: -1742.4812
   - Duration: 2.5
     forwardDirection: 0
     upDirection: -1910.307
-  - Duration: 2.75
-    forwardDirection: 0
-    upDirection: -2067.314
   - Duration: 3
     forwardDirection: 0
     upDirection: -2233.5847

@@ -17,39 +17,21 @@ MonoBehaviour:
   - Duration: 0
     forwardDirection: 0
     upDirection: 0
-  - Duration: 0.25
-    forwardDirection: 101.59786
-    upDirection: 0.3734876
   - Duration: 0.5
     forwardDirection: 187.91125
     upDirection: 1.3440652
-  - Duration: 0.75
-    forwardDirection: 266.847
-    upDirection: 2.923754
   - Duration: 1
     forwardDirection: 343.83023
     upDirection: 5.3129272
-  - Duration: 1.25
-    forwardDirection: 402.45825
-    upDirection: 7.885215
   - Duration: 1.5
     forwardDirection: 450.64478
     upDirection: 10.649244
-  - Duration: 1.75
-    forwardDirection: 498.98624
-    upDirection: 14.2040415
   - Duration: 2
     forwardDirection: 535.02386
     upDirection: 17.526665
-  - Duration: 2.25
-    forwardDirection: 570.23553
-    upDirection: 21.513416
   - Duration: 2.5
     forwardDirection: 597.6335
     upDirection: 25.280092
-  - Duration: 2.75
-    forwardDirection: 621.75146
-    upDirection: 29.229649
   - Duration: 3
     forwardDirection: 643.6495
     upDirection: 33.48846
@@ -57,39 +39,21 @@ MonoBehaviour:
   - Duration: 0
     forwardDirection: 0
     upDirection: 0
-  - Duration: 0.25
-    forwardDirection: 0
-    upDirection: -98.86499
   - Duration: 0.5
-    forwardDirection: 0
-    upDirection: -198.2965
-  - Duration: 0.75
-    forwardDirection: 0
-    upDirection: -272.02625
+    forwardDirection: 187.91125
+    upDirection: 1.3440652
   - Duration: 1
-    forwardDirection: 0
-    upDirection: -334.81226
-  - Duration: 1.25
-    forwardDirection: 0
-    upDirection: -390.2143
+    forwardDirection: 343.83023
+    upDirection: 5.3129272
   - Duration: 1.5
-    forwardDirection: 0
-    upDirection: -437.38794
-  - Duration: 1.75
-    forwardDirection: 0
-    upDirection: -482.73306
+    forwardDirection: 450.64478
+    upDirection: 10.649244
   - Duration: 2
-    forwardDirection: 0
-    upDirection: -518.7153
-  - Duration: 2.25
-    forwardDirection: 0
-    upDirection: -548.17834
+    forwardDirection: 535.02386
+    upDirection: 17.526665
   - Duration: 2.5
-    forwardDirection: 0
-    upDirection: -571.99615
-  - Duration: 2.75
-    forwardDirection: 0
-    upDirection: -594.1719
+    forwardDirection: 597.6335
+    upDirection: 25.280092
   - Duration: 3
-    forwardDirection: 0
-    upDirection: -610.1925
+    forwardDirection: 643.6495
+    upDirection: 33.48846

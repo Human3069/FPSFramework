@@ -181,6 +181,32 @@ namespace _KMH_Framework
             }
         }
 
+        public virtual GameObject EnableObject(Vector3 _position, Vector3 direction)
+        {
+            if (poolingQueue.Count > 0)
+            {
+                GameObject obj = poolingQueue.Dequeue();
+
+                obj.transform.position = _position;
+                obj.transform.forward = direction;
+                obj.transform.SetParent(enableObjectsParent.transform);
+                obj.gameObject.SetActive(true);
+
+                return obj;
+            }
+            else
+            {
+                GameObject newObj = CreateNewObject();
+
+                newObj.transform.position = _position;
+                newObj.transform.forward = direction;
+                newObj.transform.SetParent(enableObjectsParent.transform);
+                newObj.gameObject.SetActive(true);
+
+                return newObj;
+            }
+        }
+
         public virtual GameObject EnableObject(Vector3 _position)
         {
             if (poolingQueue.Count > 0)
