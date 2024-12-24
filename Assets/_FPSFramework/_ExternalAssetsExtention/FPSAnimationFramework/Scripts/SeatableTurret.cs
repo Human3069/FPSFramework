@@ -49,18 +49,15 @@ namespace FPS_Framework
 
         [Space(10)]
         [SerializeField]
-        protected bool isPredictStaticHit = false;
+        protected LayerMask raycastMask;
         [SerializeField]
-        protected Vector2Int predictRange = new Vector2Int(50, 500);
-        [ReadOnly]
+        protected float predictableDrag;
         [SerializeField]
-        protected float currentPredictRange = 200f;
+        protected float predictableSpeed;
         [SerializeField]
-        protected float predictRangeDelta = 50f;
+        protected float predictAccuracy = 0.9f;
         [SerializeField]
-        protected RectTransform predictCrosshairRect;
-        [SerializeField]
-        protected TextMeshProUGUI predictRangeText;
+        protected int predictIterationCount = 150;
 
         [Space(10)]
         [SerializeField]
@@ -81,20 +78,13 @@ namespace FPS_Framework
         [SerializeField]
         protected float rotateSpeed = 2f;
 
-        // protected static Dictionary<BulletType, BulletPredictData> predictDic = new Dictionary<BulletType, BulletPredictData>();
         protected bool isFireRating = false;
         protected bool isZoom = false;
 
         protected void Awake()
         {
             audioSource = this.GetComponent<AudioSource>();
-#if false
-            if (predictDic.ContainsKey(bulletType) == false || predictDic[bulletType] == null)
-            {
-                predictDic[bulletType] = Resources.Load<BulletPredictData>(bulletType.ToString() + "_PredictData");
-            }
-#endif
-            
+
             PostAwake().Forget();
         }
     
@@ -106,8 +96,6 @@ namespace FPS_Framework
 
         protected virtual async UniTaskVoid OnSeatedAsync()
         {
-            predictRangeText.text = currentPredictRange + "m";
-
             while (IsSeated == true)
             {
                 if (Input.GetMouseButtonDown(0) == true && isFireRating == false)
@@ -158,7 +146,6 @@ namespace FPS_Framework
                 // DrawPredict();
                 Vector3 crosshairWorldPos = firePos.position + (firePos.forward * 600f);
                 Vector3 crosshairScreenPos = targetCamera.WorldToScreenPoint(crosshairWorldPos);
-                predictCrosshairRect.position = crosshairScreenPos;
 
                 await UniTask.Yield();
             }
@@ -186,17 +173,23 @@ namespace FPS_Framework
 
         protected void OnDrawGizmos()
         {
-            // if (IsSeated == true)
+            if (IsSeated == true)
             {
                 Gizmos.color = Color.red;
-                Vector3[] predictPoints = PredictHelper.LoadPredictPoints(bulletType, firePos);
-                for (int i = 0; i < predictPoints.Length; i++)
+
+                List<Vector3> predictedPosList = Predictor.PredictWithoutCollision(predictableDrag, firePos.forward * predictableSpeed, out _, firePos.position, accuracy: predictAccuracy, iterationLimit: predictIterationCount);
+                for (int i = 0; i < predictedPosList.Count; i++)
                 {
                     if (i != 0)
                     {
-                        Gizmos.DrawLine(predictPoints[i - 1], predictPoints[i]);
+                        Gizmos.DrawLine(predictedPosList[i - 1], predictedPosList[i]);
                     }
                 }
+
+                Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
+
+                Vector3 predictedHitPos = Predictor.PredictWithSingleCollision(predictableDrag, firePos.forward * predictableSpeed, raycastMask, out _, firePos.position, accuracy: predictAccuracy, iterationLimit: predictIterationCount);
+                Gizmos.DrawSphere(predictedHitPos, 1f);
             }
         }
     }
