@@ -2224,6 +2224,9 @@ MonoBehaviour:
   predictableSpeed: 850
   predictAccuracy: 0.9
   predictIterationCount: 150
+  predictDistance: 0
+  predictCrosshair: {fileID: 1050722575}
+  predictDistanceText: {fileID: 557566117}
   bulletType: 7
   fireRate: 1
   fireRandomAngle: 0.01
@@ -2542,6 +2545,9 @@ MonoBehaviour:
   predictableSpeed: 100
   predictAccuracy: 0.9
   predictIterationCount: 150
+  predictDistance: 0
+  predictCrosshair: {fileID: 1672629719}
+  predictDistanceText: {fileID: 14854957}
   bulletType: 6
   fireRate: 1
   fireRandomAngle: 0.01
@@ -4850,7 +4856,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498634811
 MonoBehaviour:
@@ -9740,8 +9746,11 @@ MonoBehaviour:
     m_Bits: 2147483647
   predictableDrag: 0.5
   predictableSpeed: 400
-  predictAccuracy: 0.9
-  predictIterationCount: 150
+  predictAccuracy: 0.975
+  predictIterationCount: 114
+  predictDistance: 0
+  predictCrosshair: {fileID: 498634810}
+  predictDistanceText: {fileID: 1872056828}
   bulletType: 1
   fireRate: 0.2
   fireRandomAngle: 0.3
@@ -10462,7 +10471,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1050722576
 MonoBehaviour:
@@ -12031,6 +12040,9 @@ MonoBehaviour:
   predictableSpeed: 850
   predictAccuracy: 0.9
   predictIterationCount: 150
+  predictDistance: 0
+  predictCrosshair: {fileID: 1495252843}
+  predictDistanceText: {fileID: 1976407166}
   bulletType: 3
   fireRate: 0.06
   fireRandomAngle: 0.2
@@ -13490,7 +13502,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495252844
 MonoBehaviour:
@@ -14882,7 +14894,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672629720
 MonoBehaviour:

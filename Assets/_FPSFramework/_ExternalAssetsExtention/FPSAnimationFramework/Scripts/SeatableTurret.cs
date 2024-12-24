@@ -58,6 +58,15 @@ namespace FPS_Framework
         protected float predictAccuracy = 0.9f;
         [SerializeField]
         protected int predictIterationCount = 150;
+        [ReadOnly]
+        [SerializeField]
+        protected float predictDistance;
+
+        [Space(10)]
+        [SerializeField]
+        protected RectTransform predictCrosshair;
+        [SerializeField]
+        protected TextMeshProUGUI predictDistanceText;
 
         [Space(10)]
         [SerializeField]
@@ -143,9 +152,10 @@ namespace FPS_Framework
                     }
                 }
 
-                // DrawPredict();
-                Vector3 crosshairWorldPos = firePos.position + (firePos.forward * 600f);
-                Vector3 crosshairScreenPos = targetCamera.WorldToScreenPoint(crosshairWorldPos);
+                Vector3 predictedHitPos = Predictor.PredictWithSingleCollision(predictableDrag, firePos.forward * predictableSpeed, raycastMask, out predictDistance, firePos.position, accuracy: predictAccuracy, iterationLimit: predictIterationCount);
+                Vector3 crosshairScreenPos = targetCamera.WorldToScreenPoint(predictedHitPos);
+                predictCrosshair.position = crosshairScreenPos;
+                predictDistanceText.text = predictDistance.ToString("F0") + "m";
 
                 await UniTask.Yield();
             }
