@@ -157,7 +157,7 @@ namespace FPS_Framework
                 predictCrosshair.position = crosshairScreenPos;
                 predictDistanceText.text = predictDistance.ToString("F0") + "m";
 
-                await UniTask.Yield();
+                await UniTask.Yield(this.GetCancellationTokenOnDestroy());
             }
         }
 
