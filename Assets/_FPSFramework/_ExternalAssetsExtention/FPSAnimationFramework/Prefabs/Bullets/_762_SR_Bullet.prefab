@@ -5016,7 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee4e7c33f0ae5045954967368e6f726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 3
+  projectileType: 6
   lifeTime: 3
   speed: 850
   maxPenetratePower: 0.5

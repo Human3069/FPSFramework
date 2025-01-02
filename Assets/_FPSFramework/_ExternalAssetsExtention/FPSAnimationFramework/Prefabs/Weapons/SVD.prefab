@@ -6525,7 +6525,7 @@ MonoBehaviour:
   scopes: []
   recoilPattern: {fileID: 11400000, guid: 71613ada76c2eb24ba19072d3759e824, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
-  _bulletType: 3
+  projectileType: 6
   attatchmentHandler: {fileID: 1256743762939128562}
   _maxMagCount: 0
   _currentMagCount: 0

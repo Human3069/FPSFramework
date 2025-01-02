@@ -31,6 +31,22 @@ public class WarriorController : MonoBehaviour, IDamageable
         }
     }
 
+    public Vector3 MiddlePos
+    {
+        get
+        {
+            return this.transform.position + Vector3.up * 1.2f;
+        }
+    }
+
+    public Vector3 Velocity
+    {
+        get
+        {
+            return agent.velocity;
+        }
+    }
+
     protected async UniTask MoveAndAttackAsync()
     {
         FPSControllerEx foundPlayer = GameObject.FindObjectOfType<FPSControllerEx>();
@@ -104,6 +120,18 @@ public class WarriorController : MonoBehaviour, IDamageable
     protected float attackRange = 1f;
     [SerializeField]
     protected float attackSpeed = 1f;
+
+    [ContextMenu("Set Height")]
+    protected void SetHeight()
+    {
+        if (Physics.Raycast(this.transform.position, -this.transform.up, out RaycastHit hit, Mathf.Infinity) == true)
+        {
+            if (hit.collider.gameObject.isStatic == true)
+            {
+                this.transform.position = hit.point;
+            }
+        }
+    }
 
     public void OnDamaged()
     {

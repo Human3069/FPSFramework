@@ -1,5 +1,6 @@
 using _KMH_Framework;
 using Demo.Scripts.Runtime;
+using FPS_Framework.Pool;
 using Kinemation.FPSFramework.Runtime.Recoil;
 using System.Collections;
 using UnityEngine;
@@ -15,15 +16,7 @@ namespace FPS_Framework
         private const string FIRE_POINT_NAME = "FirePoint";
 
         [Header("WeaponEx")]
-        [SerializeField]
-        protected BulletHandler.BulletType _bulletType;
-        public BulletHandler.BulletType _BulletType
-        {
-            get
-            {
-                return _bulletType;
-            }
-        }
+        public ProjectileType projectileType;
 
         [SerializeField]
         protected AttatchmentHandler attatchmentHandler;
@@ -70,8 +63,6 @@ namespace FPS_Framework
         protected AudioClip[] fireClips;
         [SerializeField]
         protected AudioClip[] reloadClips;
-
-        protected string bulletName;
 
         protected Collider _collider;
         protected Rigidbody _rigidbody;
@@ -132,19 +123,6 @@ namespace FPS_Framework
             {
                 magnifable = attatchmentHandler.SelectedSight as MagnifableSight;
             }
-
-            StartCoroutine(PostAwake());
-        }
-
-        protected IEnumerator PostAwake()
-        {
-            while (BulletPoolManager.Instance == null ||
-                   BulletPoolManager.Instance.IsReady == false)
-            {
-                yield return null;
-            }
-
-            bulletName = BulletHandler.GetName(_bulletType);
         }
 
         public override Transform GetAimPoint()
@@ -200,7 +178,14 @@ namespace FPS_Framework
         public override void OnFire()
         {
             CurrentMagCount--;
-            BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].EnableObject((weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward), weaponTransformData.pivotPoint.rotation);
+
+            projectileType.EnablePool<BulletHandler>(OnBeforeEnableAction);
+            void OnBeforeEnableAction(BulletHandler bulletHandler)
+            {
+                bulletHandler.transform.position = weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward;
+                bulletHandler.transform.rotation = weaponTransformData.pivotPoint.rotation;
+            }
+
             _muzzleFlashFx.Play();
 
             if (fireClips.Length != 0)

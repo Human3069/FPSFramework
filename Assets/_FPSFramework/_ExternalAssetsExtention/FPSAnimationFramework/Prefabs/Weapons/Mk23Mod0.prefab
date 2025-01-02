@@ -10004,10 +10004,15 @@ MonoBehaviour:
   recoilPattern: {fileID: 11400000, guid: 56306d8ad38a8a7498dbbec7d3f96297, type: 2}
   cameraShake: {fileID: 11400000, guid: bb03719f457697343922a1dcf7b02e2b, type: 2}
   _bulletType: 4
+  _PoolerType: 0
   attatchmentHandler: {fileID: 2284370565006353690}
-  _maxMagCount: 0
+  _maxMagCount: 12
   _currentMagCount: 0
-  fireClips: []
+  fireClips:
+  - {fileID: 8300000, guid: a7e1be922bd851d4cb5a073f0bbbe42b, type: 3}
+  - {fileID: 8300000, guid: 8877f2d7569c5b64d9615403f6ebf3f8, type: 3}
+  - {fileID: 8300000, guid: 9593cc2aa7184f94fa319c27da6fe520, type: 3}
+  - {fileID: 8300000, guid: e7fafba642bceda4ebfa8e40dec7b85a, type: 3}
   reloadClips: []
 --- !u!65 &5182852995460359925
 BoxCollider:
@@ -10050,7 +10055,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0

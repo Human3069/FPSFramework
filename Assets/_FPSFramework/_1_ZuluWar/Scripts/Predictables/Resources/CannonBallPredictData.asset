@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8007af098fc3244292c0956d7842e68, type: 3}
+  m_Name: CannonBallPredictData
+  m_EditorClassIdentifier: 
+  dataList:
+  - Distance: 0
+    Time: 0
+    SpeedOnHit: 420
+    AdditionalHeight: 0
+  - Distance: 50
+    Time: 0.121760204
+    SpeedOnHit: 414.9868
+    AdditionalHeight: 0.05858612
+  - Distance: 100
+    Time: 0.26003549
+    SpeedOnHit: 409.21796
+    AdditionalHeight: 0.3032341
+  - Distance: 150
+    Time: 0.3766127
+    SpeedOnHit: 404.34076
+    AdditionalHeight: 0.6621361
+  - Distance: 200
+    Time: 0.50585866
+    SpeedOnHit: 399.5252
+    AdditionalHeight: 1.1570282
+  - Distance: 250
+    Time: 0.6094755
+    SpeedOnHit: 394.77063
+    AdditionalHeight: 1.7862892
+  - Distance: 300
+    Time: 0.75077915
+    SpeedOnHit: 389.29965
+    AdditionalHeight: 2.6881256
+  - Distance: 350
+    Time: 0.8787406
+    SpeedOnHit: 384.67474
+    AdditionalHeight: 3.6030426
+  - Distance: 400
+    Time: 1.0179195
+    SpeedOnHit: 379.35324
+    AdditionalHeight: 4.833828
+  - Distance: 450
+    Time: 1.1439431
+    SpeedOnHit: 374.85486
+    AdditionalHeight: 6.0270615
+  - Distance: 500
+    Time: 1.2691875
+    SpeedOnHit: 369.67926
+    AdditionalHeight: 7.578354
+  - Distance: 550
+    Time: 1.4223332
+    SpeedOnHit: 364.58066
+    AdditionalHeight: 9.298801
+  - Distance: 600
+    Time: 1.5467273
+    SpeedOnHit: 359.55817
+    AdditionalHeight: 11.18605
+  - Distance: 650
+    Time: 1.6974736
+    SpeedOnHit: 354.6108
+    AdditionalHeight: 13.237782

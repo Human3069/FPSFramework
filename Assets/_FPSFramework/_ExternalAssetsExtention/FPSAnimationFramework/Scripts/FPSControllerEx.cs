@@ -613,7 +613,8 @@ namespace FPS_Framework
             CurrentEquipedWeapon.Reload();
             actionState = FPSActionState.Reloading;
 
-            if (CurrentEquipedWeapon._BulletType == BulletHandler.BulletType._577_450_SR)
+            if (CurrentEquipedWeapon.projectileType == Pool.ProjectileType._Musket_Bullet ||
+                CurrentEquipedWeapon.projectileType == Pool.ProjectileType._577_450_SR_Bullet)
             {
                 IsAim = false;
             }

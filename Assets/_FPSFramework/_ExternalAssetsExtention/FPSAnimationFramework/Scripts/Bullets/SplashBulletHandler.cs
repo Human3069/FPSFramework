@@ -1,6 +1,5 @@
 using _KMH_Framework;
-using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
+using FPS_Framework.Pool;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -11,14 +10,14 @@ namespace FPS_Framework
         [SerializeField]
         protected float splashMaxRadius = 10f;
         [SerializeField]
-        protected string impactName = "105mm_Explosion";
+        protected ImpactType explosionImpactType;
 
         protected override void OnHit(RaycastHit[] hits)
         {
             Vector3 impactPoint = hits[0].point;
 
-            GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(impactPoint, Quaternion.identity);
-            BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+            explosionImpactType.EnablePool(obj => obj.transform.position = impactPoint);
+            this.gameObject.ReturnPool(projectileType);
 
             Collider[] colliders = Physics.OverlapSphere(impactPoint, splashMaxRadius);
             foreach (Collider collider in colliders)

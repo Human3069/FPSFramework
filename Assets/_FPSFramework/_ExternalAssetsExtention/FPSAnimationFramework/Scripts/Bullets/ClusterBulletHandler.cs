@@ -1,7 +1,5 @@
-using _KMH_Framework;
 using Cysharp.Threading.Tasks;
-using NPOI.SS.Formula.Functions;
-using System.Collections.Generic;
+using FPS_Framework.Pool;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -10,7 +8,7 @@ namespace FPS_Framework
     {
         [Header("=== ClusterBulletHandler ===")]
         [SerializeField]
-        protected BulletType clusterBulletType;
+        protected ProjectileType clusterProjectileType;
 
         [Space(10)]
         [SerializeField]
@@ -24,7 +22,7 @@ namespace FPS_Framework
 
         [Space(10)]
         [SerializeField]
-        protected string impactName = "105mm_Explosion";
+        protected ImpactType clusterImpactType;
 
         protected override async UniTaskVoid CheckTrajectoryAsync()
         {
@@ -53,7 +51,7 @@ namespace FPS_Framework
 
                 currentPos = this.transform.position;
 
-                await UniTask.NextFrame();
+                await UniTask.NextFrame(this.GetCancellationTokenOnDestroy());
             }
         }
 
@@ -64,11 +62,16 @@ namespace FPS_Framework
                 Vector3 randomCircle = Random.onUnitSphere;
                 Vector3 randomDir = Vector3.Slerp(this.transform.forward, randomCircle, Random.Range(0f, clusterRandomAngle / 360f));
 
-                BulletPoolManager.Instance.PoolHandlerDictionary[BulletHandler.GetName(clusterBulletType)].EnableObject(this.transform.position, randomDir);
+                clusterProjectileType.EnablePool<BulletHandler>(OnBeforeEnableAction);
+                void OnBeforeEnableAction(BulletHandler clusteredBulletHnadler)
+                {
+                    clusteredBulletHnadler.transform.position = this.transform.position;
+                    clusteredBulletHnadler.transform.forward = randomDir;
+                }
             }
 
-            ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].EnableObject(this.transform.position, Quaternion.identity);
-            BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+            clusterImpactType.EnablePool(x => x.transform.position = this.transform.position);
+            this.gameObject.ReturnPool(projectileType);
         }
     }
 }

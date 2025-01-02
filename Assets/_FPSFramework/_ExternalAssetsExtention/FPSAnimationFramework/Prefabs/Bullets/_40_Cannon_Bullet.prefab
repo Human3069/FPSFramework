@@ -5016,14 +5016,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf87138e67743124ea961aeff8db3cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 7
+  projectileType: 1
   lifeTime: 7.5
   speed: 850
   maxPenetratePower: 0.01
   _currentPenetratePower: 0.01
   damage: 200
   splashMaxRadius: 10
-  impactName: 40mm_Explosion_Air
+  explosionPoolerType: 9
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0

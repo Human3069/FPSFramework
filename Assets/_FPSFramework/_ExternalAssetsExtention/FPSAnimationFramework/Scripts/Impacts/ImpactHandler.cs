@@ -1,4 +1,7 @@
 using _KMH_Framework;
+using Cysharp.Threading.Tasks;
+using FPS_Framework.Pool;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,21 +10,36 @@ namespace FPS_Framework
     public class ImpactHandler : MonoBehaviour
     {
         [SerializeField]
-        protected Impactable.MaterialType _materialType;
+        protected ImpactType impactType;
         [SerializeField]
         protected float lifeTime = 20;
    
         protected void OnEnable()
         {
-            StartCoroutine(PostOnEnable());
+            OnEnableAsync().Forget();
         }
 
-        protected IEnumerator PostOnEnable()
+        protected async UniTaskVoid OnEnableAsync()
         {
-            yield return new WaitForSeconds(lifeTime);
+            await UniTask.WaitForSeconds(lifeTime);
 
-            string impactName = Impactable.GetName(_materialType);
-            ImpactPoolManager.Instance.PoolHandlerDictionary[impactName].ReturnObject(this.gameObject);
+            this.gameObject.ReturnPool(impactType);
         }
+
+#if UNITY_EDITOR
+        [ContextMenu("Parse From Name")]
+        protected void ParseFromName()
+        {
+            string name = this.gameObject.name;
+            if (Enum.TryParse(name, out ImpactType type) == true)
+            {
+                impactType = type;
+            }
+            else
+            {
+                Debug.LogError("Cannot parse from name : " + name);
+            }
+        }
+#endif
     }
 }

@@ -61,7 +61,7 @@ MonoBehaviour:
   CurrentFireMode: 1
   AllowedFireMode: -1
   fireRate: 750
-  burstAmount: 0
+  burstAmount: 3
   reloadClip: {fileID: 11400000, guid: 10267ceb909c5a14b8d7d0743e573d1a, type: 2}
   grenadeClip: {fileID: 11400000, guid: b97b26628010a35439d0c4cfc7934c92, type: 2}
   fireClip: {fileID: 0}
@@ -70,11 +70,14 @@ MonoBehaviour:
   scopes: []
   recoilPattern: {fileID: 11400000, guid: df70e32e3d10bc9418d2aa3a6e8e7431, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
-  _bulletType: 0
+  projectileType: 3
   attatchmentHandler: {fileID: 170208698217206272}
-  _maxMagCount: 0
+  _maxMagCount: 30
   _currentMagCount: 0
-  fireClips: []
+  fireClips:
+  - {fileID: 8300000, guid: 451b4bc298c4dc84081234eda529e0c3, type: 3}
+  - {fileID: 8300000, guid: bb96ef520b4375d449fa9dd1c5cf0dac, type: 3}
+  - {fileID: 8300000, guid: c6d17c25256d330498ca7547838aedb0, type: 3}
   reloadClips: []
 --- !u!65 &5998773963881264845
 BoxCollider:
@@ -6262,7 +6265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1413496009585724569
 Transform:
   m_ObjectHideFlags: 0

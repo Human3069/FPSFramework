@@ -5202,9 +5202,9 @@ MonoBehaviour:
   scopes: []
   recoilPattern: {fileID: 11400000, guid: 69c2b9a0d4a2b3349ba0fbc184f82178, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
-  _bulletType: 2
+  projectileType: 5
   attatchmentHandler: {fileID: 3387829722186058050}
-  _maxMagCount: 0
+  _maxMagCount: 30
   _currentMagCount: 0
   fireClips:
   - {fileID: 8300000, guid: b7ea397a74d534a4594f370aac18d2fd, type: 3}
@@ -11100,7 +11100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992bcb9ef6715b447a55ab1baeddd4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedSight: {fileID: 8852995578070091916}
+  _selectedSight: {fileID: 7914890843822118304}
 --- !u!1 &6289252350717042160
 GameObject:
   m_ObjectHideFlags: 0

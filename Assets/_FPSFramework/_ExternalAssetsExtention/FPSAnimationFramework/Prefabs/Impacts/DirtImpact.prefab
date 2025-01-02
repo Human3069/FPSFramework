@@ -9610,7 +9610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e078970b3e1e74d98dbaa00fa8af2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 7
+  impactType: 4
   lifeTime: 20
 --- !u!1 &186006
 GameObject:
@@ -9788,6 +9788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenSpaceDecals: 1
   randomScalePercent: 10
+  isRotateRandomely: 1
 --- !u!1 &1317295626672602
 GameObject:
   m_ObjectHideFlags: 0

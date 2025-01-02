@@ -1,6 +1,5 @@
-using _KMH_Framework;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
+using FPS_Framework.Pool;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -8,32 +7,9 @@ namespace FPS_Framework
     [RequireComponent(typeof(Rigidbody))]
     public class BulletHandler : MonoBehaviour
     {
-        public enum BulletType
-        {
-            _556_AR,
-            _577_450_SR,
-            _762_AR,
-            _762_SR,
-            _9_SMG,
-
-            _Shrapnel_Piece,
-
-            _57_Shrapnel,
-            _40_Cannon,
-        }
-
         [Header("=== BulletHandler ===")]
         [SerializeField]
-        protected BulletType _bulletType;
-        public BulletType _BulletType
-        {
-            get
-            {
-                return _bulletType;
-            }
-        }
-
-        protected string bulletName;
+        protected ProjectileType projectileType;
 
         [Space(10)]
         [SerializeField]
@@ -59,7 +35,7 @@ namespace FPS_Framework
 
                 if (_currentPenetratePower == 0f)
                 {
-                    BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+                    this.gameObject.ReturnPool(projectileType);
                 }
             }
         }
@@ -74,63 +50,15 @@ namespace FPS_Framework
 
         protected Vector3 currentPos;
 
-        public static string GetName(BulletType _type)
-        {
-            string bulletName;
-            if (_type == BulletType._556_AR)
-            {
-                bulletName = BulletPoolManager._556_AR_BULLET;
-            }
-            else if (_type == BulletType._577_450_SR)
-            {
-                bulletName = BulletPoolManager._577_450_SR_BULLET;
-            }
-            else if (_type == BulletType._762_AR)
-            {
-                bulletName = BulletPoolManager._762_AR_BULLET;
-            }
-            else if (_type == BulletType._762_SR)
-            {
-                bulletName = BulletPoolManager._762_SR_BULLET;
-            }
-            else if (_type == BulletType._9_SMG)
-            {
-                bulletName = BulletPoolManager._9_SMG_BULLET;
-            }
-
-            else if (_type == BulletType._Shrapnel_Piece)
-            {
-                bulletName = BulletPoolManager._SHRAPNEL_PIECE;
-            }
-
-            else if (_type == BulletType._57_Shrapnel)
-            {
-                bulletName = BulletPoolManager._57_SHRAPNEL_BULLET;
-            }
-            else if (_type == BulletType._40_Cannon)
-            {
-                bulletName = BulletPoolManager._40_CANNON_BULLET;
-            }
-            else
-            {
-                bulletName = null;
-                Debug.Assert(false);
-            }
-
-            return bulletName;
-        }
-
         protected virtual void Awake()
         {
             _rigidbody = this.GetComponent<Rigidbody>();
-
-            bulletName = GetName(_bulletType);
         }
 
         protected virtual void OnEnable()
         {
             CurrentPenetratePower = maxPenetratePower;
-            if (_bulletType == BulletType._577_450_SR)
+            if (projectileType == ProjectileType._577_450_SR_Bullet)
             {
                 PoolSmokeParticleAsync().Forget();
             }
@@ -152,16 +80,17 @@ namespace FPS_Framework
             disablePos = this.transform.position;
             flightDistance = Vector3.Magnitude(enablePos - disablePos);
 
-            BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].ReturnObject(this.gameObject);
+            this.gameObject.ReturnPool(projectileType);
         }
 
         protected virtual async UniTaskVoid PoolSmokeParticleAsync()
         {
-            GameObject targetObj = BulletPoolManager.Instance.PoolHandlerDictionary["Particle_Smoke"].EnableObject(this.transform);
+            FxType smokeType = FxType.MuzzleFlashSmoke;
+            GameObject pooledSmoke = smokeType.EnablePool(obj => obj.transform.SetPositionAndRotation(this.transform.position, this.transform.rotation));
 
             await UniTask.WaitForSeconds(10f);
 
-            BulletPoolManager.Instance.PoolHandlerDictionary["Particle_Smoke"].ReturnObject(targetObj);
+            pooledSmoke.ReturnPool(smokeType);
         }
 
         protected virtual async UniTaskVoid CheckTrajectoryAsync()
@@ -191,13 +120,16 @@ namespace FPS_Framework
             {
                 if (hits[i].collider.TryGetComponent<Impactable>(out Impactable _impactable) == true)
                 {
-                    Impactable.MaterialType _materialType = _impactable._MaterialType;
-                    string _impactName = Impactable.GetName(_materialType);
+                    ImpactType impactType = _impactable.ImpactType;
                     Vector3 impactPoint = hits[i].point;
                     Vector3 impactAngle = hits[i].normal + hits[i].point;
 
-                    GameObject particleObj = ImpactPoolManager.Instance.PoolHandlerDictionary[_impactName].EnableObject(impactPoint);
-                    particleObj.transform.LookAt(impactAngle);
+                    impactType.EnablePool(OnBeforeEnableAction);
+                    void OnBeforeEnableAction(GameObject impactObj)
+                    {
+                        impactObj.transform.position = impactPoint;
+                        impactObj.transform.LookAt(impactAngle);
+                    }
 
                     disablePos = this.transform.position;
                     flightDistance = Vector3.Magnitude(enablePos - disablePos);
@@ -210,12 +142,7 @@ namespace FPS_Framework
 
                         _impactable.Warrior.CurrentHealth -= (damage * _impactable.DamageMultiplier);
                     }
-
-                    if (_materialType == Impactable.MaterialType.ShootingTarget)
-                    {
-                        _impactable._ShootingTarget.ShowText(flightDistance.ToString("F1") + "m");
-                    }
-
+                    
                     CurrentPenetratePower -= _impactable.Thickness;
                 }
             }

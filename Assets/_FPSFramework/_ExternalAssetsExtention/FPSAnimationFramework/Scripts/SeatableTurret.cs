@@ -1,6 +1,7 @@
 using _KMH_Framework;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
+using FPS_Framework.Pool;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -70,9 +71,9 @@ namespace FPS_Framework
 
         [Space(10)]
         [SerializeField]
-        protected BulletType bulletType;
-        protected string bulletName;
+        protected ProjectileType projectileType;
 
+        [Space(10)]
         [SerializeField]
         protected float fireRate = 0.3f;
         [SerializeField]
@@ -93,16 +94,8 @@ namespace FPS_Framework
         protected void Awake()
         {
             audioSource = this.GetComponent<AudioSource>();
-
-            PostAwake().Forget();
         }
     
-        protected async UniTaskVoid PostAwake()
-        {
-            await UniTask.WaitUntil(() => BulletPoolManager.Instance.IsReady == true);
-            bulletName = BulletHandler.GetName(bulletType);
-        }
-
         protected virtual async UniTaskVoid OnSeatedAsync()
         {
             while (IsSeated == true)
@@ -170,7 +163,13 @@ namespace FPS_Framework
                 for (int i = 0; i < firePerShot; i++)
                 {
                     Vector3 randomedEuler = firePos.eulerAngles + new Vector3(Random.Range(-fireRandomAngle, fireRandomAngle), Random.Range(-fireRandomAngle, fireRandomAngle), 0);
-                    BulletPoolManager.Instance.PoolHandlerDictionary[bulletName].EnableObject(firePos.position, Quaternion.Euler(randomedEuler));
+
+                    projectileType.EnablePool<BulletHandler>(OnBeforeEnablePool);
+                    void OnBeforeEnablePool(BulletHandler bulletHandler)
+                    {
+                        bulletHandler.transform.position = firePos.position;
+                        bulletHandler.transform.rotation = Quaternion.Euler(randomedEuler);
+                    }
                 }
 
                 int randomIndex = Random.Range(0, fireClips.Length);

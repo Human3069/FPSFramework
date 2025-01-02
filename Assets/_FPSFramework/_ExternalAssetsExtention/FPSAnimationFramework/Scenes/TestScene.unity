@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -342,7 +346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -564,26 +568,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6378625583188701146, guid: 3a5f976697741484c996ac2193a20aeb,
-        type: 3}
-      propertyPath: _maxMagCount
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6378625583188701146, guid: 3a5f976697741484c996ac2193a20aeb,
-        type: 3}
-      propertyPath: AllowedFireMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6378625583188701146, guid: 3a5f976697741484c996ac2193a20aeb,
-        type: 3}
-      propertyPath: fireClips.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6378625583188701146, guid: 3a5f976697741484c996ac2193a20aeb,
-        type: 3}
-      propertyPath: fireClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 91cc8f79c7133a448a857cb51bc54daa, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a5f976697741484c996ac2193a20aeb, type: 3}
 --- !u!1 &40919614
@@ -802,7 +786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -1381,6 +1365,11 @@ PrefabInstance:
       objectReference: {fileID: 19400435}
     - target: {fileID: 6378625583188701146, guid: 3a5f976697741484c996ac2193a20aeb,
         type: 3}
+      propertyPath: _PoolerType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378625583188701146, guid: 3a5f976697741484c996ac2193a20aeb,
+        type: 3}
       propertyPath: _maxMagCount
       value: 20
       objectReference: {fileID: 0}
@@ -1451,6 +1440,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -1714,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 9
+  ImpactType: 11
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -1728,6 +1721,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -1819,7 +1816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -1952,6 +1949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -2078,7 +2079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 5
+  ImpactType: 2
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -2227,7 +2228,7 @@ MonoBehaviour:
   predictDistance: 0
   predictCrosshair: {fileID: 1050722575}
   predictDistanceText: {fileID: 557566117}
-  bulletType: 7
+  projectileType: 1
   fireRate: 1
   fireRandomAngle: 0.01
   firePerShot: 1
@@ -2542,13 +2543,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   predictableDrag: 0.1
-  predictableSpeed: 100
+  predictableSpeed: 250
   predictAccuracy: 0.9
   predictIterationCount: 150
   predictDistance: 0
   predictCrosshair: {fileID: 1672629719}
   predictDistanceText: {fileID: 14854957}
-  bulletType: 6
+  projectileType: 2
   fireRate: 1
   fireRandomAngle: 0.01
   firePerShot: 1
@@ -2621,7 +2622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 3
+  ImpactType: 10
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -2735,7 +2736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 4
+  ImpactType: 12
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -2988,7 +2989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 6
+  ImpactType: 3
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -3102,7 +3103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 7
+  ImpactType: 4
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -3217,7 +3218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 0
+  ImpactType: 9
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -3317,16 +3318,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 746774683944186785, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
-        type: 3}
-      propertyPath: _maxMagCount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1447304294419404240, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2208818845419045761, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
         type: 3}
       propertyPath: m_Name
@@ -3387,25 +3378,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3387829722186058050, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
-        type: 3}
-      propertyPath: _selectedSight
-      value: 
-      objectReference: {fileID: 274683909}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbecc5d1e3d87784f935a27a5abbbd0f, type: 3}
---- !u!114 &274683909 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7914890843822118304, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
-    type: 3}
-  m_PrefabInstance: {fileID: 274683908}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa0c72a87a904c4392d0e1aec601e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &274813889
 GameObject:
   m_ObjectHideFlags: 0
@@ -3599,7 +3573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 0
+  ImpactType: 9
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -3666,18 +3640,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290499470}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &296427162 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5018886655984257604, guid: a34be93552bc7c946826cf4780167bd3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1088978376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa0c72a87a904c4392d0e1aec601e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &307048498
 GameObject:
   m_ObjectHideFlags: 0
@@ -3725,6 +3687,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -3785,7 +3751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -3996,6 +3962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -4190,7 +4160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -4244,6 +4214,119 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 413496487}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &441346952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441346953}
+  - component: {fileID: 441346954}
+  m_Layer: 0
+  m_Name: ObjectPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441346953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441346952}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 964863186657625220}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &441346954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441346952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41a5c8f2adf7a14198cfdb0610342bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePooler:
+    _poolHandlerList:
+    - Prefab: {fileID: 6879916920074542158, guid: 6804a094e5231b146a31588c05ab91c2,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 270239ee12f106a498480121d917303a,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 6d2f35dbac9e6414b85449977a241f27,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 3d99e7267ad9b4146934553a35e0aa1d,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 45f202ad50b66f84aa8c2aeca3225d41,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 59fdc15005074de44a44db0646cf9f8c,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: ce759a28bfe03b443820a87921fe8199,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 16a5982208de7cd46a9c84960dfd96f1,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 6879916920074542158, guid: 40229014c90e6784a82b1b68111c22ef,
+        type: 3}
+      initCount: 100
+  impactPooler:
+    _poolHandlerList:
+    - Prefab: {fileID: 9180080523680794357, guid: 48ec8da3ea5358d448b2b0125f9a6d02,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 9180080523680794357, guid: bf2f57fe6ba6d884691ca0973fe26b5f,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 151174, guid: 2beca6a8877c0044fb94c1671b185209, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 108086, guid: f3c56490620b54746b4e8e5ced8de3c6, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 186004, guid: 24c5d7da5c43de4408167dbab93c6777, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 108086, guid: baa194f6490a57d4eb4bc7b2f3c51c2b, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 196912, guid: c7ddd7b9bacc4294ab90160710b16329, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 168394, guid: 19c8e2f498930f549b04f97743a865c7, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 180772, guid: db65ea4c3bc2f9f449f67fc2f721630f, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 178032, guid: 8f4faa847d4117840bfb9e97c0ae08d5, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 142740, guid: 6108a49bb9ddf8544a9e46d90cb19ad5, type: 3}
+      initCount: 100
+    - Prefab: {fileID: 8696287440648460840, guid: fae529385c68bde428cd432e823a7031,
+        type: 3}
+      initCount: 100
+    - Prefab: {fileID: 138412, guid: fc81856dc3f1dad4285301f492380297, type: 3}
+      initCount: 100
+  fxPooler:
+    _poolHandlerList:
+    - Prefab: {fileID: 1592060619293822337, guid: 6f7c81de27d002b40a8b8c6d45534c00,
+        type: 3}
+      initCount: 100
+  unitPooler:
+    _poolHandlerList:
+    - Prefab: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      initCount: 100
 --- !u!1 &444832799
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,6 +4533,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -5016,7 +5103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -5132,7 +5219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -5233,7 +5320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 7
+  ImpactType: 4
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -5451,6 +5538,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -5681,6 +5772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -5738,6 +5833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -5794,6 +5893,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -7927,7 +8030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -8028,7 +8131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 4
+  ImpactType: 12
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -8105,6 +8208,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -8337,7 +8444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -8404,7 +8511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -8479,6 +8586,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
+        type: 3}
+      propertyPath: _PoolerType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
         type: 3}
@@ -8704,6 +8816,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -8940,6 +9056,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -9051,7 +9171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 8
+  ImpactType: 7
   Thickness: 0.05
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -9343,7 +9463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 5
+  ImpactType: 2
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -9457,7 +9577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 2
+  ImpactType: 6
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -9536,7 +9656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 10
+  ImpactType: 0
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -9638,7 +9758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 1
+  ImpactType: 8
   Thickness: 1
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -9751,7 +9871,7 @@ MonoBehaviour:
   predictDistance: 0
   predictCrosshair: {fileID: 498634810}
   predictDistanceText: {fileID: 1872056828}
-  bulletType: 1
+  projectileType: 4
   fireRate: 0.2
   fireRandomAngle: 0.3
   firePerShot: 1
@@ -9984,7 +10104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -10051,7 +10171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -10171,7 +10291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 10
+  ImpactType: 0
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -10286,7 +10406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 0
+  ImpactType: 9
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -10623,6 +10743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -10681,41 +10805,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: M4A1_OpenDot
       objectReference: {fileID: 0}
-    - target: {fileID: 170208698217206272, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: _selectedSight
-      value: 
-      objectReference: {fileID: 296427162}
-    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: burstAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: _maxMagCount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: fireClips.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: fireClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 451b4bc298c4dc84081234eda529e0c3, type: 3}
-    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: fireClips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: bb96ef520b4375d449fa9dd1c5cf0dac, type: 3}
-    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: fireClips.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: c6d17c25256d330498ca7547838aedb0, type: 3}
     - target: {fileID: 830822289977377357, guid: a34be93552bc7c946826cf4780167bd3,
         type: 3}
       propertyPath: m_RootOrder
@@ -10771,11 +10860,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7323635562702174659, guid: a34be93552bc7c946826cf4780167bd3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a34be93552bc7c946826cf4780167bd3, type: 3}
 --- !u!1001 &1090521768
@@ -10791,7 +10875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -11034,6 +11118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -11093,7 +11181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -11158,6 +11246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -11217,7 +11309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -11289,7 +11381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 1
+  ImpactType: 8
   Thickness: 1
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -11413,7 +11505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -11577,7 +11669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 9
+  ImpactType: 11
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -11591,6 +11683,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -11648,6 +11744,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -11785,7 +11885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -12043,7 +12143,7 @@ MonoBehaviour:
   predictDistance: 0
   predictCrosshair: {fileID: 1495252843}
   predictDistanceText: {fileID: 1976407166}
-  bulletType: 3
+  projectileType: 6
   fireRate: 0.06
   fireRandomAngle: 0.2
   firePerShot: 1
@@ -12051,7 +12151,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 451b4bc298c4dc84081234eda529e0c3, type: 3}
   - {fileID: 8300000, guid: bb96ef520b4375d449fa9dd1c5cf0dac, type: 3}
   - {fileID: 8300000, guid: c6d17c25256d330498ca7547838aedb0, type: 3}
-  rotateSpeed: 2
+  rotateSpeed: 10
 --- !u!65 &1304849623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12177,6 +12277,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -12548,7 +12652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 3
+  ImpactType: 10
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -12784,7 +12888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 8
+  ImpactType: 7
   Thickness: 0.05
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -12862,6 +12966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -12921,6 +13029,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 746774683944186785, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
+        type: 3}
+      propertyPath: _PoolerType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 746774683944186785, guid: bbecc5d1e3d87784f935a27a5abbbd0f,
         type: 3}
       propertyPath: _maxMagCount
@@ -13103,7 +13216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 9
+  ImpactType: 11
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -13191,7 +13304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 9
+  ImpactType: 11
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -13271,7 +13384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -13397,7 +13510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 10
+  ImpactType: 0
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -13729,6 +13842,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -13841,7 +13958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 10
+  ImpactType: 0
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -14007,6 +14124,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5793223459091897020, guid: cd8d6a4392d379c4ea3564ad9b97db3c,
         type: 3}
+      propertyPath: _PoolerType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793223459091897020, guid: cd8d6a4392d379c4ea3564ad9b97db3c,
+        type: 3}
       propertyPath: _maxMagCount
       value: 20
       objectReference: {fileID: 0}
@@ -14055,7 +14177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -14170,41 +14292,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1520529762629545365, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: _maxMagCount
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1520529762629545365, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: fireClips.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1520529762629545365, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: fireClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: a7e1be922bd851d4cb5a073f0bbbe42b, type: 3}
-    - target: {fileID: 1520529762629545365, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: fireClips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8877f2d7569c5b64d9615403f6ebf3f8, type: 3}
-    - target: {fileID: 1520529762629545365, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: fireClips.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9593cc2aa7184f94fa319c27da6fe520, type: 3}
-    - target: {fileID: 1520529762629545365, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: fireClips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: e7fafba642bceda4ebfa8e40dec7b85a, type: 3}
-    - target: {fileID: 2851168618998532770, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4910695102810075455, guid: 3ac7968d4cc67ad4e9f7edd74d63f625,
         type: 3}
@@ -14344,7 +14431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 0
+  ImpactType: 9
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -14361,7 +14448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -14525,7 +14612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 9
+  ImpactType: 11
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -14545,6 +14632,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -14676,7 +14767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 1
+  ImpactType: 8
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -14754,6 +14845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -14810,6 +14905,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -15012,7 +15111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 6
+  ImpactType: 3
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -15092,7 +15191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -15163,6 +15262,11 @@ PrefabInstance:
       propertyPath: _selectedSight
       value: 
       objectReference: {fileID: 1726241525}
+    - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
+        type: 3}
+      propertyPath: _PoolerType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 830822289977377346, guid: a34be93552bc7c946826cf4780167bd3,
         type: 3}
       propertyPath: burstAmount
@@ -15275,7 +15379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -15441,6 +15545,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -15587,6 +15695,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -15713,6 +15825,10 @@ PrefabInstance:
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_Name
       value: Tribal Warrior (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -16102,7 +16218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 0
+  ImpactType: 3
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -16127,7 +16243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1878231608
 Transform:
   m_ObjectHideFlags: 0
@@ -16721,7 +16837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -16822,7 +16938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 1
+  ImpactType: 8
   Thickness: 0.5
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -17260,7 +17376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -17361,7 +17477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 2
+  ImpactType: 6
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -17472,6 +17588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -17568,7 +17688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 10
+  ImpactType: 0
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -17702,7 +17822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 10
+  ImpactType: 0
   Thickness: 10
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -17797,6 +17917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tribal Warrior (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -17856,7 +17980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679657141564596, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4481337796383070, guid: bbd2581d2ad923b4693521d3518e1dbf, type: 3}
       propertyPath: m_RootOrder
@@ -18459,25 +18583,9 @@ Transform:
   - {fileID: 6078753554199139622}
   - {fileID: 343785979018828025}
   - {fileID: 5133771285277854395}
-  - {fileID: 977657297349380874}
-  - {fileID: 1772367250086044344}
+  - {fileID: 441346953}
   m_Father: {fileID: 3777772160685502708}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &977657297349380874
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8173435195145084225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 964863186657625220}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1057460495815649258
 RectTransform:
@@ -18986,21 +19094,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1772367250086044344
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681910790543000892}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 964863186657625220}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &1796167847812491423
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19863,46 +19956,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1000
   m_TargetDisplay: 0
---- !u!114 &3058691491575399145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8173435195145084225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9a715b14b8b63438f451cd33c14807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _InitInfos:
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 3d99e7267ad9b4146934553a35e0aa1d, type: 3}
-    ObjInitCount: 100
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 45f202ad50b66f84aa8c2aeca3225d41, type: 3}
-    ObjInitCount: 600
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 59fdc15005074de44a44db0646cf9f8c, type: 3}
-    ObjInitCount: 100
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: ce759a28bfe03b443820a87921fe8199, type: 3}
-    ObjInitCount: 100
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 6804a094e5231b146a31588c05ab91c2, type: 3}
-    ObjInitCount: 100
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 40229014c90e6784a82b1b68111c22ef, type: 3}
-    ObjInitCount: 10
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 6d2f35dbac9e6414b85449977a241f27, type: 3}
-    ObjInitCount: 10
-  - Title: 
-    Obj: {fileID: 6879916920074542158, guid: 270239ee12f106a498480121d917303a, type: 3}
-    ObjInitCount: 10
-  - Title: 
-    Obj: {fileID: 1592060619293822337, guid: 6f7c81de27d002b40a8b8c6d45534c00, type: 3}
-    ObjInitCount: 10
 --- !u!4 &3081899170714117079
 Transform:
   m_ObjectHideFlags: 0
@@ -21320,7 +21373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0884da89c7b78c46b4ef7aaa2ae72b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materialType: 9
+  ImpactType: 11
   Thickness: 0
   Warrior: {fileID: 0}
   DamageMultiplier: 1
@@ -21514,23 +21567,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &5681910790543000892
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1772367250086044344}
-  - component: {fileID: 6850685489234593417}
-  m_Layer: 0
-  m_Name: ImpactPoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &5707296138055022569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21954,58 +21990,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8785304188504683064}
   m_CullTransparentMesh: 1
---- !u!114 &6850685489234593417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681910790543000892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9540f616e433d9a4fbedb3e39400d8e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _InitInfos:
-  - Title: Brick
-    Obj: {fileID: 151174, guid: 2beca6a8877c0044fb94c1671b185209, type: 3}
-    ObjInitCount: 20
-  - Title: Concrete
-    Obj: {fileID: 108086, guid: f3c56490620b54746b4e8e5ced8de3c6, type: 3}
-    ObjInitCount: 20
-  - Title: Dirt
-    Obj: {fileID: 186004, guid: 24c5d7da5c43de4408167dbab93c6777, type: 3}
-    ObjInitCount: 20
-  - Title: Foilage
-    Obj: {fileID: 196912, guid: c7ddd7b9bacc4294ab90160710b16329, type: 3}
-    ObjInitCount: 20
-  - Title: Glass
-    Obj: {fileID: 168394, guid: 19c8e2f498930f549b04f97743a865c7, type: 3}
-    ObjInitCount: 20
-  - Title: Metal
-    Obj: {fileID: 180772, guid: db65ea4c3bc2f9f449f67fc2f721630f, type: 3}
-    ObjInitCount: 20
-  - Title: Plaster
-    Obj: {fileID: 178032, guid: 8f4faa847d4117840bfb9e97c0ae08d5, type: 3}
-    ObjInitCount: 20
-  - Title: Rock
-    Obj: {fileID: 142740, guid: 6108a49bb9ddf8544a9e46d90cb19ad5, type: 3}
-    ObjInitCount: 20
-  - Title: Water
-    Obj: {fileID: 8696287440648460840, guid: fae529385c68bde428cd432e823a7031, type: 3}
-    ObjInitCount: 20
-  - Title: Wood
-    Obj: {fileID: 138412, guid: fc81856dc3f1dad4285301f492380297, type: 3}
-    ObjInitCount: 20
-  - Title: Flesh
-    Obj: {fileID: 108086, guid: baa194f6490a57d4eb4bc7b2f3c51c2b, type: 3}
-    ObjInitCount: 5
-  - Title: Explosion 105mm
-    Obj: {fileID: 9180080523680794357, guid: bf2f57fe6ba6d884691ca0973fe26b5f, type: 3}
-    ObjInitCount: 5
-  - Title: Explosion 40mm Air
-    Obj: {fileID: 9180080523680794357, guid: 48ec8da3ea5358d448b2b0125f9a6d02, type: 3}
-    ObjInitCount: 5
 --- !u!222 &6917087551440744857
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22527,23 +22511,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811173428362506973}
   m_CullTransparentMesh: 1
---- !u!1 &8173435195145084225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 977657297349380874}
-  - component: {fileID: 3058691491575399145}
-  m_Layer: 0
-  m_Name: BulletPoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &8220242418197469034
 RectTransform:
   m_ObjectHideFlags: 0

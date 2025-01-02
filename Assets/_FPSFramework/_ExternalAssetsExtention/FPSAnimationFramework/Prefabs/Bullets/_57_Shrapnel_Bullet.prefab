@@ -5016,18 +5016,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515aeae3a82c9b144817cae1f018b314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletType: 6
+  projectileType: 2
   lifeTime: 20
-  speed: 100
+  speed: 250
   maxPenetratePower: 0.01
   _currentPenetratePower: 0
   damage: 0
-  clusterBulletType: 5
+  clusterProjectileType: 0
   isReactOnStatic: 1
   clusterCount: 200
   clusterDistance: 30
   clusterRandomAngle: 90
-  impactName: 40mm_Explosion_Air
+  clusterExplosionType: 0
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -212,11 +212,12 @@ MonoBehaviour:
   scopes: []
   recoilPattern: {fileID: 11400000, guid: d6668c23eaa0f604f8ade366b19cdd2e, type: 2}
   cameraShake: {fileID: 11400000, guid: ce574d2150fc1f540a612314d3d6662e, type: 2}
-  _bulletType: 3
+  projectileType: 6
   attatchmentHandler: {fileID: 5793509749445684559}
-  _maxMagCount: 0
+  _maxMagCount: 20
   _currentMagCount: 0
-  fireClips: []
+  fireClips:
+  - {fileID: 8300000, guid: 91cc8f79c7133a448a857cb51bc54daa, type: 3}
   reloadClips: []
 --- !u!65 &8011262509291288249
 BoxCollider:
