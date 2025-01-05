@@ -144,7 +144,7 @@ namespace FPS_Framework.ZuluWar
             muzzleFlash.Play();
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (targetController == null)
             {

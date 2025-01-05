@@ -1,4 +1,3 @@
-using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -80,6 +79,28 @@ namespace _KMH_Framework
             targetPredict -= new Vector3(0f, gravityApproximate, 0f);
 
             return targetPredict;
+        }
+
+        public static Vector3 OnRandomCircle(Vector3 center, float radius, float startAngle, float totalAngle)
+        {
+            float endAngle = (startAngle - 90) + totalAngle;
+            float angle = UnityEngine.Random.Range((startAngle - 90), endAngle) * Mathf.Deg2Rad;
+            float x = Mathf.Cos(-angle);
+            float z = Mathf.Sin(-angle);
+
+            return center + (new Vector3(x, 0, z) * radius);
+        }
+
+        public static Vector3 OnRandomCircle(Vector3 center, float minRadius, float maxRadius, float startAngle, float totalAngle)
+        {
+            float randomizedRadius = UnityEngine.Random.Range(minRadius, maxRadius);
+
+            float endAngle = (startAngle - 90) + totalAngle;
+            float angle = UnityEngine.Random.Range((startAngle - 90), endAngle) * Mathf.Deg2Rad;
+            float x = Mathf.Cos(-angle);
+            float z = Mathf.Sin(-angle);
+
+            return center + (new Vector3(x, 0, z) * randomizedRadius);
         }
         #endregion
 

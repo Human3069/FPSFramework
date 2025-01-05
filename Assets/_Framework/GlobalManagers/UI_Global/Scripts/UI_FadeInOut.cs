@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class UI_FadeInOut : MonoBehaviour
 
     [SerializeField]
     protected Image image;
+    [SerializeField]
+    protected TextMeshProUGUI fadeOverText;
 
     protected virtual void Awake()
     {
@@ -40,6 +43,8 @@ public class UI_FadeInOut : MonoBehaviour
         Color _color = image.color;
         _color.a = 0f;
         image.color = _color;
+
+        fadeOverText.color = new Color(fadeOverText.color.r, fadeOverText.color.g, fadeOverText.color.b, 0f);
     }
 
     protected virtual void OnDestroy()
@@ -75,8 +80,8 @@ public class UI_FadeInOut : MonoBehaviour
         {
             image.color = Color.Lerp(originColor, targetColor, normalized);
 
-            await UniTaskEx.WaitForFixedUpdate(this, 0);
-            timer += Time.deltaTime;
+            await UniTaskEx.NextFrame(this, 0);
+            timer += Time.unscaledDeltaTime;
             normalized = timer / duration;
         }
         image.color = targetColor;
@@ -96,10 +101,67 @@ public class UI_FadeInOut : MonoBehaviour
         {
             image.color = Color.Lerp(originColor, color, normalized);
 
-            await UniTaskEx.WaitForFixedUpdate(this, 0);
-            timer += Time.deltaTime;
+            await UniTaskEx.NextFrame(this, 0);
+            timer += Time.unscaledDeltaTime;
             normalized = timer / duration;
         }
         image.color = color;
+    }
+
+    public virtual async UniTask ShowText(string text, float duration)
+    {
+        fadeOverText.text = text;
+        Color originColor = fadeOverText.color;
+        Color targetColor = new Color(originColor.r, originColor.g, originColor.b, 1f);
+
+        float timer = 0f;
+        float normalized = 0f;
+
+        while (timer < duration)
+        {
+            fadeOverText.color = Color.Lerp(originColor, targetColor, normalized);
+
+            await UniTaskEx.NextFrame(this, 0);
+            timer += Time.unscaledDeltaTime;
+            normalized = timer / duration;
+        }
+        fadeOverText.color = targetColor;
+    }
+
+    public virtual async UniTask HideText(float duration)
+    {
+        Color originColor = fadeOverText.color;
+        Color targetColor = new Color(originColor.r, originColor.g, originColor.b, 0f);
+
+        float timer = 0f;
+        float normalized = 0f;
+
+        while (timer < duration)
+        {
+            fadeOverText.color = Color.Lerp(originColor, targetColor, normalized);
+
+            await UniTaskEx.NextFrame(this, 0);
+            timer += Time.unscaledDeltaTime;
+            normalized = timer / duration;
+        }
+        fadeOverText.color = targetColor;
+    }
+
+    public virtual async UniTask FloatText(string text, float duration)
+    {
+        await FadeOutAsync(duration, Color.black);
+
+        await ShowText(text, duration);
+
+        float timer = 0f;
+        while (timer < duration)
+        {
+            timer += Time.unscaledDeltaTime;
+            await UniTask.Yield();
+        }
+
+        await HideText(duration);
+
+        await FadeInAsync(duration, Color.black);
     }
 }
