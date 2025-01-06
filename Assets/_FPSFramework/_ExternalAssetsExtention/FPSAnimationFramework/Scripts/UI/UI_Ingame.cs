@@ -1,4 +1,5 @@
 using _KMH_Framework;
+using FPS_Framework.ZuluWar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,13 @@ namespace FPS_Framework
         [SerializeField]
         protected TMP_Text interactableText;
 
-        [Space(10)]
+        [Header("Toolbars")]
+        [SerializeField]
+        protected TMP_Text totalMoneyText;
+        [SerializeField]
+        protected TMP_Text remainedEnemiesCountText;
+
+        [Header("Bottombars")]
         [SerializeField]
         protected TMP_Text ammoText;
 
@@ -41,10 +48,19 @@ namespace FPS_Framework
             _SingleFPSPlayer.FPSController.OnEquipableValueChanged += OnEquipableValueChanged;
             _SingleFPSPlayer.FPSController.OnSeatableValueChanged += OnSeatableValueChanged;
             _SingleFPSPlayer.FPSController.OnEquipedWeaponChanged += OnEquipedWeaponChanged;
+
+            PhaseCounter.OnTotalMoneyChanged += OnTotalMoneyChanged;
+            OnTotalMoneyChanged(0); // forcelly call!
+
+            PhaseCounter.OnRemainedEnemyCountChanged += OnRemainedEnemyCountChanged;
+            OnRemainedEnemyCountChanged(0); // forcelly call!
         }
 
         protected void OnDestroy()
         {
+            PhaseCounter.OnRemainedEnemyCountChanged -= OnRemainedEnemyCountChanged;
+            PhaseCounter.OnTotalMoneyChanged -= OnTotalMoneyChanged;
+
             if (_SingleFPSPlayer != null)
             {
                 _SingleFPSPlayer.FPSController.OnEquipedWeaponChanged -= OnEquipedWeaponChanged;
@@ -76,6 +92,16 @@ namespace FPS_Framework
                 currentWeapon.OnAmmoValuesChanged -= OnAmmoValuesChanged;
             }
             equipedWeapon.OnAmmoValuesChanged += OnAmmoValuesChanged;
+        }
+
+        protected void OnTotalMoneyChanged(int totalMoney)
+        {
+            totalMoneyText.text = "Money : " + totalMoney.ToString();
+        }
+
+        protected void OnRemainedEnemyCountChanged(int remainedEnemyCount)
+        {
+            remainedEnemiesCountText.text = "Remained : " + remainedEnemyCount.ToString();
         }
 
         protected void OnAmmoValuesChanged(int maxAmmo, int currentAmmo)
