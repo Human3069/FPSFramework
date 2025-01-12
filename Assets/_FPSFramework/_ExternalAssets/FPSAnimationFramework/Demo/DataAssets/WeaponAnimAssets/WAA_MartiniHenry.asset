@@ -31,7 +31,7 @@ MonoBehaviour:
       z: 0.148
     pointAimOffset:
       position: {x: -0.03, y: 0, z: 0.02}
-      rotation: {x: 0.0044270228, y: 0.016430076, z: 0.26012978, w: 0.96542376}
+      rotation: {x: 0.004427021, y: 0.016430078, z: 0.26012975, w: 0.96542376}
     aimSpeed: 3.4
     changeSightSpeed: 2
     pointAimSpeed: 3
@@ -40,8 +40,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
     rightHandOffset:
-      position: {x: 0, y: 1.53, z: 5.48}
-      rotation: {x: 0.09810444, y: 4.5425294e-10, z: 0.0000000036985677, w: 0.99517614}
+      position: {x: 0, y: -1.79, z: 5.48}
+      rotation: {x: 0.098104455, y: -0.0000000021775206, z: 0.0000000303954, w: 0.99517614}
     leftHandOffset:
       position: {x: 0, y: 0, z: 10}
       rotation: {x: 0, y: 0, z: 0, w: 1}

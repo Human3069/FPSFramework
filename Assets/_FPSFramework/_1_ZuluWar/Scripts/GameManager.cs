@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace FPS_Framework.ZuluWar
 {
-    [System.Serializable]
+    [Serializable]
     public class PhaseCounter
     {
         [SerializeField]
@@ -139,6 +139,9 @@ namespace FPS_Framework.ZuluWar
         [Space(10)]
         public PhaseCounter _PhaseCounter;
 
+        [Space(10)]
+        public List<DamagedLog> DamagedLogList = new List<DamagedLog>();
+
         protected List<WarriorController> enemyList = new List<WarriorController>();
 
         protected void Awake()
@@ -207,7 +210,7 @@ namespace FPS_Framework.ZuluWar
                 float startAngle = enemySpawnPoint.eulerAngles.y;
                 Vector3 randomizedPos = Vector3Ex.OnRandomCircle(enemySpawnPoint.position, minSpawnRadius, maxSpawnRadius, startAngle, spawnAngle);
 
-                UnitType.ZuluWarrior.EnablePool<WarriorController>(OnBeforeEnable);
+                Pool.UnitType.ZuluWarrior.EnablePool((Action<WarriorController>)OnBeforeEnable);
                 void OnBeforeEnable(WarriorController controller)
                 {
                     controller.transform.position = randomizedPos;

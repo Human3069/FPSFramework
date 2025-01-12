@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using FPS_Framework.Pool;
+using FPS_Framework.ZuluWar;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -50,9 +51,29 @@ namespace FPS_Framework
 
         protected Vector3 currentPos;
 
+        // For Log
+        protected UnitType offenderType; 
+        protected string shooterWeaponName; 
+       
         protected virtual void Awake()
         {
             _rigidbody = this.GetComponent<Rigidbody>();
+        }
+
+        public void Initialize(UnitType offenderType, string shooterWeaponName)
+        {
+            this.offenderType = offenderType;
+            this.shooterWeaponName = shooterWeaponName;
+        }
+
+        public PredictableInfo GetPredictableInfo()
+        {
+            if (_rigidbody == null)
+            {
+                _rigidbody = this.GetComponent<Rigidbody>();
+            }
+
+            return new PredictableInfo(speed, _rigidbody.drag);
         }
 
         protected virtual void OnEnable()
@@ -133,14 +154,28 @@ namespace FPS_Framework
 
                     disablePos = this.transform.position;
                     flightDistance = Vector3.Magnitude(enablePos - disablePos);
+
                     if (_impactable.Warrior != null)
                     {
-                        if (_impactable.Warrior.CurrentHealth > 0f)
+                        if (_impactable.Warrior.CurrentHealth > 0f && offenderType == UnitType.Player)
                         {
                             FPSManager.Instance.PlayHitMarkerSoundIfAllowed();
                         }
 
-                        _impactable.Warrior.CurrentHealth -= (damage * _impactable.DamageMultiplier);
+                        float actualDamage = (damage * _impactable.DamageMultiplier);
+                        InjuriedType injuriedType = _impactable._InjuriedType;
+                        
+                        bool isLoggable = _impactable.Warrior.CurrentHealth > 0f;
+                        _impactable.Warrior.CurrentHealth -= actualDamage;
+
+                        StateOnDamaged stateOnDamaged = _impactable.Warrior.CurrentHealth.ToStateOnDamaged();
+                        if (isLoggable == true)
+                        {
+                            DamagedLog log = new DamagedLog(offenderType, UnitType.Enemy, flightDistance, shooterWeaponName, actualDamage, injuriedType, stateOnDamaged);
+                            Debug.Log(log.ToString());
+
+                            GameManager.Instance.DamagedLogList.Add(log);
+                        }
                     }
                     
                     CurrentPenetratePower -= _impactable.Thickness;

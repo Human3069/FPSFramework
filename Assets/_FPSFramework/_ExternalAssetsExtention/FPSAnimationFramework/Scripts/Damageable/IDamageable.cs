@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+using System;
 
 public enum State
 {
@@ -11,6 +10,15 @@ public enum State
 
 public interface IDamageable
 {
+    State _State
+    {
+        get;
+        set;
+    }
+
+    delegate void StateChanged(State state);
+    event StateChanged OnStateChanged;
+
     float CurrentHealth
     {
         get;

@@ -30,6 +30,25 @@ namespace FPS_Framework
             }
         }
 
+        protected State _state;
+        public State _State
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    OnStateChanged.Invoke(value);
+                }
+            }
+        }
+
+        public event IDamageable.StateChanged OnStateChanged;
+
         [SerializeField]
         protected float maxHealth = 100;
 
@@ -210,7 +229,7 @@ namespace FPS_Framework
 
         public delegate void EquipedWeaponChnaged(WeaponEx currentWeapon, WeaponEx equipedWeapon);
         public event EquipedWeaponChnaged OnEquipedWeaponChanged;
-
+      
         protected void Invoke_OnEquipedWeaponChanged(WeaponEx currentWeapon, WeaponEx equipedWeapon)
         {
             if (OnEquipedWeaponChanged != null)
@@ -779,6 +798,11 @@ namespace FPS_Framework
 
         protected override void UpdateLookInput()
         {
+            if (Cursor.visible == true)
+            {
+                return;
+            }
+
             _freeLook = Input.GetKey(KeyCode.X);
 
             float deltaMouseX = Input.GetAxis("Mouse X") * FPSManager.Instance.ActualSenstivity;

@@ -21,8 +21,8 @@ namespace FPS_Framework
         {
             await UniTask.WaitUntil(() => LayerManager.Instance != null);
 
-            minimapCamera.cullingMask = LayerManager.Instance.MinimapLayer |
-                                        LayerManager.Instance.DefaultLayer;
+            minimapCamera.cullingMask = LayerManager.Instance.MinimapCullingMask |
+                                        LayerManager.Instance.DefaultCullingMask;
         }
 
         protected void FixedUpdate()

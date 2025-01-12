@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
-using FPS_Framework;
 using FPS_Framework.Pool;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,9 +30,13 @@ namespace FPS_Framework.ZuluWar
                     {
                         MoveAndAttackAsync().Forget();
                     }
+
+                    OnStateChanged?.Invoke(value);
                 }
             }
         }
+
+        public event IDamageable.StateChanged OnStateChanged;
 
         public Vector3 MiddlePos
         {
@@ -209,8 +213,26 @@ namespace FPS_Framework.ZuluWar
 
             if (this.gameObject.activeSelf == true)
             {
-                this.gameObject.ReturnPool(UnitType.ZuluWarrior);
+                this.gameObject.ReturnPool(Pool.UnitType.ZuluWarrior);
             }
+        }
+
+        [Header("Editor Only")]
+        [SerializeField]
+        protected float yOffset;
+
+        private void OnDrawGizmos()
+        {
+            if (Application.isPlaying == false || FPSControllerEx.Instance == null)
+            {
+                return;
+            }
+
+            float distance = (FPSControllerEx.Instance.transform.position - this.transform.position).magnitude;
+            GUIStyle style = new GUIStyle();
+            style.onNormal.textColor = Color.red;
+
+            Handles.Label(this.transform.position + Vector3.right * yOffset, "distance : " + distance.ToString("F0"));
         }
     }
 }

@@ -53,6 +53,18 @@ namespace FPS_Framework.Pool
             return pooledComponent;
         }
 
+        public static T GetComponent<T>(this ProjectileType type) where T : MonoBehaviour
+        {
+            T peek = ObjectPoolManager.Instance.GetPoolHandler(type).GetAnyObject<T>();
+            return peek.GetComponent<T>();
+        }
+
+        public static GameObject PeekObj(this ProjectileType type)
+        {
+            GameObject peek = ObjectPoolManager.Instance.GetPoolHandler(type).GetAnyObject();
+            return peek;
+        }
+
         public static void ReturnPool(this GameObject obj, ProjectileType type)
         {
             ObjectPoolManager.Instance.GetPoolHandler(type).DisableObj(obj);

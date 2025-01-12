@@ -1,11 +1,11 @@
 using _KMH_Framework;
+using Cysharp.Threading.Tasks;
 using FPS_Framework.ZuluWar;
-using System;
+using NPOI.Util;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static FPS_Framework.FPSControllerEx;
+using UnityEngine.UI;
 
 namespace FPS_Framework
 {
@@ -17,6 +17,8 @@ namespace FPS_Framework
         public SingleFPSPlayer _SingleFPSPlayer;
 
         [SerializeField]
+        protected Camera mainCamera;
+        [SerializeField]
         protected TMP_Text interactableText;
 
         [Header("Toolbars")]
@@ -25,6 +27,22 @@ namespace FPS_Framework
         [SerializeField]
         protected TMP_Text remainedEnemiesCountText;
 
+        [Header("Shop")]
+        [SerializeField]
+        protected RectTransform shopPanel;
+        [SerializeField]
+        protected TextMeshProUGUI shopTitleText;
+        [SerializeField]
+        protected GridLayoutGroup gridLayoutGroup;
+
+        [Header("Predictor")]
+        [SerializeField]
+        protected RectTransform predictPanel;
+        [SerializeField]
+        protected TextMeshProUGUI predictDistanceText;
+
+        protected bool isShopOpened = false;
+
         [Header("Bottombars")]
         [SerializeField]
         protected TMP_Text ammoText;
@@ -32,18 +50,25 @@ namespace FPS_Framework
         protected void Awake()
         {
             interactableText.enabled = false;
+            shopPanel.localRotation = Quaternion.Euler(0f, -90f, 0f);
 
-            StartCoroutine(PostAwake());
+            Debug.Log(Display.main.renderingWidth);
+            float remainedX = Display.main.renderingWidth + shopPanel.sizeDelta.x;
+            gridLayoutGroup.cellSize = new Vector2(remainedX / gridLayoutGroup.constraintCount, 150f);
+
+            AwakeAsync().Forget();
         }
 
-        protected IEnumerator PostAwake()
+        protected async UniTaskVoid AwakeAsync()
         {
-            while (_SingleFPSPlayer == null)
-            {
-                Debug.LogFormat(LOG_FORMAT, "yield return null");
+            await UniTask.WaitUntil(() => KeyInputManager.Instance != null);
 
-                yield return null;
-            }
+            KeySetting shopSetting = KeyInputManager.Instance.KeyData["Open/Close Shop"];
+            shopSetting.OnValueChanged += OnValueChangedOpenCloseShopToggle;
+            string keyCode = shopSetting._KeyCode.ToString();
+            shopTitleText.text = "toggle \'" + keyCode + "\' to open";
+
+            await UniTask.WaitUntil(() => _SingleFPSPlayer != null);
 
             _SingleFPSPlayer.FPSController.OnEquipableValueChanged += OnEquipableValueChanged;
             _SingleFPSPlayer.FPSController.OnSeatableValueChanged += OnSeatableValueChanged;
@@ -56,16 +81,31 @@ namespace FPS_Framework
             OnRemainedEnemyCountChanged(0); // forcelly call!
         }
 
-        protected void OnDestroy()
+        protected void OnValueChangedOpenCloseShopToggle(bool isOn)
         {
-            PhaseCounter.OnRemainedEnemyCountChanged -= OnRemainedEnemyCountChanged;
-            PhaseCounter.OnTotalMoneyChanged -= OnTotalMoneyChanged;
-
-            if (_SingleFPSPlayer != null)
+            if (isOn == true)
             {
-                _SingleFPSPlayer.FPSController.OnEquipedWeaponChanged -= OnEquipedWeaponChanged;
-                _SingleFPSPlayer.FPSController.OnSeatableValueChanged -= OnSeatableValueChanged;
-                _SingleFPSPlayer.FPSController.OnEquipableValueChanged -= OnEquipableValueChanged;
+                isShopOpened = !isShopOpened;
+
+                Cursor.visible = isShopOpened;
+                Cursor.lockState = isShopOpened ? CursorLockMode.None : CursorLockMode.Locked;
+
+                UniTaskEx.Cancel(this, 0);
+                OnValueChangedOpenCloseShopToggleAsync(isShopOpened).Forget();
+            }
+        }
+
+        protected async UniTaskVoid OnValueChangedOpenCloseShopToggleAsync(bool isOpened)
+        {
+            Quaternion targetRot = (isOpened == true) ? Quaternion.Euler(0f, 0f, 0f) : Quaternion.Euler(0f, -90f, 0f);
+            Quaternion currentRot = shopPanel.localRotation;
+
+            while (currentRot != targetRot)
+            {
+                currentRot = Quaternion.RotateTowards(currentRot, targetRot, 360f * Time.unscaledDeltaTime);
+                shopPanel.localRotation = currentRot;
+
+                await UniTaskEx.Yield(this, 0);
             }
         }
 
@@ -90,8 +130,10 @@ namespace FPS_Framework
             if (currentWeapon != null)
             {
                 currentWeapon.OnAmmoValuesChanged -= OnAmmoValuesChanged;
+                currentWeapon.OnPredictPointCalculated -= OnPredictPointCalculated;
             }
             equipedWeapon.OnAmmoValuesChanged += OnAmmoValuesChanged;
+            equipedWeapon.OnPredictPointCalculated += OnPredictPointCalculated;
         }
 
         protected void OnTotalMoneyChanged(int totalMoney)
@@ -107,6 +149,13 @@ namespace FPS_Framework
         protected void OnAmmoValuesChanged(int maxAmmo, int currentAmmo)
         {
             ammoText.text = currentAmmo + " / " + maxAmmo;
+        }
+
+        protected void OnPredictPointCalculated(Vector3 predictedHitPos, float distance)
+        {
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(predictedHitPos);
+            predictPanel.position = screenPos;
+            predictDistanceText.text = distance.ToString("F0") + "m";
         }
     }
 }

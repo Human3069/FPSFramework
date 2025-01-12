@@ -1,8 +1,11 @@
 using _KMH_Framework;
+using Cysharp.Threading.Tasks;
 using Demo.Scripts.Runtime;
 using FPS_Framework.Pool;
 using Kinemation.FPSFramework.Runtime.Recoil;
 using System.Collections;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -149,6 +152,32 @@ namespace FPS_Framework
             this.gameObject.SetActive(false);
 
             CurrentMagCount = MaxMagCount;
+
+            DoInteractAsync().Forget();
+        }
+
+        protected BulletHandler samplePooledBullet = null;
+        protected PredictableInfo predictableInfo = default;
+
+        public System.Action<Vector3, float> OnPredictPointCalculated;
+
+        protected async UniTaskVoid DoInteractAsync()
+        {
+            while (true)
+            {
+                if (samplePooledBullet == null)
+                {
+                    samplePooledBullet = this.projectileType.GetComponent<BulletHandler>();
+                    predictableInfo = samplePooledBullet.GetPredictableInfo();
+                }
+
+                Vector3 predictedHitPos = Predictor.PredictWithSingleCollision(predictableInfo.Drag, this.transform.forward * predictableInfo.Speed, 1, out _, this.transform.position + this.transform.forward * 1.5f, accuracy: 0.99f, iterationLimit: 1000);
+                float distance = (predictedHitPos - this.transform.position).magnitude;
+
+                OnPredictPointCalculated?.Invoke(predictedHitPos, distance);
+
+                await UniTaskEx.Yield(this, 0);
+            }
         }
 
         public virtual void Release(Vector3 worldPos, Quaternion worldRot) // Weapon Release
@@ -160,6 +189,8 @@ namespace FPS_Framework
 
             _collider.enabled = true;
             _rigidbody.isKinematic = false;
+
+            UniTaskEx.Cancel(this, 0);
         }
 
         public override void Reload()
@@ -182,6 +213,7 @@ namespace FPS_Framework
             projectileType.EnablePool<BulletHandler>(OnBeforeEnableAction);
             void OnBeforeEnableAction(BulletHandler bulletHandler)
             {
+                bulletHandler.Initialize(UnitType.Player, this.gameObject.name);
                 bulletHandler.transform.position = weaponTransformData.pivotPoint.position + weaponTransformData.pivotPoint.forward;
                 bulletHandler.transform.rotation = weaponTransformData.pivotPoint.rotation;
             }

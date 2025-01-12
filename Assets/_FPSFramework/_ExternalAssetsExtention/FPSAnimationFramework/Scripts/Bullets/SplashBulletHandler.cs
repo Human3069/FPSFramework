@@ -1,4 +1,3 @@
-using _KMH_Framework;
 using FPS_Framework.Pool;
 using FPS_Framework.ZuluWar;
 using UnityEngine;
@@ -28,7 +27,22 @@ namespace FPS_Framework
                     float distance = (warrior.transform.position - impactPoint).magnitude;
                     float splashDamage = Mathf.Lerp(damage, 0f, distance / splashMaxRadius);
 
+                    bool isLoggable = warrior.CurrentHealth > 0f;
+                    if (warrior.CurrentHealth > 0f && offenderType == UnitType.Player)
+                    {
+                        FPSManager.Instance.PlayHitMarkerSoundIfAllowed();
+                    }
+
                     warrior.CurrentHealth -= splashDamage;
+
+                    StateOnDamaged stateOnDamaged = warrior.CurrentHealth.ToStateOnDamaged();
+                    if (isLoggable == true)
+                    {
+                        DamagedLog log = new DamagedLog(offenderType, UnitType.Enemy, flightDistance, shooterWeaponName, splashDamage, InjuriedType.Splash, stateOnDamaged);
+                        Debug.Log(log.ToString());
+
+                        GameManager.Instance.DamagedLogList.Add(log);
+                    }
                 }
             }
 

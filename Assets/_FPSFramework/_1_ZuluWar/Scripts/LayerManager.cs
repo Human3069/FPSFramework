@@ -27,7 +27,15 @@ namespace FPS_Framework
         {
             get
             {
-                return (int)Mathf.Log(_defaultLayerMask.value, 2);
+                return (int)Mathf.Log(_defaultLayerMask.value, 2); // => 0
+            }
+        }
+
+        public int DefaultCullingMask
+        {
+            get
+            {
+                return _defaultLayerMask.value; // => 64
             }
         }
 
@@ -37,7 +45,15 @@ namespace FPS_Framework
         {
             get
             {
-                return (int)Mathf.Log(_minimapLayerMask.value, 2);
+                return (int)Mathf.Log(_minimapLayerMask.value, 2); // => 6
+            }
+        }
+
+        public int MinimapCullingMask
+        {
+            get
+            {
+                return _minimapLayerMask.value; // => 64
             }
         }
 

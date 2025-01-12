@@ -63,6 +63,25 @@ public class UniTaskEx
     }
 
     // 이 밑은 같은 패턴으로 직접 추가하여 구현해야 합니다. 많이 쓰는것만 일단 해놓음
+    public static UniTask Yield(MonoBehaviour monoBehaviour, int index)
+    {
+        Initialize(monoBehaviour, index);
+
+        int id = monoBehaviour.GetInstanceID();
+        string cancelKey = id + "_" + monoBehaviour.GetType() + "_" + index;
+        CancellationToken currentToken = tokenSourceDic[cancelKey].Token;
+
+        return UniTask.Yield(currentToken);
+    }
+
+    public static UniTask Yield(string key)
+    {
+        Initialize(key);
+        CancellationToken currentToken = tokenSourceDic[key].Token;
+
+        return UniTask.Yield(currentToken);
+    }
+
     public static UniTask NextFrame(MonoBehaviour monoBehaviour, int index)
     {
         Initialize(monoBehaviour, index);

@@ -129,6 +129,7 @@ namespace FPS_Framework.ZuluWar
             projectileType.EnablePool<BulletHandler>(OnBeforePool);
             void OnBeforePool(BulletHandler bullet)
             {
+                bullet.Initialize(UnitType.Ally, "Martini-Henry");
                 bullet.transform.position = fireT.position;
                 float distance = (targetController.MiddlePos - fireT.position).magnitude;
 

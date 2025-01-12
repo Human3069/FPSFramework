@@ -61,5 +61,17 @@ namespace FPS_Framework.Pool.Internal
             obj.SetActive(false);
             poolQueue.Enqueue(obj);
         }
+
+        internal GameObject GetAnyObject() 
+        {
+            GameObject peekObj = poolQueue.Peek();
+            return peekObj;
+        }
+
+        internal T GetAnyObject<T>() where T : MonoBehaviour
+        {
+            GameObject peekObj = poolQueue.Peek();
+            return peekObj.GetComponent<T>();
+        }
     }
 }

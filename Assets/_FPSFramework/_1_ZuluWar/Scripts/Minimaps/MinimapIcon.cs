@@ -16,6 +16,14 @@ namespace FPS_Framework
         protected void Awake()
         {
             AwakeAsync().Forget();
+
+            IDamageable damageable = this.GetComponent<IDamageable>();
+            damageable.OnStateChanged += OnStateChanged;
+        }
+
+        protected void OnStateChanged(State state)
+        {
+            spriteRenderer.enabled = (state != State.Dead);
         }
 
         protected async UniTaskVoid AwakeAsync()

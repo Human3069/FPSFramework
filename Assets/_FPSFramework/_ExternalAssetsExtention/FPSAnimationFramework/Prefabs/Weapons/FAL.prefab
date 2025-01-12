@@ -11467,7 +11467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992bcb9ef6715b447a55ab1baeddd4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedSight: {fileID: 3320319764898643281}
+  _selectedSight: {fileID: 2525758064541907857}
 --- !u!1 &8997714200225672274
 GameObject:
   m_ObjectHideFlags: 0
