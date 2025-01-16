@@ -5023,7 +5023,7 @@ MonoBehaviour:
   _currentPenetratePower: 0.01
   damage: 200
   splashMaxRadius: 10
-  explosionPoolerType: 9
+  explosionImpactType: 1
 --- !u!54 &7366162576436128689
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -108,20 +108,20 @@ namespace FPS_Framework
                 if (isRotateToKey == true)
                 {
                     float actualRotateSpeed = rotateSpeed * Time.deltaTime;
-                    if (KeyInputManager.Instance.KeyData["Move Forward"].IsInput == true)
+                    if (KeyType.Move_Forward.IsInput() == true == true)
                     {
                         this.transform.Rotate(-actualRotateSpeed, 0f, 0f);
                     }
-                    else if (KeyInputManager.Instance.KeyData["Move Backward"].IsInput == true)
+                    else if (KeyType.Move_Backward.IsInput() == true)
                     {
                         this.transform.Rotate(actualRotateSpeed, 0f, 0f);
                     }
 
-                    if (KeyInputManager.Instance.KeyData["Move Right"].IsInput == true)
+                    if (KeyType.Move_Right.IsInput() == true)
                     {
                         this.transform.Rotate(0f, actualRotateSpeed, 0f);
                     }
-                    else if (KeyInputManager.Instance.KeyData["Move Left"].IsInput == true)
+                    else if (KeyType.Move_Left.IsInput() == true)
                     {
                         this.transform.Rotate(0f, -actualRotateSpeed, 0f);
                     }

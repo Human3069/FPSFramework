@@ -204,14 +204,6 @@ namespace FPS_Framework
             }
         }
 
-        protected Dictionary<string, KeySetting> _keyData
-        {
-            get
-            {
-                return KeyInputManager.Instance.KeyData;
-            }
-        }
-
         protected WeaponEx _currentEquipedWeapon;
         public WeaponEx CurrentEquipedWeapon
         {
@@ -306,9 +298,7 @@ namespace FPS_Framework
 
         protected async UniTaskVoid PostAwake()
         {
-            await UniTask.WaitUntil(() => KeyInputManager.Instance != null);
-
-            KeyInputManager.Instance.KeyData["Change FireMode"].OnValueChanged += OnFireModeChanged;
+            await KeyType.Change_FireMode.RegisterEventAsync(OnFireModeChanged);
         }
 
         protected void OnDestroy()
@@ -368,7 +358,7 @@ namespace FPS_Framework
                 IsEquipable = isInteractable && isTypeEquipable; // Property
                 IsSeatable = isInteractable && isTypeSittable && (IsSeated == false); // Property
 
-                if (_keyData["Interact"].IsInputDown == true)
+                if (KeyType.Interact.IsInputDown() == true)
                 {
                     if (IsEquipable == true)
                     {
@@ -679,17 +669,17 @@ namespace FPS_Framework
         protected override void UpdateActionInput()
         {
             if (movementComponent.MovementState == FPSMovementState.Sprinting ||
-                KeyInputManager.Instance == null)
+                KeyCodeManager.Instance == null)
             {
                 return;
             }
 
-            if (_keyData["Reload"].IsInput == true)
+            if (KeyType.Reload.IsInput() == true)
             {
                 TryReload();
             }
 
-            if (_keyData["Throw Grenade"].IsInput == true)
+            if (KeyType.Throw_Grenade.IsInput() == true)
             {
                 TryGrenadeThrow();
             }
@@ -698,8 +688,8 @@ namespace FPS_Framework
             {
                 bool wasLeaning = _isLeaning;
 
-                bool isLeanRight = _keyData["Lean Right"].IsInput;
-                bool isLeanLeft = _keyData["Lean Left"].IsInput;
+                bool isLeanRight = KeyType.Lean_Right.IsInput();
+                bool isLeanLeft = KeyType.Lean_Left.IsInput();
 
                 _isLeaning = (isLeanRight == true) ||
                              (isLeanLeft == true);

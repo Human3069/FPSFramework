@@ -10,14 +10,6 @@ namespace FPS_Framework
     {
         protected FPSControllerEx fpsController;
 
-        protected Dictionary<string, KeySetting> _keyData
-        {
-            get
-            {
-                return KeyInputManager.Instance.KeyData;
-            }
-        }
-
         protected void Awake()
         {
             fpsController = this.GetComponent<FPSControllerEx>();
@@ -26,12 +18,12 @@ namespace FPS_Framework
         protected override void UpdatePoseState()
         {
             if (MovementState is FPSMovementState.Sprinting or FPSMovementState.InAir ||
-                KeyInputManager.Instance == null)
+                KeyCodeManager.Instance == null)
             {
                 return;
             }
 
-            if (_keyData["Prone"].IsInput == true)
+            if (KeyType.Prone.IsInput() == true)
             {
                 if (CanProne() == false)
                 {
@@ -50,7 +42,7 @@ namespace FPS_Framework
                 return;
             }
 
-            if (_keyData["Crouch"].IsInput == false)
+            if (KeyType.Crouch.IsInput() == false)
             {
                 return;
             }
@@ -76,16 +68,16 @@ namespace FPS_Framework
         {
             if ((MovementState == FPSMovementState.InAir &&
                 IsInAir() == true) ||
-                KeyInputManager.Instance == null)
+                KeyCodeManager.Instance == null)
             {
                 return;
             }
 
-            if (_keyData["Move Right"].IsInput == true)
+            if (KeyType.Move_Right.IsInput() == true)
             {
                 _inputDirection.x = 1f;
             }
-            else if (_keyData["Move Left"].IsInput == true)
+            else if (KeyType.Move_Left.IsInput() == true)
             {
                 _inputDirection.x = -1f;
             }
@@ -94,11 +86,11 @@ namespace FPS_Framework
                 _inputDirection.x = 0f;
             }
 
-            if (_keyData["Move Forward"].IsInput == true)
+            if (KeyType.Move_Forward.IsInput() == true)
             {
                 _inputDirection.y = 1f;
             }
-            else if (_keyData["Move Backward"].IsInput == true)
+            else if (KeyType.Move_Backward.IsInput() == true)
             {
                 _inputDirection.y = -1f;
             }
@@ -136,7 +128,7 @@ namespace FPS_Framework
 
         protected override bool TryJump()
         {
-            if (_keyData["Jump"].IsInput == false ||
+            if (KeyType.Jump.IsInput() == false ||
                 PoseState == FPSPoseState.Crouching)
             {
                 return false;
@@ -161,7 +153,7 @@ namespace FPS_Framework
 
             if (_inputDirection.y <= 0f ||
                 _inputDirection.x != 0f ||
-                _keyData["Sprint"].IsInput == false)
+                KeyType.Sprint.IsInput() == false)
             {
                 return false;
             }

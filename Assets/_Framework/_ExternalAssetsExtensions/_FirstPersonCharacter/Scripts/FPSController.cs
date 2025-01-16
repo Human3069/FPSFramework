@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -180,25 +181,9 @@ namespace _KMH_Framework
 
         protected virtual async UniTaskVoid PostAwake()
         {
-            await UniTask.WaitWhile(PredicateFunc);
-            bool PredicateFunc()
-            {
-                return KeyInputManager.Instance == null;
-            }
-
-            KeyInputManager.Instance.KeyData["Jump"].OnValueChanged += OnJumpValueChanged;
-            KeyInputManager.Instance.KeyData["Crouch"].OnValueChanged += OnCrouchValueChanged;
-            KeyInputManager.Instance.KeyData["Prone"].OnValueChanged += OnProneValueChanged;
-        }
-
-        protected virtual void OnDestroy()
-        {
-            if (KeyInputManager.Instance != null)
-            {
-                KeyInputManager.Instance.KeyData["Prone"].OnValueChanged -= OnProneValueChanged;
-                KeyInputManager.Instance.KeyData["Crouch"].OnValueChanged -= OnCrouchValueChanged;
-                KeyInputManager.Instance.KeyData["Jump"].OnValueChanged -= OnJumpValueChanged;
-            }
+            await KeyType.Jump.RegisterEventAsync(OnJumpValueChanged);
+            await KeyType.Crouch.RegisterEventAsync(OnCrouchValueChanged);
+            await KeyType.Prone.RegisterEventAsync(OnProneValueChanged);
         }
 
         protected void OnJumpValueChanged(bool _value)
@@ -338,12 +323,12 @@ namespace _KMH_Framework
 
         protected virtual void HandleMoveInput()
         {
-            isMoveForward = KeyInputManager.Instance.HasInput("Move Forward");
-            isMoveBackward = KeyInputManager.Instance.HasInput("Move Backward");
-            isMoveRight = KeyInputManager.Instance.HasInput("Move Right");
-            isMoveLeft = KeyInputManager.Instance.HasInput("Move Left");
+            isMoveForward = KeyType.Move_Forward.IsInput();
+            isMoveBackward = KeyType.Move_Backward.IsInput();
+            isMoveRight = KeyType.Move_Right.IsInput();
+            isMoveLeft = KeyType.Move_Left.IsInput();
 
-            isRun = KeyInputManager.Instance.HasInput("Run");
+            isRun = KeyType.Sprint.IsInput();
 
             if (isRun == true && isStand_Radio == true)
             {

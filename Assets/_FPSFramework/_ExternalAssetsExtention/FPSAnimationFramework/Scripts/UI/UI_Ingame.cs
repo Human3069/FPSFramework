@@ -2,6 +2,7 @@ using _KMH_Framework;
 using Cysharp.Threading.Tasks;
 using FPS_Framework.ZuluWar;
 using NPOI.Util;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,11 @@ namespace FPS_Framework
         [HideInInspector]
         public SingleFPSPlayer _SingleFPSPlayer;
 
+        [Header("Components")]
+        [SerializeField]
+        protected UI_Minimap minimap;
+
+        [Header("Interactable")]
         [SerializeField]
         protected Camera mainCamera;
         [SerializeField]
@@ -41,8 +47,6 @@ namespace FPS_Framework
         [SerializeField]
         protected TextMeshProUGUI predictDistanceText;
 
-        protected bool isShopOpened = false;
-
         [Header("Bottombars")]
         [SerializeField]
         protected TMP_Text ammoText;
@@ -61,12 +65,8 @@ namespace FPS_Framework
 
         protected async UniTaskVoid AwakeAsync()
         {
-            await UniTask.WaitUntil(() => KeyInputManager.Instance != null);
-
-            KeySetting shopSetting = KeyInputManager.Instance.KeyData["Open/Close Shop"];
-            shopSetting.OnValueChanged += OnValueChangedOpenCloseShopToggle;
-            string keyCode = shopSetting._KeyCode.ToString();
-            shopTitleText.text = "toggle \'" + keyCode + "\' to open";
+            await KeyType.Toggle_Shop.RegisterEventAsync(OnValueChangedOpenCloseShopToggle);
+            shopTitleText.text = "toggle \'" + KeyType.Toggle_Shop.GetKeyName() + "\' to open";
 
             await UniTask.WaitUntil(() => _SingleFPSPlayer != null);
 
@@ -83,16 +83,11 @@ namespace FPS_Framework
 
         protected void OnValueChangedOpenCloseShopToggle(bool isOn)
         {
-            if (isOn == true)
-            {
-                isShopOpened = !isShopOpened;
+            Cursor.visible = isOn;
+            Cursor.lockState = isOn ? CursorLockMode.None : CursorLockMode.Locked;
 
-                Cursor.visible = isShopOpened;
-                Cursor.lockState = isShopOpened ? CursorLockMode.None : CursorLockMode.Locked;
-
-                UniTaskEx.Cancel(this, 0);
-                OnValueChangedOpenCloseShopToggleAsync(isShopOpened).Forget();
-            }
+            UniTaskEx.Cancel(this, 0);
+            OnValueChangedOpenCloseShopToggleAsync(isOn).Forget();
         }
 
         protected async UniTaskVoid OnValueChangedOpenCloseShopToggleAsync(bool isOpened)
@@ -113,7 +108,7 @@ namespace FPS_Framework
         {
             // Debug.LogFormat(LOG_FORMAT, "OnEquipableValueChanged(), isEquipable : " + isEquipable);
 
-            interactableText.text = "Press \'" + KeyInputManager.Instance.KeyData["Interact"]._KeyCode + "\' to Equip";
+            interactableText.text = "Press \'" + KeyType.Interact.GetKeyName() + "\' to Equip";
             interactableText.enabled = isEquipable;
         }
 
@@ -121,7 +116,7 @@ namespace FPS_Framework
         {
             // Debug.LogFormat(LOG_FORMAT, "OnSeatableValueChanged(), isSeatable : " + isSeatable);
 
-            interactableText.text = "Press \'" + KeyInputManager.Instance.KeyData["Interact"]._KeyCode + "\' to Seat";
+            interactableText.text = "Press \'" + KeyType.Interact.GetKeyName() + "\' to Seat";
             interactableText.enabled = isSeatable;
         }
 

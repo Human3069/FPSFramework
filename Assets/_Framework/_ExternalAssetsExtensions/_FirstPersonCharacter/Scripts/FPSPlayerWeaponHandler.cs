@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -39,21 +40,7 @@ namespace _KMH_Framework
 
         protected async UniTaskVoid PostAwake()
         {
-            await UniTask.WaitWhile(PredicateFunc);
-            bool PredicateFunc()
-            {
-                return KeyInputManager.Instance == null;
-            }
-
-            KeyInputManager.Instance.KeyData["Selection"].OnValueChanged += OnSelectionValueChanged;
-        }
-
-        protected void OnDestroy()
-        {
-            if (KeyInputManager.Instance != null)
-            {
-                KeyInputManager.Instance.KeyData["Selection"].OnValueChanged -= OnSelectionValueChanged;
-            }
+            await KeyType.Change_FireMode.RegisterEventAsync(OnSelectionValueChanged);
         }
 
         protected void OnSelectionValueChanged(bool _value)
@@ -93,7 +80,7 @@ namespace _KMH_Framework
                 if (_raycastHit.collider.TryGetComponent<BaseFPSWeapon>(out BaseFPSWeapon rayHitWeapon) == true)
                 {
                     uiHandler.IsEquipable = true;
-                    if (KeyInputManager.Instance.HasInput("Interaction") == true)
+                    if (KeyType.Interact.IsInput() == true)
                     {
                         _equipedWeapon = rayHitWeapon;
 
@@ -115,7 +102,7 @@ namespace _KMH_Framework
             {
                 _equipedWeapon.IsTriggering = Input.GetMouseButton(0);
 
-                if (KeyInputManager.Instance.HasInput("Reload") == true)
+                if (KeyType.Reload.IsInput() == true)
                 {
                     if (_equipedWeapon.AmmoPerMag > _equipedWeapon.CurrentMagCount)
                     {

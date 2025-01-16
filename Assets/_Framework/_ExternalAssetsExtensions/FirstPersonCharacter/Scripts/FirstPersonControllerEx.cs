@@ -189,11 +189,11 @@ namespace _KMH_Framework
         protected virtual void GetInput(out float _speed)
         {
             // Read input
-            if (KeyInputManager.Instance.HasInput("Move Forward") == true)
+            if (KeyType.Move_Right.IsInput() == true)
             {
                 _2DInput.y = Mathf.MoveTowards(_2DInput.y, 1f, _2DInputDelta);
             }
-            else if (KeyInputManager.Instance.HasInput("Move Backward") == true)
+            else if (KeyType.Move_Backward.IsInput() == true)
             {
                 _2DInput.y = Mathf.MoveTowards(_2DInput.y, -1f, _2DInputDelta);
             }
@@ -202,11 +202,11 @@ namespace _KMH_Framework
                 _2DInput.y = Mathf.MoveTowards(_2DInput.y, 0f, _2DInputDelta);
             }
 
-            if (KeyInputManager.Instance.HasInput("Move Left") == true)
+            if (KeyType.Move_Left.IsInput() == true)
             {
                 _2DInput.x = Mathf.MoveTowards(_2DInput.x, -1f, _2DInputDelta);
             }
-            else if (KeyInputManager.Instance.HasInput("Move Right") == true)
+            else if (KeyType.Move_Right.IsInput() == true)
             {
                 _2DInput.x = Mathf.MoveTowards(_2DInput.x, 1f, _2DInputDelta);
             }
@@ -216,7 +216,7 @@ namespace _KMH_Framework
             }
 
             bool wasWalking = isWalking;
-            isWalking = KeyInputManager.Instance.HasInput("Sprint") == false;
+            isWalking = KeyType.Sprint.IsInput();
 
             if (isWalking == true)
             {
