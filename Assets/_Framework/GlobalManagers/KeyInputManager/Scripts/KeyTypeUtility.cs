@@ -96,6 +96,18 @@ namespace _KMH_Framework
             }
         }
 
+        public static void SetToggleValue(this KeyType type, bool isOn)
+        {
+            if (KeyCodeManager.Instance == null)
+            {
+                Debug.Assert(false);
+            }
+            else
+            {
+                KeyCodeManager.Instance.GetData(type).SetToggleValue(isOn);
+            }
+        }
+
         public static string GetKeyName(this KeyType type)
         {
             if (KeyCodeManager.Instance == null)

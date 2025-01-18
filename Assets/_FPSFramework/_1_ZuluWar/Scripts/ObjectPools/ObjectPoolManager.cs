@@ -10,7 +10,7 @@ namespace FPS_Framework.Pool
     public enum ProjectileType
     {
         _9_SMG_Bullet,
-        _40_Cannon_Bullet,
+        _105_Cannon_Bullet,
         _57_Shrapnel_Bullet,
         _556_AR_Bullet,
         _577_450_SR_Bullet,

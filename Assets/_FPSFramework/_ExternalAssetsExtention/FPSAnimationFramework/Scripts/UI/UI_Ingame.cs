@@ -1,9 +1,6 @@
 using _KMH_Framework;
 using Cysharp.Threading.Tasks;
 using FPS_Framework.ZuluWar;
-using NPOI.Util;
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,6 +56,13 @@ namespace FPS_Framework
             Debug.Log(Display.main.renderingWidth);
             float remainedX = Display.main.renderingWidth + shopPanel.sizeDelta.x;
             gridLayoutGroup.cellSize = new Vector2(remainedX / gridLayoutGroup.constraintCount, 150f);
+            for (int i = 0; i < gridLayoutGroup.transform.childCount; i++)
+            {
+                Transform childT = gridLayoutGroup.transform.GetChild(i);
+                UI_BaseSellable sellableButton = childT.GetComponent<UI_BaseSellable>();
+
+                sellableButton.Initialize(minimap);
+            }
 
             AwakeAsync().Forget();
         }

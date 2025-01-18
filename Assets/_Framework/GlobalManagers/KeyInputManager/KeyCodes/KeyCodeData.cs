@@ -113,5 +113,23 @@ namespace _KMH_Framework._Internal_KeyCode
                 Debug.Assert(false);
             }
         }
+
+        internal void SetToggleValue(bool isOn)
+        {
+            if (eventType == EventType.Toggle_Down)
+            {
+                bool isChanged = toggleValue != isOn;
+                toggleValue = isOn;
+
+                if (isChanged == true)
+                {
+                    OnValueChanged?.Invoke(isOn);
+                }
+            }
+            else
+            {
+                Debug.Assert(false, "cannot set value to non-toggle type event");
+            }
+        }
     }
 }

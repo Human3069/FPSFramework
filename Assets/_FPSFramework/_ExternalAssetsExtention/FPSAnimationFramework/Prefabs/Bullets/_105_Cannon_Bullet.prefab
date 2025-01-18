@@ -358,7 +358,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4982,12 +4982,12 @@ GameObject:
   - component: {fileID: 6867790323327365830}
   - component: {fileID: 7366162576436128689}
   m_Layer: 0
-  m_Name: _40_Cannon_Bullet
+  m_Name: _105_Cannon_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2838602410088380813
 Transform:
   m_ObjectHideFlags: 0
@@ -5018,11 +5018,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 1
   lifeTime: 7.5
-  speed: 850
+  speed: 200
   maxPenetratePower: 0.01
   _currentPenetratePower: 0.01
   damage: 200
-  splashMaxRadius: 10
+  splashMaxRadius: 20
   explosionImpactType: 1
 --- !u!54 &7366162576436128689
 Rigidbody:

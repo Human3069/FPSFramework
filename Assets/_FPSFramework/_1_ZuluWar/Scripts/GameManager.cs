@@ -1,10 +1,14 @@
 using _KMH_Framework;
 using Cysharp.Threading.Tasks;
 using FPS_Framework.Pool;
+using geniikw.DataRenderer2D;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.Rendering.HableCurve;
 
 namespace FPS_Framework.ZuluWar
 {
@@ -110,6 +114,48 @@ namespace FPS_Framework.ZuluWar
         }
     }
 
+    [Serializable]
+    public class ArtilleryStrike
+    {
+        [SerializeField]
+        protected float fireDuration = 3f;
+        [SerializeField]
+        protected float fireInterval = 0.5f;
+
+        [Space(10)]
+        [SerializeField]
+        protected ProjectileType projectileType;
+        [SerializeField]
+        protected float randomSphereRadius = 30f;
+
+        public async UniTaskVoid StrikeAsync(Vector3 targetPoint, float beforeDelay)
+        {
+            await UniTask.WaitForSeconds(beforeDelay);
+
+            bool isFiring = false;
+            Vector3 startFiringPoint = targetPoint + (Vector3.up * 300f);
+
+            CountDownAsync().Forget();
+            async UniTask CountDownAsync()
+            {
+                await UniTask.WaitForSeconds(fireDuration);
+                isFiring = true;
+            }
+
+            while (isFiring == false)
+            {
+                projectileType.EnablePool(OnBeforePool);
+                void OnBeforePool(GameObject bulletObj)
+                {
+                    bulletObj.transform.position = startFiringPoint + (UnityEngine.Random.insideUnitSphere * randomSphereRadius);
+                    bulletObj.transform.forward = Vector3.down;
+                }
+
+                await UniTask.WaitForSeconds(fireInterval);
+            }
+        }
+    }
+
     public class GameManager : MonoBehaviour
     {
         private const string LOG_FORMAT = "<color=white><b>[GameManager]</b></color> {0}";
@@ -138,6 +184,7 @@ namespace FPS_Framework.ZuluWar
 
         [Space(10)]
         public PhaseCounter _PhaseCounter;
+        public ArtilleryStrike _ArtilleryStrike;
 
         [Space(10)]
         public List<DamagedLog> DamagedLogList = new List<DamagedLog>();
@@ -238,26 +285,11 @@ namespace FPS_Framework.ZuluWar
         }
 
 #if UNITY_EDITOR
-        protected List<Vector3> gizmoPosList = new List<Vector3>();
-
-        protected async UniTaskVoid DrawGizmos(Vector3 pos)
-        {
-            gizmoPosList.Add(pos);
-            await UniTask.WaitForSeconds(2f);
-            gizmoPosList.Remove(pos);
-        }
-
         protected void OnDrawGizmos()
         {
             Handles.color = new Color(1f, 0.5f, 0f, 1f);
             Handles.DrawWireArc(enemySpawnPoint.position, Vector3.up, enemySpawnPoint.forward, spawnAngle, minSpawnRadius);
             Handles.DrawWireArc(enemySpawnPoint.position, Vector3.up, enemySpawnPoint.forward, spawnAngle, maxSpawnRadius);
-
-            Gizmos.color = Color.red;
-            foreach (Vector3 pos in gizmoPosList)
-            {
-                Gizmos.DrawSphere(pos, 10f);
-            }
         }
 #endif
     }
