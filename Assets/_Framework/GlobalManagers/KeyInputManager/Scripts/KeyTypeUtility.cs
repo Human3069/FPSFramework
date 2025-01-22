@@ -58,6 +58,19 @@ namespace _KMH_Framework
             }
         }
 
+        public static bool ToggleValue(this KeyType type)
+        {
+            if (KeyCodeManager.Instance == null)
+            {
+                Debug.Assert(false);
+                return false;
+            }
+            else
+            {
+                return KeyCodeManager.Instance.GetData(type).ToggleValue;
+            }
+        }
+
         public static void RegisterEvent(this KeyType type, Action<bool> action)
         {
             if (KeyCodeManager.Instance == null)
@@ -93,6 +106,18 @@ namespace _KMH_Framework
             else
             {
                 KeyCodeManager.Instance.GetData(type).UnregisterEvent(action);
+            }
+        }
+
+        public static void UpdateLock(this KeyType type, bool isLock)
+        {
+            if (KeyCodeManager.Instance == null)
+            {
+                Debug.Assert(false);
+            }
+            else
+            {
+                KeyCodeManager.Instance.GetData(type).UpdateLock(isLock);
             }
         }
 

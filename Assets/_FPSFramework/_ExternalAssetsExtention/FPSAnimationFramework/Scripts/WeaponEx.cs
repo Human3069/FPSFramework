@@ -4,8 +4,6 @@ using Demo.Scripts.Runtime;
 using FPS_Framework.Pool;
 using Kinemation.FPSFramework.Runtime.Recoil;
 using System.Collections;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 namespace FPS_Framework
@@ -122,9 +120,9 @@ namespace FPS_Framework
 
         protected virtual void Awake()
         {
-            if (attatchmentHandler.SelectedSight is MagnifableSight)
+            if (attatchmentHandler.SelectedSight is MagnifableSight magnifableSight)
             {
-                magnifable = attatchmentHandler.SelectedSight as MagnifableSight;
+                magnifable = magnifableSight;
             }
         }
 

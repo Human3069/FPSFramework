@@ -5022,7 +5022,7 @@ MonoBehaviour:
   maxPenetratePower: 0.01
   _currentPenetratePower: 0.01
   damage: 200
-  splashMaxRadius: 20
+  splashMaxRadius: 30
   explosionImpactType: 1
 --- !u!54 &7366162576436128689
 Rigidbody:

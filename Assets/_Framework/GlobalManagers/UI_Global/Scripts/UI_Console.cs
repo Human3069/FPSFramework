@@ -1,3 +1,5 @@
+using FPS_Framework;
+using FPS_Framework.ZuluWar;
 using TMPro;
 using UnityEngine;
 
@@ -30,10 +32,15 @@ namespace _KMH_Framework
                 if (consolePanel.activeSelf == true)
                 {
                     Time.timeScale = 0;
+                    FPSControllerEx.Instance.UpdateMouseShowState(true);
+
+                    inputField.ActivateInputField();
+                    inputField.Select();
                 }
                 else
                 {
                     Time.timeScale = 1;
+                    FPSControllerEx.Instance.UpdateMouseShowState(false);
                 }
             }
 
@@ -45,6 +52,13 @@ namespace _KMH_Framework
                     inputField.text = null;
 
                     Debug.LogFormat(LOG_FORMAT, "inputField : " + consoleInput);
+                    if (consoleInput.StartsWith("give money ") == true)
+                    {
+                        if (int.TryParse(consoleInput.Replace("give money ", ""), out int gaveMoney) == true)
+                        {
+                            GameManager.Instance._PhaseCounter.TotalMoney += gaveMoney;
+                        }
+                    }
                 }
             }
         }

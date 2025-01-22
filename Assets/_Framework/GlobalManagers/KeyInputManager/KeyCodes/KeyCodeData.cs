@@ -38,7 +38,7 @@ namespace _KMH_Framework._Internal_KeyCode
             }
             set
             {
-                if (_isInput != value)
+                if (_isInput != value && _isLock == false)
                 {
                     _isInput = value;
 
@@ -50,8 +50,8 @@ namespace _KMH_Framework._Internal_KeyCode
                     {
                         if (value == true)
                         {
-                            toggleValue = !toggleValue;
-                            OnValueChanged?.Invoke(toggleValue);
+                            _toggleValue = !_toggleValue;
+                            OnValueChanged?.Invoke(_toggleValue);
                         }
                     }
                     else
@@ -72,7 +72,16 @@ namespace _KMH_Framework._Internal_KeyCode
 
         [ReadOnly]
         [SerializeField]
-        private bool toggleValue = false;
+        private bool _toggleValue = false;
+        internal bool ToggleValue
+        {
+            get
+            {
+                return _toggleValue;
+            }
+        }
+
+        private bool _isLock = false;
 
         private Action<bool> OnClick;
         private Action<bool> OnValueChanged;
@@ -118,8 +127,8 @@ namespace _KMH_Framework._Internal_KeyCode
         {
             if (eventType == EventType.Toggle_Down)
             {
-                bool isChanged = toggleValue != isOn;
-                toggleValue = isOn;
+                bool isChanged = _toggleValue != isOn;
+                _toggleValue = isOn;
 
                 if (isChanged == true)
                 {
@@ -130,6 +139,11 @@ namespace _KMH_Framework._Internal_KeyCode
             {
                 Debug.Assert(false, "cannot set value to non-toggle type event");
             }
+        }
+
+        internal void UpdateLock(bool isLock)
+        {
+            this._isLock = isLock;
         }
     }
 }

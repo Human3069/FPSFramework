@@ -1,14 +1,10 @@
 using _KMH_Framework;
 using Cysharp.Threading.Tasks;
 using FPS_Framework.Pool;
-using geniikw.DataRenderer2D;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.Rendering.HableCurve;
 
 namespace FPS_Framework.ZuluWar
 {
@@ -56,7 +52,7 @@ namespace FPS_Framework.ZuluWar
         [ReadOnly]
         [SerializeField]
         protected int _totalMoney = 0;
-        protected int TotalMoney
+        public int TotalMoney
         {
             get
             {
@@ -117,10 +113,15 @@ namespace FPS_Framework.ZuluWar
     [Serializable]
     public class ArtilleryStrike
     {
+        private const float DEFORE_DELAY_TIME = 5f;
+
         [SerializeField]
         protected float fireDuration = 3f;
+        protected int fireDurationUpgradeCount = 0;
+
         [SerializeField]
         protected float fireInterval = 0.5f;
+        protected int fireIntervalUpgradeCount = 0;
 
         [Space(10)]
         [SerializeField]
@@ -128,9 +129,9 @@ namespace FPS_Framework.ZuluWar
         [SerializeField]
         protected float randomSphereRadius = 30f;
 
-        public async UniTaskVoid StrikeAsync(Vector3 targetPoint, float beforeDelay)
+        public async UniTaskVoid StrikeAsync(Vector3 targetPoint)
         {
-            await UniTask.WaitForSeconds(beforeDelay);
+            await UniTask.WaitForSeconds(DEFORE_DELAY_TIME);
 
             bool isFiring = false;
             Vector3 startFiringPoint = targetPoint + (Vector3.up * 300f);
@@ -153,6 +154,22 @@ namespace FPS_Framework.ZuluWar
 
                 await UniTask.WaitForSeconds(fireInterval);
             }
+        }
+
+        public int UpgradeFireDuration()
+        {
+            fireDurationUpgradeCount++;
+            fireDuration += 0.5f;
+
+            return fireDurationUpgradeCount;
+        }
+
+        public int UpgradeFireInterval()
+        {
+            fireIntervalUpgradeCount++;
+            fireInterval *= 0.9f;
+
+            return fireIntervalUpgradeCount;
         }
     }
 

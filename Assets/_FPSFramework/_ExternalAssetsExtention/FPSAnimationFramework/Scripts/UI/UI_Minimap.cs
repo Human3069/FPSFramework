@@ -52,10 +52,10 @@ namespace FPS_Framework.ZuluWar
                     if (Physics.Raycast(viewPointRay, out RaycastHit hit, Mathf.Infinity) == true)
                     {
                         IsOn = false;
-                        Cursor.visible = false;
-                        Cursor.lockState = CursorLockMode.Locked;
+                        await UniTask.Yield(); // prevent fire weapon when click minimap 
 
                         onCallArtillery?.Invoke(hit.point);
+
                         return;
                     }
                 }

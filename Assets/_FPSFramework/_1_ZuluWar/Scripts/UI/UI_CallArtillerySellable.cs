@@ -5,20 +5,21 @@ namespace FPS_Framework.ZuluWar
 {
     public class UI_CallArtillerySellable : UI_BaseSellable
     {
-        protected override void OnClickButton()
+        protected override void OnPurchased()
         {
             _minimap.OpenWithCallArtillery(OnCallArtillery);
-            KeyType.Toggle_Shop.SetToggleValue(false);
 
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            KeyType.Toggle_Shop.UpdateLock(true);
+            KeyType.Toggle_Shop.SetToggleValue(false);
+            FPSControllerEx.Instance.UpdateMouseShowState(true);
         }
 
         protected void OnCallArtillery(Vector3 worldPoint)
         {
-            Debug.Log("Call Artillery : " + worldPoint);
+            GameManager.Instance._ArtilleryStrike.StrikeAsync(worldPoint).Forget();
 
-            GameManager.Instance._ArtilleryStrike.StrikeAsync(worldPoint, 5f).Forget();
+            FPSControllerEx.Instance.UpdateMouseShowState(false);
+            KeyType.Toggle_Shop.UpdateLock(false);
         }
     }
 }

@@ -87,11 +87,10 @@ namespace FPS_Framework
 
         protected void OnValueChangedOpenCloseShopToggle(bool isOn)
         {
-            Cursor.visible = isOn;
-            Cursor.lockState = isOn ? CursorLockMode.None : CursorLockMode.Locked;
-
             UniTaskEx.Cancel(this, 0);
             OnValueChangedOpenCloseShopToggleAsync(isOn).Forget();
+
+            FPSControllerEx.Instance.UpdateMouseShowState(isOn);
         }
 
         protected async UniTaskVoid OnValueChangedOpenCloseShopToggleAsync(bool isOpened)

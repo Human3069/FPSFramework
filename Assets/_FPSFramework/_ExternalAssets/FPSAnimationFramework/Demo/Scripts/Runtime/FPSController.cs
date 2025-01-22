@@ -483,7 +483,7 @@ namespace Demo.Scripts.Runtime
             actionState = FPSActionState.Reloading;
         }
 
-        protected void TryGrenadeThrow()
+        protected virtual void TryGrenadeThrow()
         {
             if (HasActiveAction()) return;
             if (GetGun().grenadeClip == null) return;

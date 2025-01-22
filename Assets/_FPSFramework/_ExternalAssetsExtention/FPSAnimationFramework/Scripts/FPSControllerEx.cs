@@ -327,12 +327,6 @@ namespace FPS_Framework
                 Time.timeScale = 1f;
             }
 
-            // Time.timeScale = timeScale;
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Application.Quit(0);
-            }
-
             UpdateActionInput();
             UpdateLookInput();
             UpdateRecoil();
@@ -610,7 +604,6 @@ namespace FPS_Framework
             }
 
             AnimSequence reloadClip = CurrentEquipedWeapon.reloadClip;
-
             if (reloadClip == null)
             {
                 return;
@@ -627,6 +620,25 @@ namespace FPS_Framework
             {
                 IsAim = false;
             }
+        }
+
+        protected override void TryGrenadeThrow()
+        {
+            if (HasActiveAction() == true)
+            {
+                return;
+            }
+
+            if (CurrentEquipedWeapon == null ||
+                CurrentEquipedWeapon.grenadeClip == null)
+            {
+                return;
+            }
+
+            OnFireReleased();
+            DisableAim();
+            PlayAnimation(CurrentEquipedWeapon.grenadeClip);
+            actionState = FPSActionState.Reloading;
         }
 
         protected void ChangeWeapon_InternalEx(WeaponEx equipedWeapon, WeaponEx currentWeapon, Vector3 equipedWeaponPos, Quaternion equipedWeaponRot)
@@ -662,6 +674,27 @@ namespace FPS_Framework
             {
                 CurrentEquipedWeapon?.MoveNextFireMode();
                 recoilComponent.fireMode = CurrentEquipedWeapon.CurrentFireMode;
+            }
+        }
+
+        public void UpdateMouseShowState(bool isShowable)
+        {
+            if (isShowable == true)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
+                aimState = FPSAimState.Ready;
+                lookLayer.SetLayerAlpha(0.5f);
+                OnFireReleased();
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+
+                aimState = FPSAimState.None;
+                lookLayer.SetLayerAlpha(1f);
             }
         }
 
@@ -754,22 +787,9 @@ namespace FPS_Framework
                 {
                     ChangeScope();
                 }
-
-                // if (Input.GetKeyDown(KeyCode.B) && IsAiming() == true)
-                // {
-                //     if (aimState == FPSAimState.PointAiming)
-                //     {
-                //         adsLayer.SetPointAim(false);
-                //         aimState = FPSAimState.Aiming;
-                //     }
-                //     else
-                //     {
-                //         adsLayer.SetPointAim(true);
-                //         aimState = FPSAimState.PointAiming;
-                //     }
-                // }
             }
 
+#if false
             if (Input.GetKeyDown(KeyCode.H) == true)
             {
                 if (aimState == FPSAimState.Ready)
@@ -784,6 +804,7 @@ namespace FPS_Framework
                     OnFireReleased();
                 }
             }
+#endif
         }
 
         protected override void UpdateLookInput()
@@ -801,7 +822,6 @@ namespace FPS_Framework
             if (_freeLook == true)
             {
                 // No input for both controller and animation component. We only want to rotate the camera
-
                 _freeLookInput.x += deltaMouseX;
                 _freeLookInput.y += deltaMouseY;
 
@@ -811,8 +831,7 @@ namespace FPS_Framework
                 return;
             }
 
-            _freeLookInput = Vector2.Lerp(_freeLookInput, Vector2.zero,
-                FPSAnimLib.ExpDecayAlpha(15f, Time.deltaTime));
+            _freeLookInput = Vector2.Lerp(_freeLookInput, Vector2.zero, FPSAnimLib.ExpDecayAlpha(15f, Time.deltaTime));
 
             _playerInput.x += deltaMouseX;
             _playerInput.y += deltaMouseY;
@@ -858,6 +877,6 @@ namespace FPS_Framework
                 recoilComponent.Stop();
             }
         }
-        #endregion
+#endregion
     }
 }
