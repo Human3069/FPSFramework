@@ -53,7 +53,6 @@ namespace FPS_Framework
             interactableText.enabled = false;
             shopPanel.localRotation = Quaternion.Euler(0f, -90f, 0f);
 
-            Debug.Log(Display.main.renderingWidth);
             float remainedX = Display.main.renderingWidth + shopPanel.sizeDelta.x;
             gridLayoutGroup.cellSize = new Vector2(remainedX / gridLayoutGroup.constraintCount, 150f);
             for (int i = 0; i < gridLayoutGroup.transform.childCount; i++)

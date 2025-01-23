@@ -5,7 +5,6 @@ using FPS_Framework.Pool;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static FPS_Framework.BulletHandler;
 
 namespace FPS_Framework
 {

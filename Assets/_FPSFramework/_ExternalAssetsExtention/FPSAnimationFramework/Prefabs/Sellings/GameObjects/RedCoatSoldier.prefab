@@ -13721,10 +13721,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: be60fb929f50ec54a9ef5a245841ece1, type: 3}
   - {fileID: 8300000, guid: 757732a84e207194db6841698b669745, type: 3}
   verticalAngle: 90
-  attackRange: 100
+  attackRange: 50
   projectileType: 7
-  attackInterval: 5
+  attackInterval: 30
   attackIntervalRandomRange: 1
+  attackAccuracy: 0
 --- !u!82 &3324590679788415849
 AudioSource:
   m_ObjectHideFlags: 0

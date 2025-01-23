@@ -12,6 +12,10 @@ namespace FPS_Framework.ZuluWar
         {
             UpgradeArtilleryStrikeDuration,
             UpgradeArtilleryStrikeInterval,
+            UpgradeArtilleryStrkieRadius,
+
+            UpgradeRiflemanRange,
+            UpgradeRiflemanFireInterval,
         }
 
         [SerializeField]
@@ -19,29 +23,47 @@ namespace FPS_Framework.ZuluWar
 
         protected override void OnPurchased()
         {
+            int upgradeCount;
             switch (upgradeType)
             {
                 case UpgradeType.UpgradeArtilleryStrikeDuration:
                     {
-                        int upgradeCount = GameManager.Instance._ArtilleryStrike.UpgradeFireDuration();
-                        progress.Set(upgradeCount % progress.Max);
-                        _price += priceDelta;
-
+                        GameManager.Instance._ArtilleryStrike.UpgradeFireDuration(out upgradeCount);
                         break;
                     }
 
                 case UpgradeType.UpgradeArtilleryStrikeInterval:
                     {
-                        int upgradeCount = GameManager.Instance._ArtilleryStrike.UpgradeFireInterval();
-                        progress.Set(upgradeCount % progress.Max);
-                        _price += priceDelta;
+                        GameManager.Instance._ArtilleryStrike.UpgradeFireInterval(out upgradeCount);
+                        break;
+                    }
 
+                case UpgradeType.UpgradeArtilleryStrkieRadius:
+                    {
+                        GameManager.Instance._ArtilleryStrike.UpgradeFireRadius(out upgradeCount);
+                        break;
+                    }
+
+                case UpgradeType.UpgradeRiflemanRange:
+                    {
+                        GameManager.Instance._UnitStats.UpgradeRange(out upgradeCount);
+                        break;
+                    }
+
+                case UpgradeType.UpgradeRiflemanFireInterval:
+                    {
+                        GameManager.Instance._UnitStats.UpgradeFireInterval(out upgradeCount);
                         break;
                     }
 
                 default:
-                    throw new System.NotImplementedException("upgradeType : " + upgradeType);
+                    {
+                        throw new System.NotImplementedException("upgradeType : " + upgradeType);
+                    }
             }
+
+            progress.Set(upgradeCount % progress.Max);
+            _price += priceDelta;
         }
     }
 }

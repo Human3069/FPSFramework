@@ -37,6 +37,11 @@ namespace FPS_Framework.ZuluWar
         [SerializeField]
         protected float attackIntervalRandomRange = 1f;
 
+        [Space(10)]
+        [SerializeField]
+        protected float attackAccuracy = 0f;
+        protected const float ACCURACY_MULTIPLYER = 5f;
+
         protected Quaternion initialRotation;
         protected Vector3 initialDirection;
 
@@ -48,6 +53,8 @@ namespace FPS_Framework.ZuluWar
             initialDirection = this.transform.forward;
 
             audioSource = this.GetComponent<AudioSource>();
+
+            UnitStats.OnUpgraded += OnRiflemanUpgraded;
             keyframeHandler.OnKeyframeReached += OnKeyframeReached;
 
             FindUnitAsync().Forget();
@@ -64,6 +71,13 @@ namespace FPS_Framework.ZuluWar
             {
                 this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, initialRotation, 5f);
             }
+        }
+
+        protected void OnRiflemanUpgraded(float riflemanRange, float riflemanFireInterval, float riflemanAccuracy)
+        {
+            this.attackRange = riflemanRange;
+            this.attackInterval = riflemanFireInterval;
+            this.attackAccuracy = riflemanAccuracy;
         }
 
         protected async UniTaskVoid FindUnitAsync()
@@ -131,12 +145,18 @@ namespace FPS_Framework.ZuluWar
             {
                 bullet.Initialize(UnitType.Ally, "Martini-Henry");
                 bullet.transform.position = fireT.position;
+
                 float distance = (targetController.MiddlePos - fireT.position).magnitude;
 
+                // get predicted position
                 PredictDataBundle predictBundle = PredictDataBundle.GetPredictData(projectileType);
                 Vector3 predictPos = predictBundle.GetPredictedPosition(fireT.position, targetController.MiddlePos, targetController.Velocity);
                 Vector3 direction = (predictPos - fireT.position).normalized;
-                bullet.transform.eulerAngles = Quaternion.LookRotation(direction).eulerAngles;
+
+                // get random angle
+                float accuracyToRandom = (1f - attackAccuracy) * ACCURACY_MULTIPLYER;
+                float randomAngle = Random.Range(-accuracyToRandom, accuracyToRandom);
+                bullet.transform.eulerAngles = Quaternion.LookRotation(direction).eulerAngles + new Vector3(Random.Range(-randomAngle, randomAngle), Random.Range(-randomAngle, randomAngle), 0);
             }
 
             // Release Fx

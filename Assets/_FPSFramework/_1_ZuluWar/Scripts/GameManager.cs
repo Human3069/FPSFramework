@@ -123,11 +123,13 @@ namespace FPS_Framework.ZuluWar
         protected float fireInterval = 0.5f;
         protected int fireIntervalUpgradeCount = 0;
 
+        [SerializeField]
+        protected float fireRadius = 30f;
+        protected int fireRadiusUpgradeCount = 0;
+
         [Space(10)]
         [SerializeField]
         protected ProjectileType projectileType;
-        [SerializeField]
-        protected float randomSphereRadius = 30f;
 
         public async UniTaskVoid StrikeAsync(Vector3 targetPoint)
         {
@@ -148,7 +150,7 @@ namespace FPS_Framework.ZuluWar
                 projectileType.EnablePool(OnBeforePool);
                 void OnBeforePool(GameObject bulletObj)
                 {
-                    bulletObj.transform.position = startFiringPoint + (UnityEngine.Random.insideUnitSphere * randomSphereRadius);
+                    bulletObj.transform.position = startFiringPoint + (UnityEngine.Random.insideUnitSphere * fireRadius);
                     bulletObj.transform.forward = Vector3.down;
                 }
 
@@ -156,20 +158,76 @@ namespace FPS_Framework.ZuluWar
             }
         }
 
-        public int UpgradeFireDuration()
+        public void UpgradeFireDuration(out int upgradeCount)
         {
             fireDurationUpgradeCount++;
-            fireDuration += 0.5f;
+            fireDuration += 0.25f;
 
-            return fireDurationUpgradeCount;
+            upgradeCount = fireDurationUpgradeCount;
         }
 
-        public int UpgradeFireInterval()
+        public void UpgradeFireInterval(out int upgradeCount)
         {
             fireIntervalUpgradeCount++;
-            fireInterval *= 0.9f;
+            fireInterval *= 0.95f;
 
-            return fireIntervalUpgradeCount;
+            upgradeCount = fireIntervalUpgradeCount;
+        }
+
+        public void UpgradeFireRadius(out int upgradeCount)
+        {
+            fireRadiusUpgradeCount++;
+            fireRadius += 1f;
+
+            upgradeCount = fireIntervalUpgradeCount;
+        }
+    }
+
+    [Serializable]
+    public class UnitStats
+    {
+        public delegate void Upgraded(float riflemanRange, float riflemanFireInterval, float riflemanAccuracy);
+        public static event Upgraded OnUpgraded;
+
+        [SerializeField]
+        protected float riflemanRange = 50f;
+        protected int riflemanRangeUpgradeCount = 0;
+
+        [SerializeField]
+        protected float riflemanFireInterval = 30f;
+        protected int riflemanFireIntervalUpgradeCount = 0;
+
+        [SerializeField]
+        protected float riflemanAccuracy = 0.5f;
+        protected int riflemanAccuracyUpgradeCount = 0;
+
+        public void UpgradeRange(out int upgradeCount)
+        {
+            riflemanRangeUpgradeCount++;
+            riflemanRange += 5f;
+
+            upgradeCount = riflemanRangeUpgradeCount;
+            OnUpgraded?.Invoke(riflemanRange, riflemanFireInterval, riflemanAccuracy);
+        }
+
+        public void UpgradeFireInterval(out int upgradeCount)
+        {
+            riflemanFireIntervalUpgradeCount++;
+            riflemanFireInterval *= 0.95f;
+
+            upgradeCount = riflemanFireIntervalUpgradeCount;
+            OnUpgraded?.Invoke(riflemanRange, riflemanFireInterval, riflemanAccuracy);
+        }
+
+        public void UpgradeAccuracy(out int upgradeCount)
+        {
+            riflemanAccuracyUpgradeCount++;
+            riflemanAccuracy = Mathf.Pow(riflemanAccuracy, 0.97f);
+
+            Debug.Log(riflemanAccuracy);
+
+            upgradeCount = riflemanAccuracyUpgradeCount;
+            OnUpgraded?.Invoke(riflemanRange, riflemanFireInterval, riflemanAccuracy);
         }
     }
 
@@ -202,6 +260,7 @@ namespace FPS_Framework.ZuluWar
         [Space(10)]
         public PhaseCounter _PhaseCounter;
         public ArtilleryStrike _ArtilleryStrike;
+        public UnitStats _UnitStats;
 
         [Space(10)]
         public List<DamagedLog> DamagedLogList = new List<DamagedLog>();
@@ -245,6 +304,10 @@ namespace FPS_Framework.ZuluWar
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 PlayAsync().Forget();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                _UnitStats.UpgradeAccuracy(out _);
             }
         }
 
