@@ -16,6 +16,7 @@ namespace FPS_Framework.ZuluWar
 
             UpgradeRiflemanRange,
             UpgradeRiflemanFireInterval,
+            UpgradeRiflemanAccuracy,
         }
 
         [SerializeField]
@@ -53,6 +54,12 @@ namespace FPS_Framework.ZuluWar
                 case UpgradeType.UpgradeRiflemanFireInterval:
                     {
                         GameManager.Instance._UnitStats.UpgradeFireInterval(out upgradeCount);
+                        break;
+                    }
+
+                case UpgradeType.UpgradeRiflemanAccuracy:
+                    {
+                        GameManager.Instance._UnitStats.UpgradeAccuracy(out upgradeCount);
                         break;
                     }
 

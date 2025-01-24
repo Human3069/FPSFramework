@@ -155,8 +155,8 @@ namespace Kinemation.FPSFramework.Runtime.Layers
         public override void ScheduleJobs()
         {
             _jobData[0] = _layerData;
-            
-            var job = new SwayLayerJob()
+
+            SwayLayerJob job = new SwayLayerJob()
             {
                 inputData = _layerInput,
                 swayData = _jobData

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2816804278842947935}
   - component: {fileID: 7422945956939112435}
   m_Layer: 2
-  m_Name: Selling_UpgradeRadius
+  m_Name: Selling_UpgradeAccuracy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   _price: 100
   priceDelta: 0
   progress: {fileID: 4989640450774283828}
-  upgradeType: 2
+  upgradeType: 5
 --- !u!222 &8839132183126021339
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 5182391014714639947}
   - component: {fileID: 152704346871771896}
   m_Layer: 2
-  m_Name: Selling_UpgradeInterval
+  m_Name: Selling_UpgradeFireInterval
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   _price: 100
   priceDelta: 0
   progress: {fileID: 4292655004104081638}
-  upgradeType: 1
+  upgradeType: 4
 --- !u!222 &7071982888444596089
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -580,9 +580,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'radius :
+  m_text: 'accuracy :
 
-    30m'
+    0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2727,7 +2727,7 @@ GameObject:
   - component: {fileID: 5668702314491872899}
   - component: {fileID: 2503244728711418080}
   m_Layer: 2
-  m_Name: Selling_UpgradeDuration
+  m_Name: Selling_UpgradeRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2773,7 +2773,7 @@ MonoBehaviour:
   _price: 100
   priceDelta: 0
   progress: {fileID: 1304140134917561555}
-  upgradeType: 0
+  upgradeType: 3
 --- !u!222 &7269603243693241607
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3151,7 +3151,7 @@ GameObject:
   - component: {fileID: 7671588698142557294}
   - component: {fileID: 7671588698142557293}
   m_Layer: 2
-  m_Name: Selling_CallArtillery
+  m_Name: Selling_SpawnRiflemans
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3190,7 +3190,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7671588698142557283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df93763334db8ce428346ecd7f75db45, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d481a9a3262b804fbd70c526d228ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 426293239758862948}
@@ -3767,11 +3767,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'duration :
+  m_text: 'range :
 
-    30s
-
-'
+    50m'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
