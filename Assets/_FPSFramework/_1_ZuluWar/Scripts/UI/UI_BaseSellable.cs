@@ -9,8 +9,6 @@ namespace FPS_Framework.ZuluWar
     {
         [Header("=== UI_BaseSellable ===")]
         [SerializeField]
-        protected TextMeshProUGUI titleText;
-        [SerializeField]
         protected TextMeshProUGUI priceText;
 
         [Space(10)]
@@ -39,12 +37,9 @@ namespace FPS_Framework.ZuluWar
             }
         }
 
-        public void Set(string title, int price)
+        protected virtual void UpdatePrice()
         {
-            titleText.text = title;
-            priceText.text = price.ToString() + " Gold";
-
-            this._price = price;
+            priceText.text = _price.ToString() + " Gold";
         }
 
         protected virtual void OnClickButton()

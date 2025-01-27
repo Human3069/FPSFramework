@@ -670,7 +670,7 @@ namespace FPS_Framework
 
         protected virtual void OnFireModeChanged(bool isOn)
         {
-            if (isOn == true)
+            if (isOn == true && recoilComponent != null && CurrentEquipedWeapon != null)
             {
                 CurrentEquipedWeapon?.MoveNextFireMode();
                 recoilComponent.fireMode = CurrentEquipedWeapon.CurrentFireMode;

@@ -131,11 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0af2867ac626d84eb5a0f3878acdcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 6164302647200046224}
   priceText: {fileID: 6555691431378033773}
   _price: 100
-  priceDelta: 0
+  priceDelta: 25
   progress: {fileID: 4989640450774283828}
+  affectText: {fileID: 4881005887630112145}
   upgradeType: 5
 --- !u!222 &8839132183126021339
 CanvasRenderer:
@@ -426,11 +426,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0af2867ac626d84eb5a0f3878acdcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 5904125993067681664}
   priceText: {fileID: 325540156711115025}
   _price: 100
-  priceDelta: 0
+  priceDelta: 25
   progress: {fileID: 4292655004104081638}
+  affectText: {fileID: 3895562465543553121}
   upgradeType: 4
 --- !u!222 &7071982888444596089
 CanvasRenderer:
@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 314024832072854552}
   - component: {fileID: 4881005887630112145}
   m_Layer: 2
-  m_Name: Text_Current
+  m_Name: Text_Affect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,7 +549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -5, y: -5}
+  m_AnchoredPosition: {x: 5, y: -5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &314024832072854552
@@ -582,7 +582,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'accuracy :
 
-    0'
+    NaN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title : NaN'
+  m_text: Upgrade Range
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1163,7 +1163,7 @@ GameObject:
   - component: {fileID: 3660634685125953520}
   - component: {fileID: 3895562465543553121}
   m_Layer: 2
-  m_Name: Text_Current
+  m_Name: Text_Affect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1186,7 +1186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -5, y: -5}
+  m_AnchoredPosition: {x: 5, y: -5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3660634685125953520
@@ -1219,7 +1219,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'interval :
 
-    round per 0.5s'
+    NaN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2115,7 +2115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &733993224320272633
@@ -2146,7 +2146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title : NaN'
+  m_text: Spawn Riflemans
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2173,8 +2173,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2250,7 +2250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &894239529759271341
@@ -2281,7 +2281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Price : NaN'
+  m_text: 500 Gold
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2308,8 +2308,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2768,11 +2768,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0af2867ac626d84eb5a0f3878acdcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 346648029549706340}
   priceText: {fileID: 8615456461203790685}
   _price: 100
-  priceDelta: 0
+  priceDelta: 25
   progress: {fileID: 1304140134917561555}
+  affectText: {fileID: 2522667683656830042}
   upgradeType: 3
 --- !u!222 &7269603243693241607
 CanvasRenderer:
@@ -3179,7 +3179,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 750, y: 150}
+  m_SizeDelta: {x: 750, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5913367907458539218
 MonoBehaviour:
@@ -3193,10 +3193,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d481a9a3262b804fbd70c526d228ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 426293239758862948}
   priceText: {fileID: 2147631102753914003}
   _price: 500
   priceDelta: 0
+  installablePrefab: {fileID: 8961888829158837128, guid: e767aef4851eef341bd1721fd1e34a11,
+    type: 3}
+  maxRayDistance: 10
+  spawnState: 0
+  mainCamera: {fileID: 0}
 --- !u!114 &7978322416723435907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3345,7 +3349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title : NaN'
+  m_text: Upgrade Accuracy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3480,7 +3484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title : NaN'
+  m_text: Upgrade Fire Interval
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3713,7 +3717,7 @@ GameObject:
   - component: {fileID: 8550972495077488390}
   - component: {fileID: 2522667683656830042}
   m_Layer: 2
-  m_Name: Text_Current
+  m_Name: Text_Affect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3736,7 +3740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -5, y: -5}
+  m_AnchoredPosition: {x: 5, y: -5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8550972495077488390
@@ -3769,7 +3773,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'range :
 
-    50m'
+    NaN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3803,7 +3807,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

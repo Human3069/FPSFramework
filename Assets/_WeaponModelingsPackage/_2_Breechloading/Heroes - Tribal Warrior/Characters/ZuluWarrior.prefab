@@ -1644,7 +1644,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 13
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &8734918017305845191
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2613,7 +2613,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 8
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &3479791030318060690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2711,7 +2711,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 4
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &399406515657256683
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3617,7 +3617,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 10
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &9100833937090624858
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3681,7 +3681,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 11
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &7630448552708512923
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3961,7 +3961,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 6
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &8694160747325805828
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4660,7 +4660,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 3
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &2688728641037152221
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4874,7 +4874,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 7
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &196209633300471537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5182,7 +5182,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 5
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &1521559196191471296
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5660,7 +5660,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 9
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &6920182655795540304
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5965,7 +5965,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 12
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &5198541527250603309
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6118,7 +6118,7 @@ MonoBehaviour:
   Thickness: 0.05
   Warrior: {fileID: 8458524538704238388}
   _InjuriedType: 14
-  DamageMultiplier: 0.1
+  DamageMultiplier: 0.4
 --- !u!136 &4428995387083563150
 CapsuleCollider:
   m_ObjectHideFlags: 0

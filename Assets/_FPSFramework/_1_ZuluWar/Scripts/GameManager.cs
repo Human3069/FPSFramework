@@ -158,28 +158,46 @@ namespace FPS_Framework.ZuluWar
             }
         }
 
-        public void UpgradeFireDuration(out int upgradeCount)
+        public float GetFireDuration()
+        {
+            return fireDuration;
+        }
+
+        public float GetFireInterval()
+        {
+            return fireInterval;
+        }
+
+        public float GetFireRadius()
+        {
+            return fireRadius;
+        }
+
+        public float UpgradeFireDuration(out int upgradeCount)
         {
             fireDurationUpgradeCount++;
-            fireDuration += 0.25f;
+            fireDuration += 0.1f;
 
             upgradeCount = fireDurationUpgradeCount;
+            return fireDuration;
         }
 
-        public void UpgradeFireInterval(out int upgradeCount)
+        public float UpgradeFireInterval(out int upgradeCount)
         {
             fireIntervalUpgradeCount++;
-            fireInterval *= 0.95f;
+            fireInterval *= 0.975f;
 
             upgradeCount = fireIntervalUpgradeCount;
+            return fireInterval;
         }
 
-        public void UpgradeFireRadius(out int upgradeCount)
+        public float UpgradeFireRadius(out int upgradeCount)
         {
             fireRadiusUpgradeCount++;
             fireRadius += 1f;
 
             upgradeCount = fireIntervalUpgradeCount;
+            return fireRadius;
         }
     }
 
@@ -201,33 +219,52 @@ namespace FPS_Framework.ZuluWar
         protected float riflemanAccuracy = 0.5f;
         protected int riflemanAccuracyUpgradeCount = 0;
 
-        public void UpgradeRange(out int upgradeCount)
+        public float GetRange()
+        {
+            return riflemanRange;
+        }
+
+        public float GetFireInterval()
+        {
+            return riflemanFireInterval;
+        }
+
+        public float GetAccuracy()
+        {
+            return riflemanAccuracy;
+        }
+
+        public float UpgradeRange(out int upgradeCount)
         {
             riflemanRangeUpgradeCount++;
-            riflemanRange += 5f;
+            riflemanRange += 1.5f;
 
             upgradeCount = riflemanRangeUpgradeCount;
             OnUpgraded?.Invoke(riflemanRange, riflemanFireInterval, riflemanAccuracy);
+
+            return riflemanRange;
         }
 
-        public void UpgradeFireInterval(out int upgradeCount)
+        public float UpgradeFireInterval(out int upgradeCount)
         {
             riflemanFireIntervalUpgradeCount++;
-            riflemanFireInterval *= 0.95f;
+            riflemanFireInterval *= 0.98f;
 
             upgradeCount = riflemanFireIntervalUpgradeCount;
             OnUpgraded?.Invoke(riflemanRange, riflemanFireInterval, riflemanAccuracy);
+
+            return riflemanFireInterval;
         }
 
-        public void UpgradeAccuracy(out int upgradeCount)
+        public float UpgradeAccuracy(out int upgradeCount)
         {
             riflemanAccuracyUpgradeCount++;
-            riflemanAccuracy = Mathf.Pow(riflemanAccuracy, 0.97f);
-
-            Debug.Log(riflemanAccuracy);
+            riflemanAccuracy = Mathf.Pow(riflemanAccuracy, 0.985f);
 
             upgradeCount = riflemanAccuracyUpgradeCount;
             OnUpgraded?.Invoke(riflemanRange, riflemanFireInterval, riflemanAccuracy);
+
+            return riflemanAccuracy;
         }
     }
 

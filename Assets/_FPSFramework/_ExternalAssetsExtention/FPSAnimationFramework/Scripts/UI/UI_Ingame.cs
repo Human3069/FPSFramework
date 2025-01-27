@@ -36,7 +36,7 @@ namespace FPS_Framework
         [SerializeField]
         protected TextMeshProUGUI shopTitleText;
         [SerializeField]
-        protected GridLayoutGroup gridLayoutGroup;
+        protected Transform sellableT;
 
         [Header("Predictor")]
         [SerializeField]
@@ -53,11 +53,9 @@ namespace FPS_Framework
             interactableText.enabled = false;
             shopPanel.localRotation = Quaternion.Euler(0f, -90f, 0f);
 
-            float remainedX = Display.main.renderingWidth + shopPanel.sizeDelta.x;
-            gridLayoutGroup.cellSize = new Vector2(remainedX / gridLayoutGroup.constraintCount, 150f);
-            for (int i = 0; i < gridLayoutGroup.transform.childCount; i++)
+            for (int i = 0; i < sellableT.childCount; i++)
             {
-                Transform childT = gridLayoutGroup.transform.GetChild(i);
+                Transform childT = sellableT.transform.GetChild(i);
                 UI_BaseSellable sellableButton = childT.GetComponent<UI_BaseSellable>();
 
                 sellableButton.Initialize(minimap);

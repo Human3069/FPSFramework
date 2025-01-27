@@ -47,6 +47,14 @@ namespace FPS_Framework.ZuluWar
 
         protected WarriorController targetController = null;
 
+        protected Vector3 HeadPos
+        {
+            get
+            {
+                return this.transform.position + Vector3.up * 1.7f;
+            }
+        }
+
         protected void Awake()
         {
             initialRotation = this.transform.rotation;
