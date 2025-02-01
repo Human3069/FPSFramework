@@ -22,7 +22,7 @@ namespace FPS_Framework
             Collider[] colliders = Physics.OverlapSphere(impactPoint, splashMaxRadius);
             foreach (Collider collider in colliders)
             {
-                if (collider.TryGetComponent<WarriorController>(out WarriorController warrior) == true)
+                if (collider.TryGetComponent<MeleeWarriorController>(out MeleeWarriorController warrior) == true)
                 {
                     float distance = (warrior.transform.position - impactPoint).magnitude;
                     float splashDamage = Mathf.Lerp(damage, 0f, distance / splashMaxRadius);

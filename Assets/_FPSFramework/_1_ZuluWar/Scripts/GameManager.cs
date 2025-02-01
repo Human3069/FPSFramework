@@ -1,48 +1,24 @@
 using _KMH_Framework;
+using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using FPS_Framework.Pool;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static FPS_Framework.ZuluWar.PhaseCounter;
 
 namespace FPS_Framework.ZuluWar
 {
     [Serializable]
     public class PhaseCounter
     {
-        [SerializeField]
-        protected int enemiesPerPhase = 15;
+        [SerializedDictionary("UnitType", "PhaseUnitData")]
+        public SerializedDictionary<Pool.UnitType, PhaseUnitData> PhaseUnitDataDic;
 
         [Space(10)]
         [ReadOnly]
         public int CurrentPhase = 1;
-
-        [Space(10)]
-        [ReadOnly]
-        [SerializeField]
-        protected int _remainedEnemies = 0;
-        protected int RemainedEnemies
-        {
-            get
-            {
-                return _remainedEnemies;
-            }
-            set
-            {
-                if (_remainedEnemies != value)
-                {
-                    _remainedEnemies = value;
-                    OnRemainedEnemyCountChanged?.Invoke(value);
-                }
-            }
-        }
-
-        public static Action<int> OnRemainedEnemyCountChanged;
-
-        [ReadOnly]
-        [SerializeField]
-        protected int totalKilledEnemies = 0;
 
         [Header("Money System")]
         [SerializeField]
@@ -68,23 +44,18 @@ namespace FPS_Framework.ZuluWar
             }
         }
 
+        public static Action<int> OnRemainedEnemyCountChanged;
         public static Action<int> OnTotalMoneyChanged;
-
-        public int EnemiesPerCurrentPhase
-        {
-            get
-            {
-                return enemiesPerPhase * CurrentPhase;
-            }
-        }
 
         public void OnInit()
         {
             CurrentPhase = 1;
 
-            totalKilledEnemies = 0;
             TotalMoney = 0;
-            RemainedEnemies = 0;
+            foreach (KeyValuePair<Pool.UnitType, PhaseUnitData> pair in PhaseUnitDataDic)
+            {
+                pair.Value.OnInit(pair.Key);
+            }
 
             OnRemainedEnemyCountChanged?.Invoke(0);
             OnTotalMoneyChanged?.Invoke(0);
@@ -92,7 +63,10 @@ namespace FPS_Framework.ZuluWar
 
         public void UpdateRemainedCount()
         {
-            RemainedEnemies = enemiesPerPhase * CurrentPhase;
+            foreach (KeyValuePair<Pool.UnitType, PhaseUnitData> pair in PhaseUnitDataDic)
+            {
+                pair.Value.OnUpdateRemainedCount(CurrentPhase);
+            }
         }
 
         public void UpdatePhase()
@@ -101,12 +75,79 @@ namespace FPS_Framework.ZuluWar
             TotalMoney += moneyPerPhase;
         }
 
-        public void CountRemainedAndKilled()
+        public void CountRemainedAndKilled(Pool.UnitType unitType)
         {
-            totalKilledEnemies++;
-            RemainedEnemies--;
-
+            PhaseUnitDataDic[unitType].OnCountRemainedAndKilled();
             TotalMoney += moneyPerKill;
+        }
+
+        [Serializable]
+        public class PhaseUnitData
+        {
+            private Pool.UnitType unitType;
+
+            [SerializeField]
+            private int UnitPerPhase;
+            [ReadOnly]
+            [SerializeField]
+            private int _remainedEnemies;
+            public int RemainedEnemies
+            {
+                get
+                {
+                    return _remainedEnemies;
+                }
+                set
+                {
+                    if (_remainedEnemies != value)
+                    {
+                        _remainedEnemies = value;
+
+                        int totalRemainedCount = 0;
+                        foreach (KeyValuePair<Pool.UnitType, PhaseUnitData> pair in GameManager.Instance._PhaseCounter.PhaseUnitDataDic)
+                        {
+                            totalRemainedCount += pair.Value.RemainedEnemies;
+                        }
+
+                        OnRemainedEnemyCountChanged?.Invoke(totalRemainedCount);
+                    }
+                }
+            }
+
+            public void OnInit(Pool.UnitType unitType)
+            {
+                this.unitType = unitType;
+                RemainedEnemies = 0;
+            }
+
+            public void OnUpdateRemainedCount(int currentPhase)
+            {
+                RemainedEnemies = currentPhase * UnitPerPhase;
+            }
+
+            public void OnCountRemainedAndKilled()
+            {
+                RemainedEnemies--;
+            }
+
+            public async UniTask SpawnAsync(int currentPhase, Vector3 center, float minRadius, float maxRadius, float startAngle, float totalAngle)
+            {
+                for (int i = 0; i < currentPhase * UnitPerPhase; i++)
+                {
+                    Vector3 randomizedPos = Vector3Ex.OnRandomCircle(center, minRadius, maxRadius, startAngle, totalAngle);
+
+                    unitType.EnablePool<MeleeWarriorController>(OnBeforeEnable);
+                    void OnBeforeEnable(MeleeWarriorController controller)
+                    {
+                        controller.transform.position = randomizedPos;
+                        controller.SetHeight();
+
+                        GameManager.Instance.EnemyList.Add(controller);
+                    }
+
+                    await UniTask.Yield();
+                }
+            }
         }
     }
 
@@ -302,7 +343,7 @@ namespace FPS_Framework.ZuluWar
         [Space(10)]
         public List<DamagedLog> DamagedLogList = new List<DamagedLog>();
 
-        protected List<WarriorController> enemyList = new List<WarriorController>();
+        public List<IDamageable> EnemyList = new List<IDamageable>();
 
         protected void Awake()
         {
@@ -355,50 +396,34 @@ namespace FPS_Framework.ZuluWar
                 UI_FadeInOut.Instance.FloatText("Phase " + _PhaseCounter.CurrentPhase, 1f).Forget();
                 await UniTask.WaitForSeconds(1f);
 
+                EnemyList.Clear();
                 ResetEnemy();
-
                 _PhaseCounter.UpdateRemainedCount();
-                await SpawnEnemyAsync(_PhaseCounter.EnemiesPerCurrentPhase);
 
-                await UniTask.WaitUntil(() => enemyList.TrueForAll(x => x.CurrentHealth <= 0f));
+                foreach (KeyValuePair<Pool.UnitType, PhaseUnitData> pair in _PhaseCounter.PhaseUnitDataDic)
+                {
+                    await pair.Value.SpawnAsync(_PhaseCounter.CurrentPhase, enemySpawnPoint.position, minSpawnRadius, maxSpawnRadius, enemySpawnPoint.eulerAngles.y, spawnAngle);
+                }
+
+                await UniTask.WaitUntil(() => EnemyList.TrueForAll(x => x.CurrentHealth <= 0f));
                 await UniTask.WaitForSeconds(3f);
 
                 _PhaseCounter.UpdatePhase();
             }
         }
 
-        public async UniTask SpawnEnemyAsync(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                float startAngle = enemySpawnPoint.eulerAngles.y;
-                Vector3 randomizedPos = Vector3Ex.OnRandomCircle(enemySpawnPoint.position, minSpawnRadius, maxSpawnRadius, startAngle, spawnAngle);
-
-                Pool.UnitType.ZuluWarrior.EnablePool((Action<WarriorController>)OnBeforeEnable);
-                void OnBeforeEnable(WarriorController controller)
-                {
-                    controller.transform.position = randomizedPos;
-                    controller.SetHeight();
-
-                    enemyList.Add(controller);
-                }
-
-                await UniTask.Yield();
-            }
-        }
-
         public void ResetEnemy()
         {
-            enemyList.ForEach(ForeachPredicate);
-            void ForeachPredicate(WarriorController controller)
+            EnemyList.ForEach(ForeachPredicate);
+            void ForeachPredicate(IDamageable enemyDamageable)
             {
-                controller.ReturnUnit();
+                enemyDamageable.ReturnPool();
             }
         }
 
-        public void CountRemainedAndKilled()
+        public void CountRemainedAndKilled(Pool.UnitType unitType)
         {
-            _PhaseCounter.CountRemainedAndKilled();
+            _PhaseCounter.CountRemainedAndKilled(unitType);
         }
 
 #if UNITY_EDITOR

@@ -11,7 +11,7 @@ namespace FPS_Framework
         public float Thickness = 1f;
 
         [Space(10)]
-        public WarriorController Warrior;
+        public MeleeWarriorController Warrior;
         public InjuriedType _InjuriedType = InjuriedType.None;
         public float DamageMultiplier = 1f;
     }

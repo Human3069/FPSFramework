@@ -48,6 +48,7 @@ namespace FPS_Framework.Pool
     public enum UnitType
     {
         ZuluWarrior,
+        ZuluMusketeer,
     }
 
     public class ObjectPoolManager : MonoBehaviour

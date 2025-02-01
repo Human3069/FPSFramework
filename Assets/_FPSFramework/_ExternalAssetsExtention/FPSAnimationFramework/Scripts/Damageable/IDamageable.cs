@@ -27,4 +27,5 @@ public interface IDamageable
 
     void OnDamaged();
     void OnDead();
+    void ReturnPool();
 }

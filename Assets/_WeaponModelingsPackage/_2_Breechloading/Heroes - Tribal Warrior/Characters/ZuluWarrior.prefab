@@ -4407,16 +4407,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1679657141564596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0c7773f8b954b143b9f4201a3bb6653, type: 3}
+  m_Script: {fileID: 11500000, guid: f539741623798bf45b6bb9c94f819d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitType: 0
   _state: 0
   maxHealth: 100
   _currentHealth: 0
   attackDamage: 10
   attackRange: 2
   attackSpeed: 1
-  yOffset: 5
+  yOffset: 7.5
 --- !u!114 &8729889760131955490
 MonoBehaviour:
   m_ObjectHideFlags: 0

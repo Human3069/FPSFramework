@@ -45,7 +45,7 @@ namespace FPS_Framework.ZuluWar
         protected Quaternion initialRotation;
         protected Vector3 initialDirection;
 
-        protected WarriorController targetController = null;
+        protected MeleeWarriorController targetController = null;
 
         protected Vector3 HeadPos
         {
@@ -97,7 +97,7 @@ namespace FPS_Framework.ZuluWar
                     Collider[] overlappedColliders = Physics.OverlapSphere(this.transform.position, attackRange);
                     foreach (Collider overlappedCollider in overlappedColliders)
                     {
-                        if (overlappedCollider.TryGetComponent<WarriorController>(out WarriorController warriorController) == true &&
+                        if (overlappedCollider.TryGetComponent<MeleeWarriorController>(out MeleeWarriorController warriorController) == true &&
                             warriorController._State != State.Dead)
                         {
                             Vector3 diffVector = warriorController.transform.position - this.transform.position;

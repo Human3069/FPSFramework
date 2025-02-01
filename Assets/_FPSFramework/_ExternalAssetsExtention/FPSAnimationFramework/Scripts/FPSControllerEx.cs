@@ -877,6 +877,11 @@ namespace FPS_Framework
                 recoilComponent.Stop();
             }
         }
-#endregion
+
+        public void ReturnPool()
+        {
+            throw new System.NotImplementedException();
+        }
+        #endregion
     }
 }
